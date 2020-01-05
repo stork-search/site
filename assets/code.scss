@@ -1,0 +1,50 @@
+pre {
+  background-color: hsla(0, 0%, 0%, 0.85);
+  color: hsla(0, 0%, 100%, 0.8);
+  padding: 1em;
+  width: 120%;
+  margin-left: -10%;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+code {
+  font-family: 'Inconsolata', monospace;
+}
+
+pre > code {
+  display: block;
+  overflow-x: scroll;
+}
+
+@media screen and (max-width: 812px) {
+  pre {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+*:not(pre) > code {
+  background: $accent-color;
+  color: hsla(0, 0%, 0%, 1);
+  padding: 0.2em 0.5em;
+  font-weight: bold;
+}
+
+[data-filename] {
+  padding-top: 3em;
+}
+
+[data-filename]:before {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+  margin-bottom: 1em;
+  font-family: $body-font-stack;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  content: attr(data-filename);
+  position: absolute;
+  left: 0;
+  margin-top: -3em;
+}
