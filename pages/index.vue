@@ -4,13 +4,13 @@
     <demo />
     <section>
       <p>
-        Stork is two things. First, it's an indexer: it turns your
+        Stork is two things. First, it's a indexer: it turns your
         loosely-structured content and builds a search index from that content.
-        Second, it's a Javascript + WebAssembly frontend for that index; Stork
-        will download the index, search through it, and display the best results
-        immediately to your user, as they type. The precomputed index and
-        WebAssembly frontend module make the entire Stork engine very good, and
-        very fast.
+        Second, it's a Javascript + WebAssembly frontend for that index; Stork's
+        Javascript library will download the index and use it to display the
+        optimal search results immediately to your user, as they type. The
+        precomputed index and WebAssembly frontend module make the entire Stork
+        engine very good, and very fast.
       </p>
     </section>
 
@@ -75,17 +75,17 @@
       <p>
         The output should be an empty
         <code>&lt;div&gt;</code> tag with the attribute
-        <code>data-stork="federalist-results"</code>. Again, here, you can
-        change <code>federalist</code> to whatever you want. Stork will
-        overwrite the contents of this element.
+        <code>data-stork="federalist-output"</code>. Again, here, you can change
+        <code>federalist</code> to whatever you want. Stork will overwrite the
+        contents of this element.
       </p>
       <p>
-        The classes in the example above (
-        <code>stork-input</code>, <code>stork-results</code>) are for the theme.
-        Most Stork themes assume the format above; the theme's documentation
-        will tell you if it requires something different. You can also design
-        your own theme, at which point the styling and class names are up to
-        you.
+        The classes in the example above (<code>stork-wrapper</code>,
+        <code>stork-input</code>, and <code>stork-output</code>) are for the
+        theme's CSS file. Most Stork themes assume the format above; the theme's
+        documentation will tell you if it requires something different. You can
+        also design your own theme, at which point the styling and class names
+        are up to you.
       </p>
       <h2>Step 2: Include the Javascript</h2>
       <p>
@@ -176,6 +176,7 @@ filename = "federalist.st"</code></pre>
         <code>liberty</code> in them.
       </p>
     </section>
+    <docslink />
     <script>
       stork.register(
         'federalist',
@@ -189,8 +190,9 @@ filename = "federalist.st"</code></pre>
 import indexintro from '~/components/indexintro.vue'
 import stats from '~/components/stats.vue'
 import demo from '~/components/demo.vue'
+import docslink from '~/components/docslink.vue'
 export default {
-  components: { indexintro, stats, demo },
+  components: { indexintro, stats, demo, docslink },
   head: {
     script: [
       { src: 'https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js' },
