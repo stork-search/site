@@ -13,7 +13,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import '~assets/main.scss';
+@import '~assets/scss/main.scss';
 
 section {
   background-color: $accent-color;
@@ -24,6 +24,16 @@ section {
   justify-content: space-between;
 }
 
+@media screen and (max-width: 750px) {
+  .flex {
+    display: block;
+  }
+
+  .flex p {
+    margin-bottom: 2em;
+  }
+}
+
 p {
   line-height: 1;
   margin: 1.4em 0;
@@ -32,6 +42,12 @@ p {
 strong {
   display: block;
   font-size: 2.2em;
+}
+
+@media screen and (max-width: 500px) {
+  strong {
+    font-size: 1.7em;
+  }
 }
 
 .github-cta {

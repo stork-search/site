@@ -30,6 +30,10 @@ a:link {
 
 section {
   padding: 2em calc(50% - #{$page-width} / 2);
+
+  & > *:first-child {
+    margin-top: 0;
+  }
 }
 
 @media screen and (max-width: 750px) {
@@ -38,4 +42,4 @@ section {
   }
 }
 
-@import '~/assets/code.scss';
+@import '~/assets/scss/code.scss';

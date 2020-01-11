@@ -11,7 +11,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import '~assets/main.scss';
+@import '~assets/scss/main.scss';
 
 section {
   background-color: $accent-color;

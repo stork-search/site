@@ -43,3 +43,25 @@ input {
   z-index: 10;
 }
 </style>
+
+<script>
+export default {
+  head: {
+    script: [
+      { src: 'https://files.stork-search.net/stork.js' },
+      {
+        hid: 'storkreg',
+        innerHTML: `stork.register('federalist', 'https://files.stork-search.net/federalist.st')`,
+        type: 'text/javascript',
+        body: true
+      }
+    ],
+    __dangerouslyDisableSanitizersByTagID: {
+      storkreg: ['innerHTML']
+    },
+    link: [
+      { rel: 'stylesheet', href: 'https://files.stork-search.net/basic.css' }
+    ]
+  }
+}
+</script>

@@ -10,10 +10,17 @@
 import topbar from '~/components/topbar.vue'
 import myfooter from '~/components/footer.vue'
 export default {
-  components: { topbar, myfooter }
+  components: { topbar, myfooter },
+  head: {
+    titleTemplate: (titleChunk) => {
+      return titleChunk
+        ? `${titleChunk} - Stork`
+        : 'Stork: Impossibly Fast Web Search'
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-@import '~assets/main.scss';
+@import '~assets/scss/main.scss';
 </style>

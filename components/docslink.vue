@@ -21,8 +21,6 @@ input {
   font-size: 1.3em;
   width: 100%;
   padding: 0.5em 0.8em;
-  // border-radius: 2em;
-  // border: 1px solid hsla(0, 0%, 0%, 90%);
 }
 
 .stork-wrapper {
