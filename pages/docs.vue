@@ -226,6 +226,15 @@
               file listing.
             </td>
           </tr>
+          <tr>
+            <td><code>printIndexInfo</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td style="width: 350px">
+              If this is set to true, Stork will print information about the
+              search index to the console when it has successfully loaded.
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
