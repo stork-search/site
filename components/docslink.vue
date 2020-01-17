@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>Next: <nuxt-link to="/docs">Review the Docs &rarr;</nuxt-link></h1>
+    <h1>Next: <a href="/docs">Review the Docs &rarr;</a></h1>
   </section>
 </template>
 
