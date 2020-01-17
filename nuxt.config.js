@@ -16,6 +16,10 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
+  generate: {
+    fallback: true,
+    fallback: '404.html' // if your hosting needs a custom location
+  },
   /*
    ** Customize the progress-bar color
    */

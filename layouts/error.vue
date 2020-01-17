@@ -1,15 +1,25 @@
 <template>
-  <section>
-    <h1 v-if="error.statusCode === 404">Page not found.</h1>
-    <h1 v-else>An error occurred.</h1>
-    <p v-if="error.statusCode === 404">
-      I'm still working on this page, check back later for more content.
-    </p>
-  </section>
+  <main>
+    <pagetitle>404: Page not found.</pagetitle>
+
+    <section>
+      <p>
+        Like... this is a search thing. You'd think we'd be able to, you know,
+        search for the page you were looking for and find it. But alas.
+      </p>
+    </section>
+  </main>
 </template>
 
 <script>
+import pagetitle from '../components/pagetitle.vue'
+
 export default {
-  props: { error: { type: Object, default: () => ({}) } }
+  components: { pagetitle },
+  head: {
+    title: '404: Page not found.'
+  }
 }
 </script>
+
+<style></style>
