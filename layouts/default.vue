@@ -16,6 +16,27 @@ export default {
       return titleChunk
         ? `${titleChunk} - Stork`
         : 'Stork: Impossibly Fast Web Search'
+    },
+    script: [
+      {
+        hid: 'analytics',
+        innerHTML: `var _paq = window._paq || [];
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="https://analytics.jameslittle.me/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '5']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+          })();
+        `,
+        type: 'text/javascript',
+        body: true
+      }
+    ],
+    __dangerouslyDisableSanitizersByTagID: {
+      analytics: ['innerHTML']
     }
   }
 }
