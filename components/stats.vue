@@ -1,9 +1,9 @@
 <template>
   <section class="stats">
     <div class="flex">
-      <p>Latest version: <strong>0.4.0</strong></p>
-      <p>Latest index protocol: <strong>1.0.0</strong></p>
-      <p>Javascript library last updated: <strong>2020-01-12</strong></p>
+      <p>Latest version: <strong>0.5.0</strong></p>
+      <p>Latest index protocol: <strong>stork-2</strong></p>
+      <p>Javascript library last updated: <strong>2020-02-29</strong></p>
     </div>
     <p class="github-cta">
       Check out the latest release
@@ -42,6 +42,7 @@ p {
 strong {
   display: block;
   font-size: 2.2em;
+  font-family: 'Inconsolata';
 }
 
 @media screen and (max-width: 500px) {
