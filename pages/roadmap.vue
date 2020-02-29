@@ -52,6 +52,7 @@
           Write and publish some integrations with other projects, e.g. various
           static site generators, Wordpress, etc.
         </li>
+        <li>Convert JS code to Typescript</li>
       </ul>
 
       <p>
