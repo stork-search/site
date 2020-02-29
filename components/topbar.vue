@@ -25,6 +25,7 @@ section {
 
 .warning {
   text-align: center;
+  font-size: 0.8em;
   background-color: #e9e777;
   font-weight: bold;
 }

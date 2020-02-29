@@ -17,6 +17,13 @@ export default {
         ? `${titleChunk} - Stork`
         : 'Stork: Impossibly Fast Web Search'
     },
+    link: [
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap'
+      }
+    ],
     script: [
       {
         hid: 'analytics',
