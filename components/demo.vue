@@ -5,7 +5,7 @@
       <a href="https://www.youtube.com/watch?v=DPgE7PNzXag"
         >Federalist Papers</a
       >
-      (except just the first ten):
+      (except just the first twenty):
     </p>
     <div class="stork-wrapper">
       <input
