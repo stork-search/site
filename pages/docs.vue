@@ -32,8 +32,7 @@
         each time an index is computed, you're "locking in" the results for any
         possible query. With a Stork setup, you're meant to recompute and
         re-upload a search index every time your content changes, likely as part
-        of the build process for your static site. However, Stork's
-        configurability lets it be used in man
+        of the build process for your static site.
       </p>
 
       <h2>Basic Configuration</h2>
