@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-sheet" v-on:click="onClose">
+  <div v-on:click="onClose" class="modal-sheet">
     <button v-on:click="onClose" class="close-button">&times;</button>
     <div class="modal"><slot></slot></div>
   </div>

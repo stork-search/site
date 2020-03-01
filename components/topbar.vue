@@ -1,7 +1,8 @@
 <template>
   <header>
     <section class="warning">
-      Stork is in beta. Please adjust your expectations accordingly.
+      Stork is in beta. Please adjust your expectations accordingly. See the
+      <a href="/roadmap">roadmap</a> for more information.
     </section>
     <section class="top-bar">
       <a href="/">Home</a>
@@ -30,7 +31,7 @@ section {
   font-weight: bold;
 }
 
-a {
+.top-bar a {
   margin-right: 1em;
 }
 </style>

@@ -5,9 +5,11 @@ export default {
       { class: [`lang-${this.lang}`] },
       this.html
     )
-    return createElement('pre', { attrs: { 'data-filename': this.filename } }, [
-      code
-    ])
+    return createElement(
+      'pre',
+      { class: [this.classList], attrs: { 'data-filename': this.filename } },
+      [code]
+    )
   },
   data() {
     return {
@@ -22,6 +24,11 @@ export default {
     lang: {
       type: String,
       required: false
+    },
+    classList: {
+      type: String,
+      required: false,
+      default: ''
     },
     filename: {
       type: String,

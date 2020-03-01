@@ -12,7 +12,7 @@
 
 <style lang="scss" scoped>
 .note {
-  background-color: rgb(179, 185, 243);
+  background-color: rgb(180, 184, 219);
   border: 1px solid hsla(0, 0%, 0%, 0.2);
   border-radius: 3px;
   padding: 1em;
@@ -25,10 +25,10 @@
 
 .icon {
   display: block;
-  font-size: 3rem;
+  font-size: 2.5rem;
+  line-height: 3rem;
   color: hsla(0, 0%, 100%, 0.8);
   background: hsla(0, 0%, 0%, 0.2);
-  line-height: 1;
   font-weight: bold;
   width: 3rem;
   height: 3rem;
@@ -44,5 +44,9 @@
   color: hsla(0, 0%, 0%, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.13em;
+}
+
+.note code {
+  background: white;
 }
 </style>

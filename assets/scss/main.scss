@@ -34,6 +34,15 @@ section {
   }
 }
 
+/**
+ * Sections outside the page's `main` tag can be wide blocks of backgrounded color;
+ * sections within the main tag cannot.
+ */
+main section {
+  padding: 2em 0;
+  margin: 0 calc(50% - #{$page-width} / 2);
+}
+
 @media screen and (max-width: 750px) {
   section {
     padding: 2em 1em;
