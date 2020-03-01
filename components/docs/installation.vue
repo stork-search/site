@@ -51,6 +51,13 @@
       >
       and let me know.
     </p>
+    <p>
+      Stork updates bring more accurate indexing, more configuration features,
+      and speed and index size optimizations. The Javascript library will update
+      automatically, but you'll have to rebuild your index when a new Stork
+      binary is released. To track updates, [follow the Stork Releases RSS
+      feed](https://github.com/jameslittle230/stork/releases.atom).
+    </p>
   </section>
 </template>
 
