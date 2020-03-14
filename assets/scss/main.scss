@@ -44,7 +44,10 @@ main section {
 }
 
 @media screen and (max-width: 750px) {
-  section {
+  section,
+  main section {
+    width: 100%;
+    margin: 0;
     padding: 2em 1em;
   }
 }

@@ -83,7 +83,6 @@ export default {
 <style>
 .toc-wrapper {
   padding-left: calc(50% - 650px / 2);
-  overflow-y: ;
 }
 .toc {
   position: absolute;
@@ -111,5 +110,26 @@ export default {
 
 .toc button.active {
   background: hsla(103, 24%, 77%, 1);
+}
+
+@media screen and (max-width: 1200px) {
+  .toc-wrapper {
+    padding: 0;
+  }
+
+  .toc {
+    position: static;
+    transform: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 calc(50% - 650px / 2);
+    /* justify-content: space-between; */
+    margin: 0;
+    margin-top: 1em;
+  }
+
+  .toc li {
+    margin-right: 1em;
+  }
 }
 </style>
