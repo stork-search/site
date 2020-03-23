@@ -1,9 +1,9 @@
 <template>
   <section class="stats">
     <div class="flex">
-      <p>Latest version: <strong>0.5.0</strong></p>
+      <p>Latest version: <strong>0.5.2</strong></p>
       <p>Latest index protocol: <strong>stork-2</strong></p>
-      <p>Javascript library last updated: <strong>2020-02-29</strong></p>
+      <p>Javascript library last updated: <strong>2020-03-22</strong></p>
     </div>
     <p class="github-cta">
       Check out the latest release
