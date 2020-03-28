@@ -32,8 +32,8 @@
         <li>Keyboard shortcuts on JS</li>
         <li>Support the SRT file format</li>
         <li>Callbacks in JS for different user events</li>
-        <li>Sorting the results by relevance</li>
-        <li>Sensible handling of multi-word queries</li>
+        <li>Sorting the results by relevance <em>Added in 0.5.3</em></li>
+        <li>Sensible handling of multi-word queries <em>Added in 0.5.3</em></li>
         <li>Different options for indexing behavior</li>
         <li>
           Different options for allowed input, like files with frontmatter, or
