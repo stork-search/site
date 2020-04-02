@@ -1,4 +1,5 @@
-export default `base_directory = "test/federalist"
+export default `[input]
+base_directory = "test/federalist"
 surrounding_word_count = 12
 files = [
     {path = "federalist-1.txt", url = "/federalist-1/", title = "Introduction"},
