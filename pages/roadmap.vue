@@ -24,6 +24,7 @@
           Build out configuration options so that search behavior can fit
           different types of content
         </li>
+        <li>Maintain compatibility with old config files and indexes</li>
       </ul>
 
       <h1>1.0.0</h1>

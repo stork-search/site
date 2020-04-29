@@ -1,14 +1,18 @@
 <template>
   <section class="stats">
-    <div class="flex">
-      <p>Latest version: <strong>0.5.3</strong></p>
-      <p>Latest index protocol: <strong>stork-2</strong></p>
-      <p>Javascript library last updated: <strong>2020-03-28</strong></p>
+    <div class="flex space-between bottom">
+      <div class="col" style="margin-right: 2rem">
+        <p class="latest-version">Latest version:</p>
+        <p class="version">0.6.0</p>
+        <p class="released">Released on 2020-04-28</p>
+      </div>
+
+      <div class="col">
+        <a href="https://github.com/jameslittle230/stork" class="cta"
+          >View on Github →</a
+        >
+      </div>
     </div>
-    <p class="github-cta">
-      Check out the latest release
-      <a href="https://github.com/jameslittle230/stork">on Github</a>
-    </p>
   </section>
 </template>
 
@@ -19,39 +23,58 @@ section {
   background-color: $accent-color;
 }
 
+p {
+  margin: 0;
+}
+
 .flex {
   display: flex;
+}
+
+.space-between {
   justify-content: space-between;
 }
 
+.center {
+  align-items: center;
+}
+
+.bottom {
+  align-items: end;
+}
 @media screen and (max-width: 750px) {
   .flex {
     display: block;
   }
-
-  .flex p {
-    margin-bottom: 2em;
-  }
 }
 
-p {
+.latest-version {
+  text-transform: uppercase;
+  color: hsla(0, 0%, 0%, 50%);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  font-size: 0.8em;
+}
+
+.version {
+  font-size: 3.5em;
+  color: #000000;
+  font-weight: bold;
+  letter-spacing: -1.75px;
   line-height: 1;
-  margin: 1.4em 0;
+  margin-bottom: 0.1em;
 }
 
-strong {
-  display: block;
-  font-size: 2.2em;
-  font-family: 'Inconsolata';
+.released {
+  font-size: 1.1em;
+  color: #434343;
+  font-weight: bold;
+  line-height: 17px;
 }
 
-@media screen and (max-width: 500px) {
-  strong {
-    font-size: 1.7em;
-  }
-}
-
-.github-cta {
-  font-size: 1.3em;
+.cta {
+  padding-right: 0.5em;
+  font-weight: bold;
+  font-size: 1.4em;
 }
 </style>
