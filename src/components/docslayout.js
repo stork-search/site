@@ -5,13 +5,13 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import styled from "styled-components"
-import { Link } from "gatsby"
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'gatsby'
 // import PropTypes from "prop-types"
 
-import Layout from "./layout"
-import { pageWidth, PageTitle, Wrapper } from "./utils"
+import Layout from './layout'
+import { pageWidth, PageTitle, Wrapper } from './utils'
 
 const TOC = styled.ul`
   text-align: right;
@@ -36,21 +36,22 @@ const TOC = styled.ul`
   }
 `
 
-const DocsLink = ({ to, children }) => {
-  const StyledLink = styled(Link)`
-    border: 1px solid gray;
-    border-radius: 4px;
-    padding: 0.3em 0.6em;
-    margin-bottom: 0.4em;
-    text-decoration: none;
-    line-height: 2.4;
-    color: currentColor !important;
-    font-weight: normal !important;
+const StyledLink = styled(Link)`
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 0.3em 0.6em;
+  margin-bottom: 0.4em;
+  text-decoration: none;
+  line-height: 2.4;
+  color: currentColor !important;
+  font-weight: normal !important;
 
-    &.active {
-      background: hsla(103, 24%, 77%, 1);
-    }
-  `
+  &.active {
+    background: hsla(103, 24%, 77%, 1);
+  }
+`
+
+const DocsLink = ({ to, children }) => {
   return (
     <li>
       <StyledLink to={to} activeClassName="active">
@@ -70,26 +71,27 @@ const DocsNav = () => (
   </TOC>
 )
 
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 12em 4em ${pageWidth} 4em 12em 1fr;
+  grid-auto-flow: column;
+  grid-auto-rows: auto;
+
+  & > * {
+    grid-column: 4 / span 1;
+  }
+
+  & > .popout {
+    grid-column: 3 / span 3;
+  }
+
+  @media (max-width: 62.5em) {
+    display: block;
+    padding: 0 1em;
+  }
+`
+
 const DocsLayout = ({ title, children }) => {
-  const GridContainer = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 12em 4em ${pageWidth} 4em 12em 1fr;
-    grid-auto-flow: column;
-    grid-auto-rows: auto;
-
-    & > * {
-      grid-column: 4 / span 1;
-    }
-
-    & > .popout {
-      grid-column: 3 / span 3;
-    }
-
-    @media (max-width: 62.5em) {
-      display: block;
-      padding: 0 1em;
-    }
-  `
   return (
     <Layout>
       <Wrapper>
