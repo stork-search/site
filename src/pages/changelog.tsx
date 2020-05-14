@@ -1,13 +1,13 @@
 // Gatsby supports TypeScript natively!
-import React from "react"
-import styled from "styled-components"
-import { PageProps, Link, graphql } from "gatsby"
+import React from 'react'
+import styled from 'styled-components'
+import { PageProps, Link, graphql } from 'gatsby'
 
-import PageLayout from "../components/pagelayout"
-import { PageTitle } from "../components/utils"
-import SEO from "../components/seo"
+import PageLayout from '../components/pagelayout'
+import { PageTitle } from '../components/utils'
+import SEO from '../components/seo'
 
-import { parseISO, format } from "date-fns"
+import { parseISO, format } from 'date-fns'
 
 export const query = graphql`
   query ChangelogQuery {
@@ -28,7 +28,7 @@ export const query = graphql`
 
 const stats = [
   {
-    version: "0.6.0",
+    version: '0.6.0',
     indexSize: 1800.0,
     wasmSize: 191.37,
     jsSize: 648.65,
@@ -56,7 +56,7 @@ const Changelog = ({ data }) => (
           </tr>
         </thead>
         <tbody>
-          {stats.map(row => (
+          {stats.map((row) => (
             <tr>
               <CenteredTableCell>{row.version}</CenteredTableCell>
               <CenteredTableCell>{row.indexSize / 1000} MB</CenteredTableCell>
@@ -68,22 +68,24 @@ const Changelog = ({ data }) => (
         </tbody>
       </table>
 
-      <p style={{ fontSize: "0.8em", marginTop: "1.5em" }}>
+      <p style={{ fontSize: '0.8em', marginTop: '1.5em' }}>
         *Search duration calculated by running the same search query on my
         computer ten times, then averaging the results.
       </p>
     </div>
     <div>
-      {data.github.repository.releases.nodes.map(release => (
-        <>
-          <h1 style={{ marginBottom: 0 }}>{release.tagName}</h1>
-          <a href={release.url}>
-            {format(parseISO(release.publishedAt), "MMM d, y")}
-          </a>
-          <p dangerouslySetInnerHTML={{ __html: release.descriptionHTML }} />
-          {/* <pre>{JSON.stringify(release, null, 2)}</pre> */}
-        </>
-      ))}
+      {data.github.repository.releases.nodes
+        .filter((r) => !!r && !!r.publishedAt)
+        .map((release) => (
+          <>
+            <h1 style={{ marginBottom: 0 }}>{release.tagName}</h1>
+            <a href={release.url}>
+              {format(parseISO(release.publishedAt), 'MMM d, y')}
+            </a>
+            <p dangerouslySetInnerHTML={{ __html: release.descriptionHTML }} />
+            {/* <pre>{JSON.stringify(release, null, 2)}</pre> */}
+          </>
+        ))}
     </div>
   </PageLayout>
 )
