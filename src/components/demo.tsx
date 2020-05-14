@@ -19,8 +19,8 @@ const Demo = () => (
         }
 
         async function load() {
-          while(typeof stork === "undefined") {
-            await sleep(10);
+          while(typeof stork === "undefined" || !document.querySelector("input[data-stork='federalist']")) {
+            await sleep(100);
           }
           
           stork.register(
