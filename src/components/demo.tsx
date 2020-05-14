@@ -48,7 +48,9 @@ const Demo = () => (
             placeholder="liberty"
             style={{ fontSize: '1.3em', width: '100%', padding: '0.5em 0.8em' }}
           />
-          <div data-stork="federalist-output" className="stork-output"></div>
+          <div data-stork="federalist-output" className="stork-output">
+            {' '}
+          </div>
         </div>
         <p style={{ fontSize: '0.8em' }}>*Well, just the first twenty.</p>
       </div>
