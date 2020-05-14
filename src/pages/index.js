@@ -54,7 +54,7 @@ export const query = graphql`
   query HomeStatsQuery {
     github {
       repository(name: "stork", owner: "jameslittle230") {
-        releases(first: 1, orderBy: { field: CREATED_AT, direction: DESC }) {
+        releases(first: 3, orderBy: { field: CREATED_AT, direction: DESC }) {
           nodes {
             publishedAt
             tagName
@@ -116,7 +116,13 @@ const IndexPage = ({ data }) => (
         <AboveFold />
       </Column>
     </Wrapper>
-    <Stats release={data.github.repository.releases.nodes[0]} />
+    <Stats
+      release={
+        data.github.repository.releases.nodes.filter(
+          (r) => !!r && !!r.publishedAt
+        )[0]
+      }
+    />
     <Wrapper>
       <Popout>
         <Quickstart />
