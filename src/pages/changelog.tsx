@@ -28,6 +28,13 @@ export const query = graphql`
 
 const stats = [
   {
+    version: '0.7.0',
+    indexSize: 1140.0,
+    wasmSize: 684.82,
+    jsSize: 9.07,
+    duration: 0.383,
+  },
+  {
     version: '0.6.0',
     indexSize: 1800.0,
     wasmSize: 191.37,
@@ -44,6 +51,12 @@ const Changelog = ({ data }) => (
   <PageLayout>
     <SEO title="Page two" />
     <PageTitle>Changelog</PageTitle>
+    <h1>Stats for numbers-type people</h1>
+    <p>
+      All file sizes are pre-compression. All files that come from
+      files.stork-search.net are gzipped; you should compress your search index
+      before serving it.
+    </p>
     <div>
       <table>
         <thead>
@@ -74,11 +87,12 @@ const Changelog = ({ data }) => (
       </p>
     </div>
     <div>
+      <h1>Releases</h1>
       {data.github.repository.releases.nodes
         .filter((r) => !!r && !!r.publishedAt)
         .map((release) => (
           <>
-            <h1 style={{ marginBottom: 0 }}>{release.tagName}</h1>
+            <h2 style={{ marginBottom: 0 }}>{release.tagName}</h2>
             <a href={release.url}>
               {format(parseISO(release.publishedAt), 'MMM d, y')}
             </a>
