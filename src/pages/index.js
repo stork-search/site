@@ -1,12 +1,12 @@
-import React from "react"
-import styled from "styled-components"
-import { Link } from "gatsby"
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'gatsby'
 
-import { parseISO, format } from "date-fns"
+import { parseISO, format } from 'date-fns'
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Demo from "../components/demo"
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import Demo from '../components/demo'
 import {
   accentColor,
   Wrapper,
@@ -14,10 +14,10 @@ import {
   Popout,
   Title,
   Subtitle,
-} from "../components/utils"
+} from '../components/utils'
 
-import AboveFold from "../components/content/index/above-fold"
-import Quickstart from "../components/content/index/quickstart"
+import AboveFold from '../components/content/index/above-fold'
+import Quickstart from '../components/content/index/quickstart'
 
 const Intro = () => {
   return (
@@ -65,7 +65,7 @@ export const query = graphql`
   }
 `
 
-const Stats = ({release}) => {
+const Stats = ({ release }) => {
   return (
     <Wrapper background={accentColor}>
       <Column>
@@ -80,7 +80,7 @@ const Stats = ({release}) => {
             <Subtitle>Latest version:</Subtitle>
             <Title fontSize={`3.5rem`}>{release.tagName}</Title>
             <Released>
-              Released on {format(parseISO(release.publishedAt), "MMM d, y")}
+              Released on {format(parseISO(release.publishedAt), 'MMM d, y')}
             </Released>
           </div>
           <CTA>
@@ -106,7 +106,7 @@ const DocsLink = () => {
   )
 }
 
-const IndexPage = ({data}) => (
+const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
     <Intro />

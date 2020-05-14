@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
-import { Helmet } from "react-helmet"
-import { Wrapper, Column, Subtitle } from "./utils"
+import React from 'react'
+import styled from 'styled-components'
+import { Helmet } from 'react-helmet'
+import { Wrapper, Column, Subtitle } from './utils'
 
 const Demo = () => (
   <Wrapper background="hsla(0, 0%, 0%, 0.1)">
@@ -35,7 +35,7 @@ const Demo = () => (
     <Column>
       <div>
         <Subtitle>
-          Search the{" "}
+          Search the{' '}
           <a href="https://www.youtube.com/watch?v=DPgE7PNzXag">
             Federalist Papers
           </a>
@@ -46,11 +46,11 @@ const Demo = () => (
             data-stork="federalist"
             className="stork-input"
             placeholder="liberty"
-            style={{ fontSize: "1.3em", width: "100%", padding: "0.5em 0.8em" }}
+            style={{ fontSize: '1.3em', width: '100%', padding: '0.5em 0.8em' }}
           />
           <div data-stork="federalist-output" className="stork-output"></div>
         </div>
-        <p style={{ fontSize: "0.8em" }}>*Well, just the first twenty.</p>
+        <p style={{ fontSize: '0.8em' }}>*Well, just the first twenty.</p>
       </div>
     </Column>
   </Wrapper>
