@@ -1,0 +1,40 @@
+import Codeblock from "../../codeblock"
+import DocsNote from "../../docsnote"
+import { Link } from "gatsby"
+
+There are two parts to Stork—the command line tool and the Javascript module—and both need to be installed separately.
+
+# Installing with [Homebrew](https://brew.sh)
+
+If you're on a Mac, you can use Homebrew to download Stork:
+
+```
+$ brew install jameslittle230/stork-tap/stork
+```
+
+The executable will be compiled and moved into your path.
+
+# Building from source
+
+If you're not on a Mac, or if you don't want to use Homebrew, you can manually install Stork.
+
+* Stork is built with Rust; make sure you have [Cargo](https://github.com/rust-lang/cargo/) installed.
+* View the [latest release on Github](https://github.com/jameslittle230/stork/releases).
+* Download the source code bundle (either the Zipfile or the Tarball) and uncompress it.
+* From the project directory, run `$ cargo build --release`
+* Optional: Copy the executable from `./target/release/stork` into your path
+* Now when you run `$ stork` from your command line, you should see the project information and help text.
+
+If this doesn't work for you, [open a Github issue](https://github.com/jameslittle230/stork/issues/new) and let me know.
+
+# Embedding the script
+
+The Javascript portion of Stork needs to be included with the following `<script>` tag, and shouldn't be packaged as part of a bundle.
+
+<Codeblock lang="html">
+  {`<script src="https://files.stork-search.net/stork.js"></script>`}
+</Codeblock>
+
+Stork dynamically loads a WebAssembly binary, which is updated regularly with bugfixes, compatibility improvements, and features.
+
+To track updates, follow the [Stork Releases RSS feed](https://github.com/jameslittle230/stork/releases.atom). 

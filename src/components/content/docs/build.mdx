@@ -1,0 +1,79 @@
+import Codeblock from "../../codeblock"
+import DocsNote from "../../docsnote"
+import { Link } from "gatsby"
+
+Stork works in two parts. At build time, it generates a static index file from your content, which contains precomputed search results for every possible search query. When someone loads your webpage, a script downloads and parses that static index file and builds an interactive search interface.
+
+You likely want to rebuild and re-upload your search index every time your content changes, so your search results stay up to date. If you include Stork as a build step in your static site generator, your search interface will be updated whenever your site is re-deployed.
+
+<!-- You can find specific build-time instructions if your site uses Gatsby, Jekyll, Publish, 11ty or Hugo. You can also find more general documentation to integrate Stork with Grunt or Gulp. -->
+
+# The Configuration File
+
+The basic Stork configuration defines a list of files to be indexed and a filename to which the computed index will be written. Stork requires a [TOML](https://github.com/toml-lang/toml) configuration file to know which files should be indexed.
+
+<div className="popout">
+  <Codeblock filename="basic.toml">
+    {`[input]
+base_directory = "my_files/"
+files = [
+    {path = "federalist-1.txt", url = "/federalist-1/", title = "Introduction"},
+    {path = "federalist-2.txt", url = "/federalist-2/", title = "Concerning Dangers from Foreign Force and Influence"},
+    {path = "federalist-3.txt", url = "/federalist-3/", title = "Concerning Dangers from Foreign Force and Influence 2"}
+]
+ 
+[output]
+filename = "federalist.st"`}
+  </Codeblock>
+</div>
+
+File paths in the config file are all relative to your working directory when you run the Stork command, including the base url. If you're in the `~/project/` directory when you run `$ stork --build basic.toml`, Stork will look for the files at:
+
+- `~/project/my_files/federalist-1.txt`
+- `~/project/my_files/federalist-2.txt`
+- `~/project/my_files/federalist-3.txt`
+
+and will output your index to `~/federalist.st`, regardless of where the configuration file is actually located.
+
+In the search interface, the search result will link to the file's `url` value, and the title of the document will be displayed as the file's `title` value.
+
+<DocsNote>
+
+The indexer will look at all content in the file and include it in search results. As of now, there is no way to filter out HTML tags, front matter, or other types of content. You might need to generate temporary plain-text versions of the documents you intend to index with extraneous content stripped away, and feed those into Stork instead of your content as written.
+
+</DocsNote>
+
+## TOML syntax oddities
+
+TOML lets you describe arrays of objects in two ways: the first, shown above, restricts each object to only be on one line. Alternatively, you can write your configuration file like this:
+
+<div className="popout">
+<Codeblock filename="longer.toml">
+  {`[input]
+base_directory = "my_files"
+url_prefix = "https://www.congress.gov/resources/display/content/The+Federalist+Papers#"
+ 
+[[input.files]] 
+path = "federalist-1.txt"
+url = "TheFederalistPapers-1"
+title = "Introduction"
+ 
+[[input.files]]
+path = "federalist-2.txt"
+url = "TheFederalistPapers-2"
+title = "Concerning Dangers from Foreign Force and Influence"
+ 
+[[input.files]]
+path = "federalist-3.txt"
+url = "TheFederalistPapers-3"
+title = "Concerning Dangers from Foreign Force and Influence 2"
+ 
+[output]
+filename = "federalist.st"
+`}
+</Codeblock>
+</div>
+
+Additional options, like SRT handling, is also implemented using this syntax. See the <Link to="/docs/srt">SRT docs page</Link> for more examples.
+
+Notice that this configuration file also uses the `url_prefix` key to prefix each file's URL. This is useful if all your links are pointed to the same host (or, in this case, the same page, just with different anchors). All possible configuration options are outlined on the <Link to="/docs/config-ref">Configuration Reference docs page</Link> for more details.

@@ -1,0 +1,35 @@
+import Codeblock from "../../codeblock"
+import DocsNote from "../../docsnote"
+import { Link } from "gatsby"
+
+<div>
+
+Stork uses a Javascript library to turn a Stork search index into an interactive interface. This library downloads the index and uses a WebAssembly binary to parse and search through it. To begin using the frontend half of Stork, load the Stork JS bundle from the Stork CDN right before the closing `</body>` tag:
+
+<Codeblock lang="html">
+  {`<script src="https://files.stork-search.net/stork.js"></script>`}
+</Codeblock>
+
+After including the `stork.js` script on your page, you'll be able to call the `stork.register()` function to register a search index on that page. To properly register an index, you'll need, at minimum:
+
+- An `<input>` element with the attribute `data-stork="foo"`
+- A `<div>` element with the attribute `data-stork="foo-results"`
+
+where `foo` is the **registration name**. Stork will find these elements and turn them into the interactive search interface after `stork.register()` is called.
+
+<Codeblock lang="html">
+  {`<input data-stork="foo" />
+<div data-stork="foo-results"></div>`}
+</Codeblock>
+
+The `stork.register()` function takes two mandatory arguments: the index's registration name, and the URL at which the Stork index can be found. When the `stork.register()` method is called, the Stork library will download the index from that URL and attach it to the correct HTML elements.
+
+<Codeblock lang="html">
+  {`<script>
+    stork.register("foo", "https://your-url.com/index-file", {});
+</script>`}
+</Codeblock>
+
+There is a third, optional argument the `register()` function takes: an options object. This lets you configure some of the display and behavior of that Stork index. The available options are as follows:
+
+</div>

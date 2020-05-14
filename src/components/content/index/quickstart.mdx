@@ -1,0 +1,127 @@
+import Codeblock from "../../codeblock"
+import DocsNote from "../../docsnote"
+import { Link } from "gatsby"
+
+# Quick Start Guide
+
+To begin, let's first embed the Federalist Paper search box in the demo above in a web page. Once that's working, we'll generate a new index with custom content and feed that into the search box.
+
+## Embed the Federalist Paper Search
+
+The demo above uses some custom CSS, but can generally be recreated with the following HTML:
+
+<div className="popout">
+  <Codeblock filename="index.html" lang="html">
+    {`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Federalist Search</title>
+    <link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
+  </head>
+  <body>
+    <div class="stork-wrapper">
+      <input data-stork="federalist" class="stork-input" />
+      <div data-stork="federalist-output" class="stork-output"></div>
+    </div>
+    <script src="https://files.stork-search.net/stork.js"></script>
+    <script>
+      stork.register(
+        'federalist',
+        'https://files.stork-search.net/federalist.st'
+      )
+    </script>
+  </body>
+</html>`}
+  </Codeblock>
+</div>
+
+Putting that code in a new HTML page will get you a copy of the demo. In the rest of the section, I'll explain what's happening here.
+
+### HTML Structure
+
+Stork hooks into existing HTML that you include on your page. Each Stork instance has to have an **input element** and an **output element**, and generally Stork themes will ask you to put the input and output in a wrapper element.
+
+<Codeblock lang="html">
+  {`<div class="stork-wrapper">
+    <input data-stork="federalist" />
+    <div data-stork="federalist-output"></div>
+</div>`}
+</Codeblock>
+
+Both the input and output elements will be registered under a certain name (here, that name is "federalist"). In your own code, replace `federalist` with a short name that describes your search index.
+
+### Javascript
+
+Right before the closing `</body>` tag, we include the Stork script and register the index.
+
+<Codeblock lang="html">
+  {`<script src="https://files.stork-search.net/stork.js"></script>
+<script>
+    stork.register(
+        'federalist', 
+        'https://files.stork-search.net/federalist.st'
+    )
+</script>`}
+</Codeblock>
+
+The `stork.register()` function takes two arguments: the name of your Stork instance, which must match the HTML attribute values; and the URL where the Stork index file can be found. Here, we're pointing to an index file I developed that searches through the contents of the Federalist Papers. Eventually, you'll build your own index, upload it to your web host, and point Stork at its URL instead.
+
+### Theme
+
+Stork is heavily customizable, and if you wanted, you could write CSS that makes the Stork output look exactly how you want. Alternatively, you can use one of the pre-existing themes to quickly spin up a polished look and feel for your search interface.
+
+Here, we're using the Basic theme. The Basic theme comes with an HTML specification and a stylesheet. The `<input>` tag must have the `class="stork-input"` attribute, and the output div must have the `class="stork-output"` attribute. Finally, we link the Basic theme's stylesheet in our page's `<head>`:
+
+<Codeblock lang="html">
+  {`<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />`}
+</Codeblock>
+
+## Building your own index
+
+Now that you have a search interface on a webpage, you can replace the Federalist Papers with your own content -- I bet you're getting sick of searching for "liberty".
+
+A Stork search index is built from a collection of sources, usually a set of files on your computer. When creating a search index, you create a **configuration file** that defines a list of sources and includes some metadata about each one. When you run the Stork command line application, Stork will build a search index based on the contents of those files and the specified metadata.
+
+After you've <Link to="/docs">installed Stork</Link>, create a new file called `config.toml` and add the following contents:
+
+<div className="popout">
+  <Codeblock filename="config.toml">
+    {`[input]
+base_directory = "my_files/"
+files = [
+    {path = "federalist-1.txt", url = "/federalist-1/", title = "Introduction"},
+    {path = "federalist-2.txt", url = "/federalist-2/", title = "Concerning Dangers from Foreign Force and Influence"},
+    {path = "federalist-3.txt", url = "/federalist-3/", title = "Concerning Dangers from Foreign Force and Influence 2"}
+]
+ 
+[output]
+filename = "my_index.st"`}
+  </Codeblock>
+</div>
+
+This TOML file defines the base directory of all your documents, then lists out a list of File maps, each of which describes:
+
+- The path on disk where that file can be found, in relation to the base directory
+- The URL to where that search result will link
+- The title of the document
+
+See the <Link to="/docs/config-ref">Configuration File reference</Link> to see all the options you can add to the configuration file or the File object.
+
+When you're ready, you can build the Stork index file with the command line tool:
+
+```
+$ stork --build config.toml
+```
+
+This will create a new file at `my_index.st`. This file is your search index, and contains the displayed results for the query your user inputs. The file should be uploaded to a public place, and its url should be passed into the `stork.register()` function.
+
+### Testing your index
+
+You can perform a search from the command line using the same command line tool, if you want to test out the search results. The results will be written to stdout in JSON; you might want to pipe the results into `jq` for visibility.
+
+```
+$ stork --search my_index.st "a search query"
+```
+
+# What's next?
