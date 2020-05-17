@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import { accentColor, Wrapper, Column, Title } from "./utils"
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import { accentColor, Wrapper, Column, Title } from './utils'
 
 const HeaderLink = styled(Link)`
   line-height: 1;
@@ -13,6 +13,10 @@ const Flex = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 35rem) {
+    flex-direction: column;
+  }
 `
 
 const NameplateLink = styled(Link)`

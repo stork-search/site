@@ -1,5 +1,5 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
 const pageWidth = `650px`
 const accentColor = `hsla(103, 24%, 77%, 1)`
@@ -23,7 +23,7 @@ const Title = styled.h1`
   line-height: 1;
   margin: 0.1em 0;
   letter-spacing: -0.02em;
-  font-size: ${props => props.fontSize || "2.2em"};
+  font-size: ${(props) => props.fontSize || '2.2em'};
 `
 
 const Subtitle = styled.p`
@@ -35,19 +35,19 @@ const Subtitle = styled.p`
   margin: 0.25em 0;
 `
 
-const PageTitle = styled(Title).attrs(props => ({
-  fontSize: "3em",
+const PageTitle = styled(Title).attrs((props) => ({
+  fontSize: '3em',
 }))`
   margin-top: 0.5em;
   margin-bottom: 0.8em;
 `
 
 const Wrapper = styled.div`
-  background-color: ${props => props.background || "none"};
+  background-color: ${(props) => props.background || 'none'};
 
-  ${props => {
+  ${(props) => {
     let rhythmObject = rhythms[props.rhythm]
-    let defaultRhythm = rhythms["default"]
+    let defaultRhythm = rhythms['default']
     if (rhythmObject) {
       return `padding-top: ${rhythmObject.top}; padding-bottom: ${rhythmObject.bottom}`
     } else {
@@ -65,6 +65,12 @@ const SimpleGrid = styled.div`
   & > * {
     grid-column: 2 / span 1;
   }
+
+  @media (max-width: 45rem) {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+  }
 `
 
 const PopoutGrid = styled.div`
@@ -79,6 +85,12 @@ const PopoutGrid = styled.div`
 
   & > .popout {
     grid-column: 2 / span 3;
+  }
+
+  @media (max-width: 50rem) {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
   }
 `
 

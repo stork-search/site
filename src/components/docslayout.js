@@ -29,6 +29,7 @@ const TOC = styled.ul`
     margin-bottom: 1em;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
 
     & > * {
       margin-right: 0.5em;
@@ -96,7 +97,6 @@ const DocsLayout = ({ title, children }) => {
     <Layout>
       <Wrapper>
         <GridContainer>
-          <PageTitle>{title}</PageTitle>
           <div
             style={{
               gridColumn: `2 / span 2`,
@@ -105,6 +105,7 @@ const DocsLayout = ({ title, children }) => {
           >
             <DocsNav />
           </div>
+          <PageTitle>{title}</PageTitle>
           {children}
         </GridContainer>
       </Wrapper>

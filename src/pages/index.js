@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 
 import { parseISO, format } from 'date-fns'
 
@@ -65,17 +65,22 @@ export const query = graphql`
   }
 `
 
+export const StatsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+
+  @media (max-width: 35rem) {
+    flex-direction: column;
+    align-items: start;
+  }
+`
+
 const Stats = ({ release }) => {
   return (
     <Wrapper background={accentColor}>
       <Column>
-        <div
-          style={{
-            display: `flex`,
-            justifyContent: `space-between`,
-            alignItems: `end`,
-          }}
-        >
+        <StatsWrapper>
           <div>
             <Subtitle>Latest version:</Subtitle>
             <Title fontSize={`3.5rem`}>{release.tagName}</Title>
@@ -88,7 +93,7 @@ const Stats = ({ release }) => {
               View on Github →
             </a>
           </CTA>
-        </div>
+        </StatsWrapper>
       </Column>
     </Wrapper>
   )
