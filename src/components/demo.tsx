@@ -7,30 +7,9 @@ const Demo = () => (
   <Wrapper background="hsla(0, 0%, 0%, 0.1)">
     <Helmet>
       <link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
-      <style>{`
-        .stork-result a:link {
-          font-weight: 400;
-        }
-      `}</style>
+      <link rel="stylesheet" href="/basic-additions.css" />
       <script src="https://files.stork-search.net/stork.js"></script>
-      <script>{`
-        function sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        async function load() {
-          while(typeof stork === "undefined" || !document.querySelector("input[data-stork='federalist']")) {
-            await sleep(100);
-          }
-          
-          stork.register(
-            'federalist',
-            'https://files.stork-search.net/federalist.st'
-          );
-        }
-
-        load();
-      `}</script>
+      <script src="/stork-load.js"></script>
     </Helmet>
     <Column>
       <div>
