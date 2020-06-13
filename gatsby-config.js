@@ -8,9 +8,9 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Stork Search`,
+    description: `Impossibly fast web search, made for static sites.`,
+    author: `@jameslittle230`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -30,10 +30,10 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#bed2b6`,
+        theme_color: `#bed2b6`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-mdx`,
@@ -51,6 +51,14 @@ module.exports = {
             },
             fetch,
           }),
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-matomo',
+      options: {
+        siteId: '5',
+        matomoUrl: 'https://analytics.jameslittle.me',
+        siteUrl: 'https://stork-search.net',
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
