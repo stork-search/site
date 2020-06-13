@@ -49,7 +49,7 @@ const CenteredTableCell = styled.td`
 
 const Changelog = ({ data }) => (
   <PageLayout>
-    <SEO title="Page two" />
+    <SEO title="Changelog" />
     <PageTitle>Changelog</PageTitle>
     <h1>Stats for numbers-type people</h1>
     <p>

@@ -1,14 +1,22 @@
-import React from "react"
+import React from 'react'
+import { Link } from 'gatsby'
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import PageLayout from '../components/pagelayout'
+import { PageTitle } from '../components/utils'
+import SEO from '../components/seo'
 
 const NotFoundPage = () => (
-  <Layout>
+  <PageLayout>
     <SEO title="404: Not found" />
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
+    <PageTitle>404: Page not found.</PageTitle>
+    <p>
+      You think we'd be able to find that page, given this is a search project,
+      but... oh well.
+    </p>
+    <p>
+      <Link to="/">&larr; Go home</Link>
+    </p>
+  </PageLayout>
 )
 
 export default NotFoundPage

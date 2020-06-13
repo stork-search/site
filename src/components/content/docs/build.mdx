@@ -1,6 +1,6 @@
-import Codeblock from "../../codeblock"
-import DocsNote from "../../docsnote"
-import { Link } from "gatsby"
+import Codeblock from '../../codeblock'
+import DocsNote from '../../docsnote'
+import { Link } from 'gatsby'
 
 Stork works in two parts. At build time, it generates a static index file from your content, which contains precomputed search results for every possible search query. When someone loads your webpage, a script downloads and parses that static index file and builds an interactive search interface.
 
@@ -48,8 +48,8 @@ The indexer will look at all content in the file and include it in search result
 TOML lets you describe arrays of objects in two ways: the first, shown above, restricts each object to only be on one line. Alternatively, you can write your configuration file like this:
 
 <div className="popout">
-<Codeblock filename="longer.toml">
-  {`[input]
+  <Codeblock filename="longer.toml">
+    {`[input]
 base_directory = "my_files"
 url_prefix = "https://www.congress.gov/resources/display/content/The+Federalist+Papers#"
  
@@ -71,7 +71,7 @@ title = "Concerning Dangers from Foreign Force and Influence 2"
 [output]
 filename = "federalist.st"
 `}
-</Codeblock>
+  </Codeblock>
 </div>
 
 Additional options, like SRT handling, is also implemented using this syntax. See the <Link to="/docs/srt">SRT docs page</Link> for more examples.

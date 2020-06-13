@@ -1,13 +1,14 @@
 // Gatsby supports TypeScript natively!
-import React from "react"
-import { PageProps, Link } from "gatsby"
+import React from 'react'
+import { PageProps, Link } from 'gatsby'
 
-import PageLayout from "../components/pagelayout"
-import { Column, PageTitle } from "../components/utils"
-import SEO from "../components/seo"
+import PageLayout from '../components/pagelayout'
+import { Column, PageTitle } from '../components/utils'
+import SEO from '../components/seo'
 
 const SecondPage = (props: PageProps) => (
   <PageLayout>
+    <SEO title="Roadmap" />
     <PageTitle>Roadmap</PageTitle>
     <p>
       <strong>Stork is still a beta project.</strong> There are aspects of the
@@ -65,7 +66,7 @@ const SecondPage = (props: PageProps) => (
     </ul>
 
     <p>
-      More specific bugs and features are listed on the project's{" "}
+      More specific bugs and features are listed on the project's{' '}
       <a href="https://github.com/jameslittle230/stork/issues">
         Github Issues page
       </a>

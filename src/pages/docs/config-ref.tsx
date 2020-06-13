@@ -1,26 +1,29 @@
 // Gatsby supports TypeScript natively!
-import React from "react"
-import { PageProps, Link } from "gatsby"
+import React from 'react'
+import { PageProps, Link } from 'gatsby'
 
-import DocsLayout from "../../components/docslayout"
-import SEO from "../../components/seo"
+import DocsLayout from '../../components/docslayout'
+import SEO from '../../components/seo'
 
-import BuildContents from "../../components/content/docs/build"
+import BuildContents from '../../components/content/docs/build'
 
 const Docs = (props: PageProps) => (
   <DocsLayout title="Configuration Reference">
-    <p>
-      Your Stork configuration file defines the way your index is created and
-      processed, and also controls some aspects of how your search results are
-      displayed. The configuration file parser relies heavily on intuitive
-      default values: if a field is inapplicable to your search index (or if
-      you're happy with the listed default value), you can leave the field out
-      of your configuration file.
-    </p>
-    <p>
-      Stork configuration files are guaranteed to be parseable in all future
-      versions of Stork.
-    </p>
+    <SEO title="Config Reference" />
+    <div>
+      <p>
+        Your Stork configuration file defines the way your index is created and
+        processed, and also controls some aspects of how your search results are
+        displayed. The configuration file parser relies heavily on intuitive
+        default values: if a field is inapplicable to your search index (or if
+        you're happy with the listed default value), you can leave the field out
+        of your configuration file.
+      </p>
+      <p>
+        Stork configuration files are guaranteed to be parseable in all future
+        versions of Stork.
+      </p>
+    </div>
     <h3>Input Options</h3>
     <p>Input options define how your files will be read and processed.</p>
     <div className="popout">
@@ -30,7 +33,7 @@ const Docs = (props: PageProps) => (
             <th>Key</th>
             <th>Type</th>
             <th>Default</th>
-            <th style={{ width: "350px" }}>Description</th>
+            <th style={{ width: '350px' }}>Description</th>
           </tr>
         </thead>
         <tbody>
@@ -83,7 +86,7 @@ const Docs = (props: PageProps) => (
               <code>Moderate</code>
             </td>
             <td>
-              One of: <code>Minimal</code>, <code>Moderate</code>,{" "}
+              One of: <code>Minimal</code>, <code>Moderate</code>,{' '}
               <code>Large</code>, and <code>Ridiculous</code>. Determines how
               much a result will be boosted if the search query matches the
               title.
@@ -129,7 +132,7 @@ const Docs = (props: PageProps) => (
             <th>Key</th>
             <th>Type</th>
             <th>Default</th>
-            <th style={{ width: "400px" }}>Description</th>
+            <th style={{ width: '400px' }}>Description</th>
           </tr>
         </thead>
         <tbody>
@@ -182,7 +185,7 @@ const Docs = (props: PageProps) => (
               <code>""</code>
             </td>
             <td>
-              The contents of the document. Each file object must have either a{" "}
+              The contents of the document. Each file object must have either a{' '}
               <code>path</code> or a <code>contents</code> field, but not both.
             </td>
           </tr>
@@ -230,7 +233,7 @@ const Docs = (props: PageProps) => (
             <th>Key</th>
             <th>Type</th>
             <th>Default</th>
-            <th style={{ width: "400px" }}>Description</th>
+            <th style={{ width: '400px' }}>Description</th>
           </tr>
         </thead>
         <tbody>
@@ -257,7 +260,7 @@ const Docs = (props: PageProps) => (
               <code>&amp;t={`{ts}`}</code>
             </td>
             <td>
-              The string that gets appended to the URL. <code>{`{ts}`}</code>{" "}
+              The string that gets appended to the URL. <code>{`{ts}`}</code>{' '}
               gets replaced with the timestamp of that result's excerpt. The
               default template string is the string used by YouTube.
             </td>
@@ -289,7 +292,7 @@ const Docs = (props: PageProps) => (
             <th>Key</th>
             <th>Type</th>
             <th>Default</th>
-            <th style={{ width: "400px" }}>Description</th>
+            <th style={{ width: '400px' }}>Description</th>
           </tr>
         </thead>
         <tbody>
