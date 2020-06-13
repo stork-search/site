@@ -7,6 +7,16 @@ import { accentColor, Wrapper, Column, Title } from './utils'
 const HeaderLink = styled(Link)`
   line-height: 1;
   margin-left: 1em;
+
+  @media (max-width: 35rem) {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+
+  @media (max-width: 25rem) {
+    display: block;
+    margin: 0.5em;
+  }
 `
 
 const Flex = styled.div`
@@ -15,7 +25,8 @@ const Flex = styled.div`
   align-items: center;
 
   @media (max-width: 35rem) {
-    flex-direction: column;
+    display: block;
+    text-align: center;
   }
 `
 
