@@ -28,12 +28,12 @@ export const query = graphql`
 
 const stats = [
   {
-    version: "0.7.1",
+    version: '0.7.1',
     indexSize: 1140.0,
     wasmSize: 674.7,
     jsSize: 73.05,
-    duration: 0.365
-  }
+    duration: 0.365,
+  },
   {
     version: '0.7.0',
     indexSize: 1140.0,
