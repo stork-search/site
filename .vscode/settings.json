@@ -1,7 +1,0 @@
-{
-    "search.exclude": {
-        "dist": true,
-        "package-lock.json": true
-    },
-    "editor.formatOnSave": true
-}
