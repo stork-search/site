@@ -28,6 +28,13 @@ export const query = graphql`
 
 const stats = [
   {
+    version: '0.7.2',
+    indexSize: 1140.0,
+    wasmSize: 578.36,
+    jsSize: 73.05,
+    duration: 0.353,
+  },
+  {
     version: '0.7.1',
     indexSize: 1140.0,
     wasmSize: 674.7,
