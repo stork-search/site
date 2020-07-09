@@ -33,7 +33,6 @@ module.exports = {
         background_color: `#bed2b6`,
         theme_color: `#bed2b6`,
         display: `minimal-ui`,
-        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-mdx`,
@@ -41,16 +40,12 @@ module.exports = {
     {
       resolve: `gatsby-source-graphql`,
       options: {
-        fieldName: `github`,
         typeName: `GitHub`,
-        createLink: () =>
-          createHttpLink({
-            uri: `https://api.github.com/graphql`,
-            headers: {
-              Authorization: `bearer ${process.env.GITHUB_TOKEN}`,
-            },
-            fetch,
-          }),
+        fieldName: `github`,
+        url: `https://api.github.com/graphql`,
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        },
       },
     },
     {

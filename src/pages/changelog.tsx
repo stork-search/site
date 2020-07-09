@@ -1,7 +1,7 @@
 // Gatsby supports TypeScript natively!
 import React from 'react'
 import styled from 'styled-components'
-import { PageProps, Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 
 import PageLayout from '../components/pagelayout'
 import { PageTitle } from '../components/utils'
@@ -107,10 +107,17 @@ const Changelog = ({ data }) => (
         .map((release) => (
           <>
             <h2 style={{ marginBottom: 0 }}>{release.tagName}</h2>
-            <a href={release.url}>
-              {format(parseISO(release.publishedAt), 'MMM d, y')}
-            </a>
-            <p dangerouslySetInnerHTML={{ __html: release.descriptionHTML }} />
+            <p style={{marginBottom: '0.4em'}}>
+              <a
+                style={{ fontSize: '0.9em', textTransform: 'uppercase' }}
+                href={release.url}
+              >
+                {format(parseISO(release.publishedAt), 'MMM d, y')}
+              </a>
+            </p>
+            <div
+              dangerouslySetInnerHTML={{ __html: release.descriptionHTML }}
+            />
             {/* <pre>{JSON.stringify(release, null, 2)}</pre> */}
           </>
         ))}
