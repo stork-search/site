@@ -53,11 +53,11 @@ const Header = ({ siteTitle }) => (
           </NameplateLink>
         </Title>
         <div>
-          <HeaderLink to="/docs/">Documentation</HeaderLink>
+          <HeaderLink to="/docs/install">Documentation</HeaderLink>
           {/* <HeaderLink to="/themes">Themes</HeaderLink> */}
           {/* <HeaderLink to="/integrations">Integrations</a> */}
-          <HeaderLink to="/changelog/">Changelog</HeaderLink>
-          <HeaderLink to="/roadmap/">Roadmap</HeaderLink>
+          <HeaderLink to="/changelog">Changelog</HeaderLink>
+          <HeaderLink to="/roadmap">Roadmap</HeaderLink>
         </div>
       </Flex>
     </Column>

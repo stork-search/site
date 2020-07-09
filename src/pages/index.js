@@ -105,7 +105,7 @@ const DocsLink = () => {
     <Wrapper rhythm="large" background="hsla(0, 0%, 0%, 0.1)">
       <Column>
         <Title>
-          Next: <Link to="/docs/">Read the Docs →</Link>
+          Next: <Link to="/docs/install">Read the Docs →</Link>
         </Title>
       </Column>
     </Wrapper>
