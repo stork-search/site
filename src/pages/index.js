@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link, graphql } from 'gatsby'
 
-import { parseISO, format } from 'date-fns'
+import { parseISO } from 'date-fns'
+import { utcToZonedTime, format } from 'date-fns-tz'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -85,7 +86,7 @@ const Stats = ({ release }) => {
             <Subtitle>Latest version:</Subtitle>
             <Title fontSize={`3.5rem`}>{release.tagName}</Title>
             <Released>
-              Released on {format(parseISO(release.publishedAt), 'MMM d, y')}
+              Released on {format(utcToZonedTime(parseISO(release.publishedAt), 'America/Los_Angeles'), 'MMM d, y')}
             </Released>
           </div>
           <CTA>

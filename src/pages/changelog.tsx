@@ -7,7 +7,8 @@ import PageLayout from '../components/pagelayout'
 import { PageTitle } from '../components/utils'
 import SEO from '../components/seo'
 
-import { parseISO, format } from 'date-fns'
+import { parseISO } from 'date-fns'
+import { utcToZonedTime, format } from 'date-fns-tz'
 
 export const query = graphql`
   query ChangelogQuery {
@@ -112,7 +113,7 @@ const Changelog = ({ data }) => (
                 style={{ fontSize: '0.9em', textTransform: 'uppercase' }}
                 href={release.url}
               >
-                {format(parseISO(release.publishedAt), 'MMM d, y')}
+                {format(utcToZonedTime(parseISO(release.publishedAt), 'America/Los_Angeles'), 'MMM d, y')}
               </a>
             </p>
             <div
