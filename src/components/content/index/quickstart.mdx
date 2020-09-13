@@ -79,11 +79,11 @@ Here, we're using the Basic theme. The Basic theme comes with an HTML specificat
 
 ## Building your own index
 
-Now that you have a search interface on a webpage, you can replace the Federalist Papers with your own content -- I bet you're getting sick of searching for "liberty".
+Now that you have a search interface on a webpage, you can replace the Federalist Papers with your own content—I bet you're getting sick of searching for "liberty".
 
 A Stork search index is built from a collection of sources, usually a set of files on your computer. When creating a search index, you create a **configuration file** that defines a list of sources and includes some metadata about each one. When you run the Stork command line application, Stork will build a search index based on the contents of those files and the specified metadata.
 
-After you've <Link to="/docs/">installed Stork</Link>, create a new file called `config.toml` and add the following contents:
+After you've <Link to="/docs/">installed Stork</Link>, create a new file called `config.toml` near the documents you want to index, and add the following contents:
 
 <div className="popout">
   <Codeblock filename="config.toml">
@@ -100,13 +100,21 @@ filename = "my_index.st"`}
   </Codeblock>
 </div>
 
-This TOML file defines the base directory of all your documents, then lists out a list of File maps, each of which describes:
+This [TOML file](https://github.com/toml-lang/toml) defines the base directory of all your documents and an array of File maps. Each File map in the array describest:
 
 - The path on disk where that file can be found, in relation to the base directory
 - The URL to where that search result will link
 - The title of the document
 
-See the <Link to="/docs/config-ref/">Configuration File reference</Link> to see all the options you can add to the configuration file or the File object.
+See the <Link to="/docs/config-ref">Configuration Reference</Link> to see all the options you can add to the configuration file or to each File object.
+
+To let you test your search index, Stork includes a demo web interface that automatically builds and loads your index from a configuration file. You can start the test interface via the command line:
+
+```
+$ stork --test config.toml
+```
+
+Opening `http://localhost:1612` in your browser will open the test interface. Here, you can test the search and adjust your index as necessary.
 
 When you're ready, you can build the Stork index file with the command line tool:
 
@@ -115,11 +123,3 @@ $ stork --build config.toml
 ```
 
 This will create a new file at `my_index.st`. This file is your search index, and contains the displayed results for the query your user inputs. The file should be uploaded to a public place, and its url should be passed into the `stork.register()` function.
-
-### Testing your index
-
-You can perform a search from the command line using the same command line tool, if you want to test out the search results. The results will be written to stdout in JSON; you might want to pipe the results into `jq` for visibility.
-
-```
-$ stork --search my_index.st "a search query"
-```
