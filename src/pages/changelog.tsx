@@ -31,8 +31,8 @@ const stats = [
   {
     version: '0.7.4',
     indexSize: 1110.0,
-    wasmSize: 2680.0,
-    jsSize: 89.95,
+    wasmSize: 578.84,
+    jsSize: 73.05,
     duration: 0.354,
   },
   {
