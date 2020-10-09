@@ -1,0 +1,119 @@
+import Codeblock from '../../codeblock'
+import DocsNote from '../../docsnote'
+import { Link } from 'gatsby'
+
+<div>
+
+Stork has first-class support for the [SRT subtitle file format](https://www.matroska.org/technical/subtitles.html#srt-subtitles). Stork will not only extract and parse the text in a subtitle file, but also maintain the mapping from each individual word to its associated timestamp. This means Stork lets your users click on a search result and automatically get linked to the timestamp in the video where the search query was mentioned.
+
+_Problem with this guide? [Let me know!](https://github.com/jameslittle230/stork-site/issues/new)_
+
+The behavior is demonstrated in the following index, in which clicking on a search result will link to the part of the video where Grant Sanderson says the word you've searched for.
+
+<div className="stork-wrapper" style={{ zIndex: 10, marginBottom: '2em' }}>
+  <input
+    data-stork="threeblue"
+    className="stork-input"
+    placeholder="starting point"
+    style={{ fontSize: '1.3em', width: '100%', padding: '0.5em 0.8em' }}
+  />
+  <div data-stork="threeblue-output" className="stork-output">
+    {' '}
+  </div>
+</div>
+
+In many cases, you won't have to do any further configuration beyond making sure the file extension of your subtitle is `.srt`. If Stork recognizes your files as SRT files, it will automatically parse and link the timestamps automatically.
+
+Stork's default SRT linking configuration is based on YouTube's timestamp link format:
+
+```
+https://youtube.com/watch=v?WUvTyaaNkzM&t=255
+```
+
+We can imagine the YouTube link above split up into four parts:
+
+- `https://youtube.com/watch?v=`: A common prefix used for every url.
+- `WUvTyaaNkzM`: The ID of the video
+- `&t={}`: A format string appended onto the URL, with a defined place for the timestamp to go.
+- `255`: The timestamp of the video, in seconds.
+
+The following configuration file was used to build the demo above:
+
+</div>
+
+<div className="popout">
+  <Codeblock filename="threeblue.toml">
+    {`[input]
+base_directory = "3b1b"
+url_prefix = "https://www.youtube.com/watch?v="
+  
+[[input.files]] 
+path = "ch1.srt"
+url = "WUvTyaaNkzM"
+title = "The Essence of Calculus, Chapter 1"
+  
+[[input.files]]
+path = "ch2.srt"
+url = "9vKqVkMQHKk"
+title = "The paradox of the derivative"
+  
+[[input.files]]
+path = "ch3.srt"
+url = "S0_qX4VJhMQ"
+title = "Derivative formulas through geometry"
+  
+[output]
+filename = "3b1b.st"
+`}
+  </Codeblock>
+</div>
+
+How does this work, and how can we configure the behavior to support other types of timestamp link formats?
+
+When those four elements listed above are combined, they generate an entire YouTube timestamp URL. Stork lets you configure each of those elements to determine how a timestamp URL is generated in the browser, and therefore how Stork links to specific timestamps from its search results.
+
+To demonstrate, we can create a Stork configuration file that links to Vimeo timestamp links, instead of YouTube timestamp links. Because Vimeo's timestamp links use a different format, we have to configure that format within the Stork configuration file.
+
+For reference, Vimeo timestamp links look like this:
+
+```
+https://vimeo.com/81400335#t=1m2s
+```
+
+Now, our four timestamp link components are set as such:
+
+- `https://vimeo.com/`: the URL prefix prepended to each search result.
+- `81400335`: The ID of the video, determined by Vimeo.
+- `#t={}`: The format string. The placeholder `{}` will be replaced with the actual timestamp.
+- `1m2s`: The timestamp is formatted with a number of minutes and a number of seconds, instead of just a total number of seconds.
+
+The Stork configuration file supports an object, `[input.srt_config]`, that lets you control how timestamp links are generated.
+
+The following configuration file will set the timestamp links to be in "Vimeo format" instead of "YouTube format":
+
+<div className="popout">
+  <Codeblock filename="vimeo.toml">
+    {`[input]
+url_prefix = "https://vimeo.com/"
+  
+[input.srt_config]
+timestamp_template_string = "#t={}"
+timestamp_format = "MinutesAndSeconds"
+  
+[[input.files]]
+path = "subtitles.srt"
+url = "81400335"
+title = "Vimeo Profile"
+`}
+  </Codeblock>
+</div>
+
+The `input.srt_config.timestamp_template_string` defines the URL suffix to be appended when your user searches for something. Stork will build the URL as usual—combining the [URL prefix](/docs/config-ref) with the URL from the [file object](/docs/config-ref), but will then add the timestamp_template_string to the end.
+
+The `{}` placeholder in the timestamp_template_string will be replaced by the timestamp.
+
+The `timestamp_format` value describes how the timestamp should be formatted within that template string. The two possible options are `NumberOfSeconds`, which renders a result like `62`, and `MinutesAndSeconds`, which renders a result like `1m2s`.
+
+# Multiple Excerpts
+
+In the Stork web interface, a given file can have multiple excerpts, and therefore multiple matching timestamps it might link to. Today, Stork can only link to one URL per file; therefore, the first visible excerpt for each file will be used to determine the linked timestamp.
