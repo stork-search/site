@@ -1,5 +1,6 @@
 // Gatsby supports TypeScript natively!
 import React from 'react'
+import styled from 'styled-components'
 import { Helmet } from 'react-helmet'
 
 import PageLayout from '../components/pagelayout'
@@ -7,6 +8,13 @@ import { PageTitle } from '../components/utils'
 import SEO from '../components/seo'
 
 import Codeblock from '../components/codeblock'
+
+const DemoWrapper = styled.div`
+background-color:  ${props => props.background};
+padding: 3em 3em 16em;
+margin: 0 -3em;
+border: 1px solid hsla(0, 0%, 0%, 0.1);
+`
 
 const Changelog = ({ data }) => (
   <PageLayout>
@@ -38,17 +46,19 @@ const Changelog = ({ data }) => (
       {`<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />`}
     </Codeblock>
 
-    <div className="stork-wrapper-basic" style={{ zIndex: 10 }}>
-      <input
-        data-stork="federalist"
-        className="stork-input"
-        placeholder="liberty"
-        style={{ fontSize: '1.3em', width: '100%', padding: '0.5em 0.8em' }}
-      />
-      <div data-stork="federalist-output" className="stork-output">
-        {' '}
+    <DemoWrapper background="#fff">
+      <div className="stork-wrapper-basic" style={{ zIndex: 10 }}>
+        <input
+          data-stork="federalist"
+          className="stork-input"
+          placeholder="liberty"
+          style={{ fontSize: '1.3em', width: '100%', padding: '0.5em 0.8em' }}
+        />
+        <div data-stork="federalist-output" className="stork-output">
+          {' '}
+        </div>
       </div>
-    </div>
+      </DemoWrapper>
 
     <h2>Dark</h2>
 
@@ -56,7 +66,7 @@ const Changelog = ({ data }) => (
       {`<link rel="stylesheet" href="https://files.stork-search.net/dark.css" />`}
     </Codeblock>
 
-    <div style={{ background: `#222`, padding: '3em', margin: `0 -3em` }}>
+    <DemoWrapper background="#222">
       <div className="stork-wrapper-dark" style={{ zIndex: 10 }}>
         <input
           data-stork="federalist-2"
@@ -68,7 +78,9 @@ const Changelog = ({ data }) => (
           {' '}
         </div>
       </div>
-    </div>
+    </DemoWrapper>
+
+    <div style={{height: "12rem"}}></div>
   </PageLayout>
 )
 

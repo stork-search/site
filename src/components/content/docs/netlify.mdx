@@ -5,21 +5,27 @@ import StorkPostsNunjucks from "./storkpostsnunjucks"
 
 <div>
 
-Stork is compatible with any website, but works especially well with static sites built with a [static site generator](https://www.netlify.com/blog/2020/04/14/what-is-a-static-site-generator-and-3-ways-to-find-the-best-one/) and hosted on static hosting services like [Netlify](https://www.netlify.com). In this guide, we'll learn:
+Stork is compatible with any website, but works especially well with static sites built with a [static site generator](https://www.netlify.com/blog/2020/04/14/what-is-a-static-site-generator-and-3-ways-to-find-the-best-one/) and hosted on static hosting services like [Netlify](https://www.netlify.com). In this guide, you'll learn:
 
 1. How to dynamically generate a Stork configuration file as part of your site's build process,
 2. How to build an index using the Stork binary during your site's build process, on the Netlify task runner, and
 3. How to load that index and build a search page on your site.
 
-I'll be using my site (https://jameslittle.me) and my static site generator ([Eleventy](https://www.11ty.dev/)) as the example, but the concepts and steps should work for any site and any static site generator, for the most part.
+I'll be building a Stork interface on top of the [Eleventy Base Blog example](https://github.com/11ty/eleventy-base-blog).
+
+<DocsNote>
+
+You can check out the [final repository on Github](https://github.com/stork-search/netlify-11ty-example) to see what we're going to build. The repository's [most recent commit](https://github.com/stork-search/netlify-11ty-example/commit/60dc9f11eee4da441ff579843f69a5f1de2fa009) represents all the work we're going to do in this guide.
+
+</DocsNote>
 
 *Problem with this guide? [Let me know!](https://github.com/jameslittle230/stork-site/issues/new)*
 
 # Step 1: Generate the Stork Configuration File
 
-Your static site generator likely lets you build a page that lists out all your "posts" or "pages" or "articles." You might be using that functionality to build a "post archive" page, or perhaps an RSS feed.
+A [Stork configuration file](/docs/build) is required to tell Stork how to index your content. Stork configuration files are, in essence, a listing of each document that should be indexed. We could write this file by hand, but we'll use Eleventy to build tihs configuration file for us.
 
-We can use that same functionality to build a Stork configuration file. Eleventy lets me write a Nunjucks file that will be used as the template for any arbitrary output file when the site is built. In this Nunjucks file, I'm looping through `collections.post` and adding a new `[[input.files]]` entry with the post's path on disk, the URL path it will ultimately have once it's published, and the post's title.
+Every static site generator likely lets you build a page that lists out all your "posts" or "pages" or "articles." You might be using that functionality to build a "post archive" page, or perhaps an RSS feed. We can use that same functionality to build a Stork configuration file. I'll create a new Nunjucks file that will act as a template for my Stork configuration file. In it, I'll loop through `collections.posts` and generate a new TOML entry under `[[input.files]]` for each post with the post's path on disk, the URL it will ultimately have once it's published, and the post's title.
 
 </div>
 
@@ -29,13 +35,13 @@ I'm also configuring the output file to be located in the `_site` directory: the
 
 <div>
 
-When Eleventy builds my site, it will create a file at `_site/stork-posts.toml` with the full Stork configuration file.
+Now, when Eleventy builds my site, it will create a file at `_site/stork-posts.toml` with the full Stork configuration file. (We can run `npm run eleventy build` and examine the contents of the `_site` directory to confirm this!) 
 
-Next, we'll configure Netlify to generate the Stork index file when it builds the site.
+Next, we'll configure Netlify to use that configuration file to generate the Stork index after it builds the site.
 
 # Step 2: Building the Index
 
-When Netlify builds my site, it usually runs my static site generator to build my site. Now, I want to change what Netlify does so that it: 
+By default, when Netlify builds my site, it runs `npx eleventy`, a Terminal command which will build the site. In this step, we want to change the Netlify build process so that it:
 
 1. Runs the Eleventy site generation to build my static pages and my Stork configuration file, then
 2. Runs `stork --build` on the generated configuration file to build an index file.
@@ -65,18 +71,26 @@ From top to bottom, this script:
 3. Runs Eleventy and builds the site, and
 4. Uses the Stork binary to build the generated Stork configuration file.
 
-Netlify lets you choose the **build command** to run when publishing a new version of the site; by default, that command is `yarn build`. We can change it to `./build.sh` so that Netlify will automatically run that script each time our site is deployed.
+Netlify lets users configure the **build command** to run when publishing a new version of the site (again, by default, it's running `npx eleventy`) by editing a file named `netlify.toml` in the root of the repository. I'll change the file so it has the following contents:
 
-After I change the Netlify configuration and re-deployed my site, I'll check to make sure Netlify is generating the search index properly. In the configuration file, we set the index file to be built to `https://jameslittle.me/stork-posts.st`, and I can `wget` that URL to confirm that the file has been built and hosted correctly.
+<Codeblock filename="netlify.toml" lang="toml">
+  {`[build]
+publish = "_site"
+command = "chmod +x build.sh && ./build.sh"`}
+   </Codeblock>
+
+After I change the Netlify configuration and re-deployed my site, I'll check to make sure Netlify is generating the search index properly. At this point, your index should be available on Netlify's CDN; you should be able to visit `https://<your-site>/stork-posts.st` to download the index file
 
 # Step 3: Building the Search page
 
-Now that Netlify is automatically building the search index, I can build a static page on my site that will load the Stork interface. I'll add the following page to my site:
+Now that Netlify is automatically building the search index, I can build a new page on my site that will display the Stork interface. I'll add the following page to my site:
+
+<div className="popout">
 
 <Codeblock filename="search.njk" lang="html">
     {`---
-layout: base.njk
-permalink: /search/index.html
+layout: layouts/home.njk
+permalink: /search/
 ---
   
 <h1>Search</h1>
@@ -93,12 +107,13 @@ permalink: /search/index.html
 </script>`}
 </Codeblock>
 
+</div>
 
-Eleventy will use the default page layout and publish this page to `/search` when it builds the site.
 
-Once I let Netlify build a version of this site with the page, I can visit https://jameslittle.me/search to see a search interface for all the posts in my blog. Moreover, I never have to touch my Stork setup again; this setup dynamically reloads the search index every time I update my site's content, so my search interface is always up to date.
+Eleventy will use the default page layout and publish this page to `/search` when it builds the site. Visit <https://stork-eleventy-netlify-example.netlify.app/search> to see the final result in action!
 
 # Next steps
 
-- I have multiple "collections" of content on my site, including a portfolio of projects I've worked on. What would you add to also index the portfolio project descriptions as well?
+- On my personal site, I have multiple "collections" of content on my site, including a portfolio of projects I've worked on. What would you add to also index the portfolio project descriptions as well?
 - What would you change to get the search interface embedded in my site's header or footer, on every page of the site?
+- This setup runs the Stork indexer on the Markdown files in the site's repository. How would you change it so that it instead indexes the HTML files generated by Eleventy?

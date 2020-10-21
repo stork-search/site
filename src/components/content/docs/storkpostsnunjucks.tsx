@@ -9,14 +9,14 @@ const StorkPostsNunjucks = () => {
       <pre style={{ marginTop: `0`, padding: `0` }}>
         <CodeBlockCodeTag>
           {`---
-permalink: "stork-posts.toml",
+permalink: "stork-posts.toml"
 eleventyExcludeFromCollections: true
 ---
 
 [input]
-url_prefix = "https://jameslittle.me"
+url_prefix = "{{metadata.url}}"
 
-{%- for post in collections.post %}
+{%- for post in collections.posts %}
 {% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
 [[input.files]]
 path = "{{post.inputPath}}"

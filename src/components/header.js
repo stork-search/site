@@ -54,7 +54,7 @@ const Header = ({ siteTitle }) => (
         </Title>
         <div>
           <HeaderLink to="/docs/install">Documentation</HeaderLink>
-          {/* <HeaderLink to="/themes">Themes</HeaderLink> */}
+          <HeaderLink to="/themes">Themes</HeaderLink>
           {/* <HeaderLink to="/integrations">Integrations</a> */}
           <HeaderLink to="/changelog">Changelog</HeaderLink>
           <HeaderLink to="/roadmap">Roadmap</HeaderLink>
