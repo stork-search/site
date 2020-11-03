@@ -27,6 +27,12 @@ const Changelog = ({ data }) => (
       <link rel="stylesheet" href="https://files.stork-search.net/dark.css" />
       <script src="https://files.stork-search.net/stork.js"></script>
       <script src="/stork-load.js"></script>
+      <style>{`
+      .stork-results {
+        max-height: 10rem;
+        }
+      `}
+      </style>
     </Helmet>
 
     <p>
