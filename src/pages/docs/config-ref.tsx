@@ -28,7 +28,11 @@ const Docs = (props: PageProps) => (
       </p>
       <p>
         Stork configuration files are guaranteed to be parseable in all future
-        versions of Stork, though the Stork build phase will warn you if you're using deprecated fields in your configuration file. Fields may be deprecated in point releases of Stork, at which point they will also be undocumented. Setting deprecated fields will have no effect on your index.
+        versions of Stork, though the Stork build phase will warn you if you're
+        using deprecated fields in your configuration file. Fields may be
+        deprecated in point releases of Stork, at which point they will also be
+        undocumented. Setting deprecated fields will have no effect on your
+        index.
       </p>
     </div>
     <h3>Input Options</h3>
@@ -130,6 +134,35 @@ const Docs = (props: PageProps) => (
               If your list of files includes SRT Subtitle files, this object
               will describe how Stork will handle the timestamp information
               embedded in the file.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <code>minimum_indexed_substring_length</code>
+            </td>
+            <td>Integer</td>
+            <td>3</td>
+            <td>
+              The minimum substring length that gets indexed and is available to
+              be searched. Setting this too low will make your index file
+              gigantic.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <code>minimum_index_ideographic_substring_length</code>
+            </td>
+            <td>Integer</td>
+            <td>1</td>
+            <td>
+              If a string is made of{' '}
+              <a href="https://en.wikipedia.org/wiki/CJK_Unified_Ideographs">
+                CJK Ideographs
+              </a>
+              , its substrings should be shorter. This defines the minimum
+              indexed substring length when indexing an ideographic string.
             </td>
           </tr>
         </tbody>
