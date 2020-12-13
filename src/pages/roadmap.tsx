@@ -11,12 +11,17 @@ const SecondPage = (props: PageProps) => (
     <SEO title="Roadmap" />
     <PageTitle>Roadmap</PageTitle>
     <p>
-      <strong>Stork is still a beta project.</strong> There are aspects of the
-      project where it's fallen short of the design decisions, where it seems
-      broken, and where it seems like it should be able to do more. While it's
-      in beta (and likely beyond), I'm going to list out the project roadmap and
-      expected features on this page to keep me accountable for how Stork
-      evolves.
+      As with any software project, Stork is not done: there are more features
+      that will get built. In the interest of transparency, I want to describe
+      the project's principles, goals, and next steps so that Stork's users are
+      not solely reliant on the features available today, but can forsee the
+      Stork of the future.
+    </p>
+
+    <p>
+      Stork is a single-person project that I build in my spare time.
+      Development will likely be slow, but I'm always receiptive to
+      communication via Github, Email, or Twitter.
     </p>
 
     <h2>Overarching goals:</h2>
@@ -24,15 +29,34 @@ const SecondPage = (props: PageProps) => (
     <ul>
       <li>Reduce index size and keep WebAssembly bundle size low</li>
       <li>Keep search fast (responsive on a per-keystroke basis)</li>
-      <li>Keep the API easy to get started and easy to configure</li>
       <li>
-        Build out configuration options so that search behavior can fit
-        different types of content
+        Going from installation to useable search interface should be as fast as
+        possible
+      </li>
+      <li>
+        Expose many configuration knobs to tweak, but maintain sensible and
+        opinionated defaults (so people don't have to tweak those knobs)
+      </li>
+      <li>
+        Index different types of content (prose, subtitles, even code) and
+        different languages, not just long-form English texts.
       </li>
       <li>Maintain compatibility with old config files and indexes</li>
     </ul>
 
-    <h1>1.0.0</h1>
+    <h1>1.1.0</h1>
+
+    <ul>
+      <li>Support fuzzy search</li>
+      <li>Write more themes</li>
+      <li>
+        Write and publish some integrations with other projects, e.g. various
+        static site generators, Wordpress, etc.
+      </li>
+      <li>Get a logo! (illustrator recommendations appreciated!)</li>
+    </ul>
+    
+    <h2>Completed features that were previously on the roadmap</h2>
 
     <ul>
       <li>Keyboard shortcuts on JS</li>
@@ -44,25 +68,9 @@ const SecondPage = (props: PageProps) => (
       <li>
         Sensible handling of multi-word queries <em>Added in 0.5.3</em>
       </li>
-      <li>Different options for indexing behavior</li>
-      <li>
-        Different options for allowed input, like files with frontmatter, or
-        lists of files
-      </li>
-    </ul>
-
-    <h1>1.1.0</h1>
-
-    <ul>
-      <li>
-        Write and publish some themes: first-party stylesheets that change the
-        UI of the search interface
-      </li>
-      <li>
-        Write and publish some integrations with other projects, e.g. various
-        static site generators, Wordpress, etc.
-      </li>
-      <li>Convert JS code to Typescript</li>
+      <li>Parse frontmatter</li>
+      <li>Build different themes</li>
+      <li>Write JS code in Typescript</li>
     </ul>
 
     <p>

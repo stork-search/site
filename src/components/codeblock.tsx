@@ -4,7 +4,7 @@ import Highlight, { defaultProps } from "prism-react-renderer"
 import "./prism.css"
 import "./layout.css"
 
-const FilenameBlock = styled.div`
+export const FilenameBlock = styled.div`
   padding: 0.5em 1em;
   border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
   font-weight: bold;
@@ -14,7 +14,7 @@ const FilenameBlock = styled.div`
   color: white;
 `
 
-const CodeBlockCodeTag = styled.code`
+export const CodeBlockCodeTag = styled.code`
   display: block;
   padding: 0.5em 1em;
   overflow-x: scroll;

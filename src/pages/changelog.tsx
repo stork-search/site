@@ -29,6 +29,13 @@ export const query = graphql`
 
 const stats = [
   {
+    version: '1.0.0',
+    indexSize: 1110.0,
+    wasmSize: 591.97,
+    jsSize: 94.75,
+    duration: 0.367,
+  },
+  {
     version: '0.7.4',
     indexSize: 1110.0,
     wasmSize: 578.84,
@@ -99,7 +106,7 @@ const Changelog = ({ data }) => (
         </thead>
         <tbody>
           {stats.map((row) => (
-            <tr>
+            <tr key={row.version}>
               <CenteredTableCell>{row.version}</CenteredTableCell>
               <CenteredTableCell>{row.indexSize / 1000} MB</CenteredTableCell>
               <CenteredTableCell>{row.wasmSize} kB</CenteredTableCell>
@@ -120,7 +127,7 @@ const Changelog = ({ data }) => (
       {data.github.repository.releases.nodes
         .filter((r) => !!r && !!r.publishedAt)
         .map((release) => (
-          <>
+          <div key={release.url}>
             <h2 style={{ marginBottom: 0 }}>{release.tagName}</h2>
             <p style={{marginBottom: '0.4em'}}>
               <a
@@ -134,7 +141,7 @@ const Changelog = ({ data }) => (
               dangerouslySetInnerHTML={{ __html: release.descriptionHTML }}
             />
             {/* <pre>{JSON.stringify(release, null, 2)}</pre> */}
-          </>
+          </div>
         ))}
     </div>
   </PageLayout>

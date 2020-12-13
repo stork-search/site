@@ -12,16 +12,27 @@ const Docs = (props: PageProps) => (
     <SEO title="Config Reference" />
     <div>
       <p>
+        Just getting started?{' '}
+        <Link to="/docs/build">Learn how to build a search index.</Link>
+      </p>
+      <p>
         Your Stork configuration file defines the way your index is created and
         processed, and also controls some aspects of how your search results are
-        displayed. The configuration file parser relies heavily on intuitive
-        default values: if a field is inapplicable to your search index (or if
-        you're happy with the listed default value), you can leave the field out
-        of your configuration file.
+        displayed.
+      </p>
+      <p>
+        The configuration file parser relies heavily on intuitive default
+        values: if a field is inapplicable to your search index (or if you're
+        happy with the listed default value), you can leave the field out of
+        your configuration file.
       </p>
       <p>
         Stork configuration files are guaranteed to be parseable in all future
-        versions of Stork.
+        versions of Stork, though the Stork build phase will warn you if you're
+        using deprecated fields in your configuration file. Fields may be
+        deprecated in point releases of Stork, at which point they will also be
+        undocumented. Setting deprecated fields will have no effect on your
+        index.
       </p>
     </div>
     <h3>Input Options</h3>
@@ -53,7 +64,9 @@ const Docs = (props: PageProps) => (
             <td>
               <code>files</code>
             </td>
-            <td>Array of File objects</td>
+            <td>
+              Array of <strong>File</strong> objects
+            </td>
             <td>
               <code>[]</code>
             </td>
@@ -113,12 +126,43 @@ const Docs = (props: PageProps) => (
             <td>
               <code>srt_config</code>
             </td>
-            <td>SRT Config object</td>
+            <td>
+              <strong>SRT Config</strong> object
+            </td>
             <td>See below</td>
             <td>
               If your list of files includes SRT Subtitle files, this object
               will describe how Stork will handle the timestamp information
               embedded in the file.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <code>minimum_indexed_substring_length</code>
+            </td>
+            <td>Integer</td>
+            <td>3</td>
+            <td>
+              The minimum substring length that gets indexed and is available to
+              be searched. Setting this too low will make your index file
+              gigantic.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <code>minimum_index_ideographic_substring_length</code>
+            </td>
+            <td>Integer</td>
+            <td>1</td>
+            <td>
+              If a string is made of{' '}
+              <a href="https://en.wikipedia.org/wiki/CJK_Unified_Ideographs">
+                CJK Ideographs
+              </a>
+              , its substrings should be shorter. This defines the minimum
+              indexed substring length when indexing an ideographic string.
             </td>
           </tr>
         </tbody>
