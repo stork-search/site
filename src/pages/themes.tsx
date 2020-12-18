@@ -25,7 +25,7 @@ const Changelog = ({ data }) => (
       <link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
       <link rel="stylesheet" href="/basic-additions.css" />
       <link rel="stylesheet" href="https://files.stork-search.net/dark.css" />
-      <script src="https://files.stork-search.net/stork.js"></script>
+      <script src="https://files.stork-search.net/stork.js?2020-12-17"></script>
       <script src="/stork-load.js"></script>
       <style>{`
       .stork-results {
