@@ -3,17 +3,17 @@ function sleep(ms) {
 }
 
 function defer(method) {
-  if (
-    window.stork &&
-    document.querySelector('input.stork-input') &&
-    document.querySelector('div.stork-output')
-  ) {
-    method()
-  } else {
-    setTimeout(function () {
+  setTimeout(function () {
+    if (
+      window.stork &&
+      document.querySelector('input.stork-input') &&
+      document.querySelector('div.stork-output')
+    ) {
+      method()
+    } else {
       defer(method)
-    }, 100)
-  }
+    }
+  }, 250)
 }
 
 function load() {
@@ -36,7 +36,7 @@ function load() {
     try {
       stork.register(name, url, { printIndexInfo: true })
     } catch (e) {
-      console.log(`${name} not available on this page`)
+      // console.log(`${name} not available on this page`)
     }
   }
 }
