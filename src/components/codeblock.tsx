@@ -17,7 +17,6 @@ export const FilenameBlock = styled.div`
 export const CodeBlockCodeTag = styled.code`
   display: block;
   padding: 0.5em 1em;
-  overflow-x: scroll;
 `
 
 const Codeblock = ({ filename, lang, children }) => {
