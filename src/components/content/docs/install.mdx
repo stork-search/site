@@ -10,22 +10,23 @@ There are two parts to Storkâ€”the command line tool and the Javascript moduleâ€
 
 Today, there are four ways to install the command-line tool:
 
-- Installing with [Homebrew](https://brew.sh) (macOS):
+1. Installing with [Homebrew](https://brew.sh) (macOS):
   ```
-  $ brew install jameslittle230/stork-tap/stork
+  $ brew install stork-search/stork-tap/stork
   ```
-- Downloading the compiled binary (Ubuntu):
-  ```
-  $ wget https://files.stork-search.net/releases/latest/stork-x86_64-unknown-linux-gnu
-  $ chmod +x stork-x86_64-unknown-linux-gnu
-  ```
-
-  This option is only recommended in situations where you're automatically re-building an index file on a task runner. See [Stork and Netlify](/docs/stork-and-netlify) for an example.
-- Installing with [Cargo](https://crates.io/crates/stork-search) (cross-platform):
+2. Installing with [Cargo](https://crates.io/crates/stork-search) (cross-platform):
   ```
   $ cargo install stork-search
   ```
-- Building from source (cross-platform):
+3. Downloading the compiled binary (Ubuntu):
+  ```
+  $ wget https://files.stork-search.net/releases/latest/stork-ubuntu-latest
+  $ chmod +x stork-ubuntu-latest
+  ```
+
+  This option is only recommended in situations where you're automatically re-building an index file on a task runner. See [Stork and Netlify](/docs/stork-and-netlify) for an example.
+  
+4. Building from source (cross-platform):
   - Stork is built with Rust; make sure you have [Cargo](https://github.com/rust-lang/cargo/) installed.
   - Download the [source code of the latest release](https://github.com/jameslittle230/stork/releases) (either the Zipfile or the Tarball), and uncompress it.
   - From the project directory, run `$ cargo build --release`

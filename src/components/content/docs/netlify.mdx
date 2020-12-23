@@ -15,7 +15,7 @@ I'll be building a Stork interface on top of the [Eleventy Base Blog example](ht
 
 <DocsNote>
 
-You can check out the [final repository on Github](https://github.com/stork-search/netlify-11ty-example) to see what we're going to build. The repository's [most recent commit](https://github.com/stork-search/netlify-11ty-example/commit/0e06861c46adf50eb53f7aaab88cd57e3360e184) represents all the work we're going to do in this guide.
+You can check out the [final repository on Github](https://github.com/stork-search/netlify-11ty-example) to see what we're going to build. The repository's [most recent commit](https://github.com/stork-search/netlify-11ty-example/commit/53aa8614cc48dc168782657a352781d31d0d2441) represents all the work we're going to do in this guide.
 
 </DocsNote>
 
@@ -56,10 +56,10 @@ I'll add the following to a new file called `build.sh` in the root of my project
 
 <Codeblock filename="build.sh" lang="bash">
     {`#!/usr/bin/env bash
-wget https://files.stork-search.net/releases/latest/stork-x86_64-unknown-linux-gnu
-chmod +x stork-x86_64-unknown-linux-gnu
+wget https://files.stork-search.net/releases/latest/stork-ubuntu-latest
+chmod +x stork-ubuntu-latest
 ELEVENTY_ENV=production npx @11ty/eleventy --config=eleventy.js
-./stork-x86_64-unknown-linux-gnu --build _site/stork-posts.toml`}
+./stork-ubuntu-latest --build _site/stork-posts.toml`}
 </Codeblock>
 
 </div>
@@ -89,28 +89,31 @@ Now that Netlify is automatically building the search index, I can build a new p
 
 <Codeblock filename="search.njk" lang="html">
     {`---
-layout: layouts/home.njk
-permalink: /search/
----
-  
-<h1>Search</h1>
-<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
-  
-<div class="stork-wrapper">
-  <input data-stork="posts" class="stork-input" />
-  <div data-stork="posts-output" class="stork-output"></div>
-</div>
-  
-<script src="https://files.stork-search.net/stork.js"></script>
-<script>
-  stork.register('posts', '/stork-posts.st');
-</script>`}
+ layout: layouts/home.njk
+ permalink: /search/
+ eleventyNavigation:
+   key: Search
+   order: 4
+ ---
+
+ <h1>Search</h1>
+ <link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
+
+ <div class="stork-wrapper">
+   <input data-stork="posts" class="stork-input" />
+   <div data-stork="posts-output" class="stork-output"></div>
+ </div>
+
+ <script src="https://files.stork-search.net/stork.js"></script>
+ <script>
+   stork.register('posts', '/stork-posts.st');
+ </script>`}
 </Codeblock>
 
 </div>
 
 
-Eleventy will use the default page layout and publish this page to `/search` when it builds the site. Visit <https://stork-eleventy-netlify-example.netlify.app/search> to see the final result in action!
+Eleventy will use the default page layout and publish this page to `/search` when it builds the site. Visit <https://stork-netlify-example.netlify.app/search> to see the final result in action!
 
 # Next steps
 

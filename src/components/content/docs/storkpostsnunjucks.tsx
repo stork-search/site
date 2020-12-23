@@ -17,7 +17,7 @@ eleventyExcludeFromCollections: true
 url_prefix = "{{metadata.url}}"
 
 {%- for post in collections.posts %}
-{% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
+{% set absolutePostUrl %}{{ post.url | url }}{% endset %}
 [[input.files]]
 path = "{{post.inputPath}}"
 url = "{{absolutePostUrl}}"
