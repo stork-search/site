@@ -13,7 +13,7 @@ function defer(method) {
     } else {
       defer(method)
     }
-  }, 250)
+  }, 500)
 }
 
 function load() {
