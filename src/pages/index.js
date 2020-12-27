@@ -114,7 +114,7 @@ const DocsLink = () => {
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="Stork Search: Ultra Fast Web Search for Static Sites" />
     <Intro />
     <Demo />
     <Wrapper>

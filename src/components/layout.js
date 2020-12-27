@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap"
         />
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta property="og:url" content="https://stork-search.net" />
         <meta
           property="og:title"
