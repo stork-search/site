@@ -33,6 +33,13 @@ const stats = [
     indexSize: 1110.0,
     wasmSize: 591.97,
     jsSize: 94.75,
+    duration: 0.418,
+  },
+  {
+    version: '1.0.1',
+    indexSize: 1110.0,
+    wasmSize: 591.97,
+    jsSize: 94.75,
     duration: 0.409,
   },
   {
