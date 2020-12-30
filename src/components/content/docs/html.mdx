@@ -1,0 +1,77 @@
+import Codeblock from '../../codeblock'
+import DocsNote from '../../docsnote'
+import { Link } from 'gatsby'
+
+<div>
+  
+Stork will parse HTML files using a browser-grade HTML parser, extracting content from tags, scripts, and styles.
+
+However, your HTML likely has more content than you actually want indexed. The very page you're looking at has a header and a footer, and if Stork indexed the text in the header and footer as part of each document, you would be able to search for "questions or comments" and get *every page* in your results, since it's in the footer of every page.
+
+When parsing a file, Stork will look for a container tag, identified by a [CSS selector](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors), that it should use to look for searchable contents. By default, this is the `<main>` tag.
+
+If you don't want to use the `<main>` tag, you can change the default for all your HTML files in your Stork configuration. The `html_selector` configuration option controls the container tag Stork will look for. For example, in this configuration file:
+
+</div>
+
+<Codeblock filename="papers.toml">
+    {`[input]
+base_directory = "html/"
+html_selector = "article.main-contents"
+files = [
+    {path = "federalist-1.html", url = "/federalist-1/", title = "Introduction"},
+    {path = "federalist-2.html", url = "/federalist-2/", title = "Concerning Dangers from Foreign Force and Influence"},
+    {path = "federalist-3.html", url = "/federalist-3/", title = "Concerning Dangers from Foreign Force and Influence 2"}
+]
+ 
+[output]
+filename = "federalist.st"`}
+</Codeblock>
+
+Stork will index only the body of the article in the following HTML document:
+
+<Codeblock filename="federalist-1.html" lang="html">
+  {`<!doctype html>
+<html>
+  <body>
+    <header> <!-- header contents --> </header>
+    <aside> <!-- header contents --> </aside>
+    <main>
+      <h1>The First Federalist Paper</h1>
+      <div class="related-papers"> <!-- Links to other papers --> </div>
+      
+      <article class="main-contents">
+        <p>This is the content that will get indexed by Stork.</p>
+        <p>Nothing in the header, the aside, the h1, or the 
+          related papers div will get indexed.</p>
+      </article>
+      
+    </main>
+  </body>
+</html>`}
+</Codeblock>
+
+Stork works best if you give it plain prose. You might want to strip away certain tags like code blocks, SVGs, or other elements that will get dynamically replaced by Javascript before generating your index.
+
+If you want to override the container tag for any individual file, pass in the `html_selector_override` configuration option in the file array:
+
+<Codeblock filename="override.toml">
+    {`[input]
+base_directory = "html/"
+html_selector = "article.main-contents"
+ 
+[[input.files]] 
+path = "federalist-1.html"
+url = "TheFederalistPapers-1"
+title = "Introduction"
+html_selector_override = "#inner-contents"
+ 
+[[input.files]]
+path = "federalist-2.txt"
+url = "TheFederalistPapers-2"
+title = "Concerning Dangers from Foreign Force and Influence"
+ 
+[output]
+filename = "federalist.st"
+`}
+  </Codeblock>

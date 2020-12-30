@@ -108,6 +108,35 @@ const Docs = (props: PageProps) => (
 
           <tr>
             <td>
+              <code>html_selector</code>
+            </td>
+            <td>String</td>
+            <td><code>main</code></td>
+            <td>
+              For all HTML files, this will control the container tag where 
+              Stork will index content. Expects a CSS selector. 
+              <a href="/docs/html/">See more</a>
+            </td>
+          </tr>
+         
+          <tr>
+            <td>
+              <code>frontmatter_handling</code>
+            </td>
+            <td>String</td>
+            <td><code>Omit</code></td>
+            <td>
+              One of <code>Ignore</code>, <code>Omit</code>, or <code>Parse</code>. 
+              If frontmatter is detected in your content, <code>Ignore</code> will{' '}
+              <em>not handle the frontmatter in any special way</em>, 
+              effectively including it in the index. <code>Omit</code> will 
+              parse and remove frontmatter from indexed content.{' '}
+              <code>Parse</code> does nothing.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
               <code>stemming</code>
             </td>
             <td>String</td>
@@ -131,9 +160,9 @@ const Docs = (props: PageProps) => (
             </td>
             <td>See below</td>
             <td>
-              If your list of files includes SRT Subtitle files, this object
+              For all SRT files, this object
               will describe how Stork will handle the timestamp information
-              embedded in the file.
+              embedded in the file. <a href="/docs/srt">See more</a>
             </td>
           </tr>
 
@@ -236,6 +265,19 @@ const Docs = (props: PageProps) => (
 
           <tr>
             <td>
+              <code>html_selector_override</code>
+            </td>
+            <td>Optional String</td>
+            <td>
+              <code>null</code>
+            </td>
+            <td>
+              Overrides the global <code>html_selector</code> configuration option for a given file.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
               <code>stemming_override</code>
             </td>
             <td>Optional String</td>
@@ -243,11 +285,7 @@ const Docs = (props: PageProps) => (
               <code>null</code>
             </td>
             <td>
-              If the specific file requires different stemming rules than the
-              rest of the corpus, you can override the stemming configuration
-              here. Should be <code>None</code> or one of the languages
-              supported by <a href="https://snowballstem.org">Snowball Stem</a>,
-              e.g. <code>Dutch</code>
+              Overrides the stemming algorithm used for this document's language, instead of using the global <code>stemming</code> configuration.
             </td>
           </tr>
 
@@ -260,7 +298,7 @@ const Docs = (props: PageProps) => (
               <code>null</code>
             </td>
             <td>
-              One of: <code>PlainText</code> or <code>SRTSubtitle</code>.
+              One of: <code>PlainText</code> <code>SRTSubtitle</code>, <code>HTML</code>, or <code>Markdown</code>.
               Usually, Stork can determine what kind of file it's looking at
               based on the file extension. If it's having trouble, you can
               override the derived filetype here.
@@ -270,6 +308,7 @@ const Docs = (props: PageProps) => (
       </table>
     </div>
     <h3>The SRT Configuration object</h3>
+    <p>Read more about configuring SRT behavior on the <a href="/docs/srt">SRT documentation page</a>.</p>
     <div className="popout">
       <table>
         <thead>

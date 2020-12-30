@@ -101,10 +101,13 @@ const DocsNav = () => (
     <DocsLink to="/docs/build">Building an Index</DocsLink>
     <DocsLink to="/docs/interface">Embedding the Interface</DocsLink>
 
-    <TOCTitle>Guides</TOCTitle>
-    <DocsLink to="/docs/stork-and-netlify">Stork &amp; Netlify</DocsLink>
+    <TOCTitle>Going Further</TOCTitle>
     <DocsLink to="/docs/languages">Indexing Non-English Content</DocsLink>
     <DocsLink to="/docs/srt">Working with Subtitle Files</DocsLink>
+    <DocsLink to="/docs/html">Parsing HTML and Markdown</DocsLink>
+
+    <TOCTitle>Guides</TOCTitle>
+    <DocsLink to="/docs/stork-and-netlify">Stork &amp; Netlify</DocsLink>
 
     <TOCTitle>References</TOCTitle>
     <DocsLink to="/docs/config-ref">Configuration Reference</DocsLink>
