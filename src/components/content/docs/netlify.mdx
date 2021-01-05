@@ -23,7 +23,7 @@ You can check out the [final repository on Github](https://github.com/stork-sear
 
 # Step 1: Generate the Stork Configuration File
 
-A [Stork configuration file](/docs/build) is required to tell Stork how to index your content. Stork configuration files are, in essence, a listing of each document that should be indexed. We could write this file by hand, but we'll use Eleventy to build tihs configuration file for us.
+A [Stork configuration file](/docs/build) is required to tell Stork how to index your content. Stork configuration files are, in essence, a listing of each document that should be indexed. We could write this file by hand, but we'll use Eleventy to build this configuration file for us.
 
 Every static site generator likely lets you build a page that lists out all your "posts" or "pages" or "articles." You might be using that functionality to build a "post archive" page, or perhaps an RSS feed. We can use that same functionality to build a Stork configuration file. I'll create a new Nunjucks file that will act as a template for my Stork configuration file. In it, I'll loop through `collections.posts` and generate a new TOML entry under `[[input.files]]` for each post with the post's path on disk, the URL it will ultimately have once it's published, and the post's title.
 
