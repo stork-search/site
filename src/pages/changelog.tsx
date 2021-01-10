@@ -110,6 +110,18 @@ const CenteredTableCell = styled.td`
 const Changelog = ({ data }) => {
   const [expandedStats, setExpandedStats] = useState(false)
 
+  const showMoreToggle = (isExpanded) => (
+    <a
+      href="#"
+      onClick={(e) => {
+        e.preventDefault()
+        setExpandedStats(!isExpanded)
+      }}
+    >
+      See {isExpanded ? 'less' : 'more'}
+    </a>
+  )
+
   return (
     <PageLayout>
       <SEO title="Changelog" />
@@ -134,8 +146,12 @@ const Changelog = ({ data }) => {
           <tbody>
             {stats.slice(0, expandedStats ? stats.length : 5).map((row) => (
               <tr key={row.version}>
-                <CenteredTableCell>{row.version}</CenteredTableCell>
-                <CenteredTableCell>{row.indexSize / 1000} MB</CenteredTableCell>
+                <CenteredTableCell>
+                  <strong>{row.version}</strong>
+                </CenteredTableCell>
+                <CenteredTableCell>
+                  {(row.indexSize / 1000).toFixed(2)} MB
+                </CenteredTableCell>
                 <CenteredTableCell>{row.wasmSize} kB</CenteredTableCell>
                 <CenteredTableCell>{row.jsSize} kB</CenteredTableCell>
                 {row.duration ? (
@@ -148,13 +164,7 @@ const Changelog = ({ data }) => {
           </tbody>
         </table>
 
-                <p>{expandedStats ? <a href="#" onClick={(e) => {
-                  e.preventDefault();
-                  setExpandedStats(false);
-                }}>See less</a> : <a href="#" onClick={(e) => {
-                  e.preventDefault();
-                  setExpandedStats(true);
-                }}>See more</a>}</p>
+        <p>{showMoreToggle(expandedStats)}</p>
 
         <p style={{ fontSize: '0.8em', marginTop: '1.5em' }}>
           *Benchmarks from 1.0.0 and before were run on my personal computer.
