@@ -1,0 +1,67 @@
+export const getStaticProps = async (context) => {
+  return {
+    props: { template: 'docs' },
+  }
+}
+
+# Using the Stork UI
+
+Once you've [built an index file](/docs/build) and uploaded it somewhere accessible (like a CDN or your web host), you'll need to use the Stork Javascript library to load the index and build an interactive search interface.
+
+## Step 1: Include the HTML
+
+The Stork Javascript library hooks into HTML that already exists on your page and transforms it into an interactive element. To begin, add the following HTML to your page:
+
+<Codeblock lang="html">
+  {`<input data-stork="foo" />
+<div data-stork="foo-results"></div>`}
+</Codeblock>
+
+Stork requires an **input element** and an **output element** to attach to. Both those elements need to be tagged with a **registration name**, which is `foo` above (though yours can be whatever you'd like). You'll use the registration name later.
+
+<DocsNote>
+  The input element must conform to the selector <code>input[data-stork="foo"]</code>.<br />
+  The output element must conform to the selector <code>[data-stork="foo-results"]</code>.
+  The registration name must start with a letter.
+</DocsNote>
+
+## Step 2: Load the Javascript
+
+The Stork Javascript library downloads the index file and uses a WebAssembly binary to parse and search through it. Right before the closing `</body>` tag, load the Stork Javascript library from the Stork CDN:
+
+<Codeblock lang="html">
+  {`<script src="https://files.stork-search.net/stork.js"></script>`}
+</Codeblock>
+
+<DocsNote>
+  Because the Stork library interfaces with a WebAssembly blob loaded dynamically from the Stork CDN, you must load the Javascript library from <code>files.stork-search.net</code>; do not cache it or preprocess it, or you run the risk of your search interface suddenly breaking.
+</DocsNote>
+
+## Step 3: Register your index
+
+The Stork Javascript library exposes a single global variable, `stork`, which itself has a single function: `stork.register()`. After you load the Javascript library, you can add a `<script>` block where you call that function:
+
+<Codeblock lang="html">
+  {`<script>
+    stork.register("foo", "https://your-url.com/index-file");
+</script>`}
+</Codeblock>
+
+There is a third, optional argument you can pass to the `register()` function takes: an options object. The options object exposes client-side configuration settings and a callback API; [visit the JS API Reference](/docs/js-ref) to learn more.
+
+## Step 4: Add a theme
+
+Stork is not perscriptive about the CSS you use to style your search index. The Javascript library does not include any pre-defined styling, and you're free to inspect the DOM and add your own styling, if you wish.
+
+Stork also offers pre-built themes, which it exposes through CSS files on the Stork CDN. To include the **Basic** theme, add the following within your page's `<head>`:
+
+<Codeblock lang="html">
+  {`<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />`}
+</Codeblock>
+
+You can see the entire selection of themes in the [theme gallery](/themes).
+
+## Next Steps
+
+- [See the Javascript configuration options available →](/docs/js-ref)
+- [Read a guide to accomplish a specific task →](/docs)

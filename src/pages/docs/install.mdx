@@ -1,0 +1,49 @@
+export const getStaticProps = async (context) => {
+  return {
+    props: { template: 'docs' },
+  }
+}
+
+# Installing Stork
+
+There are two parts to Stork—the command line tool and the Javascript module—and both need to be installed separately.
+
+## The command line tool
+
+Today, there are four ways to install the command-line tool:
+
+1. Installing with [Homebrew](https://brew.sh) (macOS):
+  ```
+  $ brew install stork-search/stork-tap/stork
+  ```
+2. Installing with [Cargo](https://crates.io/crates/stork-search) (cross-platform):
+  ```
+  $ cargo install stork-search
+  ```
+3. Downloading the compiled binary (Ubuntu):
+  ```
+  $ wget https://files.stork-search.net/releases/latest/stork-ubuntu-latest
+  $ chmod +x stork-ubuntu-latest
+  ```
+
+  This option is only recommended in situations where you're automatically re-building an index file on a task runner. See [Stork and Netlify](/docs/stork-and-netlify) for an example.
+  
+4. Building from source (cross-platform):
+  - Stork is built with Rust; make sure you have [Cargo](https://github.com/rust-lang/cargo/) installed.
+  - Download the [source code of the latest release](https://github.com/jameslittle230/stork/releases) (either the Zipfile or the Tarball), and uncompress it.
+  - From the project directory, run `$ cargo build --release`
+  - Run `./target/release/stork`, or copy the binary into your path
+
+If none of these options work for you, or if you want Stork distributed elsewhere, [open a Github issue](https://github.com/jameslittle230/stork/issues/new) and let me know.
+
+## The Javascript module
+
+The Javascript portion of Stork needs to be included with the following `<script>` tag, and (because the WebAssembly is dynamically loaded) shouldn't be packaged as part of a bundle, otherwise your search interface might unexpectedly break.
+
+<Codeblock lang="html">
+  {`<script src="https://files.stork-search.net/stork.js"></script>`}
+</Codeblock>
+
+Stork dynamically loads a WebAssembly binary, which is updated regularly with bugfixes, compatibility improvements, and features.
+
+To track updates, follow the [Stork Releases RSS feed](https://github.com/jameslittle230/stork/releases.atom).

@@ -1,0 +1,141 @@
+export const getStaticProps = async (context) => {
+  return {
+    props: { template: 'docs' },
+  }
+}
+
+# Building a Search Index
+
+To build a search interface that searches through your content, you first need to build an **index file** using the `stork` binary program that you [installed](/docs/install).
+
+The index file is a static binary file, usually with the file extension `.st`, that you need to serve on your web server or CDN. It contains precomputed search results for every possible search query; the Stork Javascript library queries this file to display search results.
+
+When you first integrate Stork, you will likely build your search index on your development machine. This is encouraged, and if you're fine building your search index on your computer, there is no need to stop doing this. Eventually, though, you may want to rebuild and re-upload your search index every time your content changes so your search results stay up to date. The instructions in the [Stork & Netlify guide](/docs/stork-and-netlify) might help you set up a process through which your search interface is updated whenever your site's content is updated and your site is re-deployed.
+
+## The Configuration File
+
+To build an index file, you must tell Stork which documents you want to index. You do this by putting together a **configuration file** and passing it into the Stork binary program.
+
+The most basic Stork configuration specifies a list of files to be indexed and a filename to which the computed index will be written:
+
+<Wide>
+  <Codeblock filename="basic.toml">
+    {`[input]
+base_directory = "my_files/"
+files = [
+    {path = "federalist-1.txt", url = "/federalist-1/", title = "Introduction"},
+    {path = "federalist-2.txt", url = "/federalist-2/", title = "Concerning Dangers from Foreign Force and Influence"},
+    {path = "federalist-3.txt", url = "/federalist-3/", title = "Concerning Dangers from Foreign Force and Influence 2"}
+]
+ 
+[output]
+filename = "federalist.st"`}
+  </Codeblock>
+</Wide>
+
+You would build a search index by running:
+
+```
+$ stork --build basic.toml
+```
+
+File paths in the config file are all relative to your **working directory when you run the Stork command**, including the base directory. For example, if you're in the `~/project/` directory when you run `$ stork --build basic.toml`, Stork will look for the files at:
+
+- `~/project/my_files/federalist-1.txt`
+- `~/project/my_files/federalist-2.txt`
+- `~/project/my_files/federalist-3.txt`
+
+and will output your index to `~/project/federalist.st`, regardless of where the configuration file exists in your filesystem.
+
+## <span class="badge">New in 1.0.0!</span> Testing your index
+
+After writing a config file, you might want to test how well the search interface works before loading it onto your web site. Stork offers a test mode, where it will build your search index and load it into a simplified web interface so you can play with the search functionality while iterating on your configuration.
+
+To test out your index, run:
+
+```
+$ stork --test basic.toml
+```
+
+and open `http://localhost:1612`, the web page served by Stork.
+
+## Advanced file configuration
+
+In your configuration file, you specify a list of file objects that Stork should index. The Stork file object has [many different parameters](/docs/config-ref) that can change the indexing behavior. However, the syntax shown above in `basic.toml` restricts each file object to only be on one line. If you have a lot of parameters in a file object, this could get unwieldy.
+
+TOML syntax specifies another syntax for writing an array of objects which might be preferable if your file objects have lots of parameters. In this syntax, each object in the array is in its own multi-line block, and each parameter (and its value) is on its own line:
+
+<Wide>
+  <Codeblock filename="longer.toml">
+    {`[input]
+base_directory = "my_files"
+url_prefix = "https://www.congress.gov/resources/display/content/The+Federalist+Papers#"
+ 
+[[input.files]] 
+path = "federalist-1.txt"
+url = "TheFederalistPapers-1"
+title = "Introduction"
+ 
+[[input.files]]
+path = "federalist-2.txt"
+url = "TheFederalistPapers-2"
+title = "Concerning Dangers from Foreign Force and Influence"
+ 
+[[input.files]]
+path = "federalist-3.txt"
+url = "TheFederalistPapers-3"
+title = "Concerning Dangers from Foreign Force and Influence 2"
+ 
+[output]
+filename = "federalist.st"
+`}
+  </Codeblock>
+</Wide>
+
+You might prefer this syntax for more complicated configurations.
+
+## File Formats
+
+Stork's north star implementation would let you bring your content in whatever format it exists, and Stork would be able to recognize and index it with no preprocessing needed. Today, Stork can automatically recognize and extract text from four types of files:
+
+1. Plain text files, 
+2. [SRT subtitle files](/docs/srt), 
+3. [HTML files](/docs/html), and 
+4. Markdown files.
+
+Stork will automatically detect the file format by inspecting its file extension; however, if your file extension is non-standard, you can specify the format of any file:
+
+```
+[[input.files]]
+path = "federalist-1.mdx"
+url = "TheFederalistPapers-1"
+title = "Introduction"
+filetype = "Markdown"
+```
+
+In the configuration file, you can specify that your files have [Front Matter](https://jekyllrb.com/docs/front-matter/). You can configure Stork to omit frontmatter from the files it reads by adding the `frontmatter_handling` key to your configuration:
+
+```
+[input]
+base_directory = "my_files"
+url_prefix = "https://www.congress.gov/resources/display/content/The+Federalist+Papers#"
+frontmatter_handling = "Omit"
+files = [...]
+```
+
+You can also override frontmatter handling on a file-by-file basis; see the [Configuration File Reference](/docs/config-ref) for details.
+
+## Additional Options
+
+You can visit the [Configuration File Reference](/docs/config-ref) to see the full list of acceptable configuration key-value pairs.
+
+The Stork configuration file lets you control many subtle aspects of how Stork indexes your content and how the search interface behaves, such as:
+
+- Configure which language the stemmer uses to stem each word in your corpus
+- Configure how much the words in the title get a search rank boost
+- Configure how the content previews are displayed in the web interface
+
+## Next steps
+
+- [See the complete Configuration File reference →](/docs/config-ref)
+- [Learn how to embed the web interface on your site →](/docs/interface)
