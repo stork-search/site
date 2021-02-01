@@ -1,6 +1,6 @@
 [build]
   publish = "out"
-  command = "next build"
+  command = "next build && next export"
 
 [build.processing.css]
   bundle = true
