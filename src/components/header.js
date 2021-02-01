@@ -67,7 +67,7 @@ const Header = ({ nameplateHidden }) => {
     >
       <Flex>
         {nameplateHidden === true ? (
-          <NameplateLink href="#">&nbsp;</NameplateLink>
+          <NameplateLink href="/">&nbsp;</NameplateLink>
         ) : (
           <NameplateLink href="/">Stork Search</NameplateLink>
         )}

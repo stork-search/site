@@ -20,9 +20,11 @@ The Stork Javascript library hooks into HTML that already exists on your page an
 Stork requires an **input element** and an **output element** to attach to. Both those elements need to be tagged with a **registration name**, which is `foo` above (though yours can be whatever you'd like). You'll use the registration name later.
 
 <DocsNote>
-  The input element must conform to the selector <code>input[data-stork="foo"]</code>.<br />
-  The output element must conform to the selector <code>[data-stork="foo-results"]</code>.
-  The registration name must start with a letter.
+  The input element must conform to the selector{' '}
+  <code>input[data-stork="foo"]</code>.<br />
+  The output element must conform to the selector <code>
+    [data-stork="foo-results"]
+  </code>. The registration name must start with a letter.
 </DocsNote>
 
 ## Step 2: Load the Javascript
@@ -34,7 +36,10 @@ The Stork Javascript library downloads the index file and uses a WebAssembly bin
 </Codeblock>
 
 <DocsNote>
-  Because the Stork library interfaces with a WebAssembly blob loaded dynamically from the Stork CDN, you must load the Javascript library from <code>files.stork-search.net</code>; do not cache it or preprocess it, or you run the risk of your search interface suddenly breaking.
+  Because the Stork library interfaces with a WebAssembly blob loaded
+  dynamically from the Stork CDN, you must load the Javascript library from{' '}
+  <code>files.stork-search.net</code>; do not cache it or preprocess it, or you
+  run the risk of your search interface suddenly breaking.
 </DocsNote>
 
 ## Step 3: Register your index

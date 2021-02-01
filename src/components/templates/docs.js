@@ -15,9 +15,7 @@ const Grid = styled.div`
 `
 
 const Wide = ({ children }) => {
-  return (
-    <Column width="100%">{children}</Column>
-  )
+  return <Column width="100%">{children}</Column>
 }
 
 export default (props) => {

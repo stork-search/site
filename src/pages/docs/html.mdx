@@ -8,14 +8,14 @@ export const getStaticProps = async (context) => {
 
 Stork will parse HTML files using a browser-grade HTML parser, extracting content from tags, scripts, and styles.
 
-However, your HTML likely has more content than you actually want indexed. The very page you're looking at has a header and a footer, and if Stork indexed the text in the header and footer as part of each document, you would be able to search for "questions or comments" and get *every page* in your results, since it's in the footer of every page.
+However, your HTML likely has more content than you actually want indexed. The very page you're looking at has a header and a footer, and if Stork indexed the text in the header and footer as part of each document, you would be able to search for "questions or comments" and get _every page_ in your results, since it's in the footer of every page.
 
 When parsing a file, Stork will look for a container tag, identified by a [CSS selector](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors), that it should use to look for searchable contents. By default, this is the `<main>` tag.
 
 If you don't want to use the `<main>` tag, you can change the default for all your HTML files in your Stork configuration. The `html_selector` configuration option controls the container tag Stork will look for. For example, in this configuration file:
 
 <Codeblock filename="papers.toml">
-    {`[input]
+  {`[input]
 base_directory = "html/"
 html_selector = "article.main-contents"
 files = [
@@ -56,7 +56,7 @@ Stork works best if you give it plain prose. You might want to strip away certai
 If you want to override the container tag for any individual file, pass in the `html_selector_override` configuration option in the file array:
 
 <Codeblock filename="override.toml">
-    {`[input]
+  {`[input]
 base_directory = "html/"
 html_selector = "article.main-contents"
  
@@ -74,4 +74,4 @@ title = "Concerning Dangers from Foreign Force and Influence"
 [output]
 filename = "federalist.st"
 `}
-  </Codeblock>
+</Codeblock>

@@ -1,3 +1,6 @@
+import Stork from '../../components/stork'
+import { Column } from '../../components/utils'
+
 export const getStaticProps = async (context) => {
   return {
     props: { template: 'docs' },
@@ -12,7 +15,14 @@ _Problem with this guide? [Let me know!](https://github.com/jameslittle230/stork
 
 The behavior is demonstrated in the following index, in which clicking on a search result will link to the part of the video where Grant Sanderson says the word you've searched for.
 
-<!-- Demo here -->
+<Column>
+  <Stork
+    loadedIndexes={props.loadedIndexes}
+    addLoadedIndex={props.addLoadedIndex}
+    name="threeblue"
+    placeholder="second derivative"
+  />
+</Column>
 
 In many cases, you won't have to do any further configuration beyond making sure the file extension of your subtitle is `.srt`. If Stork recognizes your files as SRT files, it will automatically parse and link the timestamps automatically.
 
@@ -31,8 +41,9 @@ We can imagine the YouTube link above split up into four parts:
 
 The following configuration file was used to build the demo above:
 
+{' '}
 
-  <Wide>
+<Wide>
   <Codeblock filename="threeblue.toml">
     {`[input]
 base_directory = "3b1b"

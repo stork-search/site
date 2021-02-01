@@ -10,23 +10,22 @@ const Column = ({ width, alignLeft, children, ...props }) => (
       ${width ? `--column-width: ${width};` : ''}
       max-width: var(--column-width, 42rem);
       margin: var(--column-margin, 0 auto);
-    `} 
+    `}
     {...props}
   >
     {children}
   </div>
 )
+const VerticalSpacerWrapper = styled.div`
+  padding: ${(props) => props.padding || '1em'} 0;
+  margin: 2em 0 2em;
+`
 
 const VerticalSpacer = ({ children, padding, ...props }) => {
-  const Wrapper = styled.div`
-    padding: ${padding || "1em"} 0;
-    margin: 2em 0 2em;
-  `
-
   return (
-    <Wrapper {...props}>
+    <VerticalSpacerWrapper padding={padding} {...props}>
       <Column>{children}</Column>
-    </Wrapper>
+    </VerticalSpacerWrapper>
   )
 }
 
@@ -36,7 +35,9 @@ const FullWidth = ({ background, children, padding, ...props }) => (
       background-color: ${background};
     `}
   >
-    <VerticalSpacer padding={padding} {...props}>{children}</VerticalSpacer>
+    <VerticalSpacer padding={padding} {...props}>
+      {children}
+    </VerticalSpacer>
   </div>
 )
 

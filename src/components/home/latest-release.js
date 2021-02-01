@@ -34,7 +34,7 @@ const StatsWrapper = styled.div`
   }
 `
 
-const Stats = ({release}) => {
+const Stats = ({ release }) => {
   const dateString = format(
     utcToZonedTime(
       parseISO(release.publishedAt || '2021-01-28'),

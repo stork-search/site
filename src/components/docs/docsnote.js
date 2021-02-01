@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import {Column} from "../utils"
-import {MetaText} from "../text"
+import styled from 'styled-components'
+import { Column } from '../utils'
+import { MetaText } from '../text'
 
 const DocsNoteWrapper = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ const AlertIconWrapper = styled.span`
   border-radius: 50%;
 `
 
-const AlertIcon = () => (<AlertIconWrapper>!</AlertIconWrapper>);
+const AlertIcon = () => <AlertIconWrapper>!</AlertIconWrapper>
 
 const DocsNote = ({ children }) => {
   return (

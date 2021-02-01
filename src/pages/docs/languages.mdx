@@ -1,4 +1,3 @@
-
 export const getStaticProps = async (context) => {
   return {
     props: { template: 'docs' },
@@ -9,7 +8,7 @@ export const getStaticProps = async (context) => {
 
 Stork is not an inherently English-language-specific tool. If your content is in a different language, Stork can parse and index that content.
 
-*Problem with this guide? [Let me know!](https://github.com/jameslittle230/stork-site/issues/new)*
+_Problem with this guide? [Let me know!](https://github.com/jameslittle230/stork-site/issues/new)_
 
 The only language-specific functionality of Stork is the **stemmer**: the functionality that lets you search for the word "tributaries" and get results for the word "tributary." In this case, Stork's stemmer will recognize "tributar" as the root of the word "tributary" and use that to improve search results.
 
@@ -37,7 +36,7 @@ This transformation from "tributaries" to "tributar" is English-specific. Stork 
 The stemming language algorithm used for each file is determined by your Stork config file. With no language specified, Stork will default to English stemming. To change the global stemming algorithm, set it in your config file:
 
 <Codeblock filename="basic.toml (partial)">
-    {`[input]
+  {`[input]
 base_directory = "my_files/"
 stemming = "Dutch"
 files = [
@@ -51,8 +50,9 @@ If you don't want the words in your content to be stemmed (or if it's in an unsu
 
 The stemming configuration can be set on a per-file basis, as well. For example, if you have three files in Spanish but one in French, you can specify that the Spanish stemming algorithm be used generally, but the French algorithm be used for the French language file:
 
-  <Codeblock filename="longer.toml (partial)">
-    {`[input]
+{' '}
+<Codeblock filename="longer.toml (partial)">
+  {`[input]
 base_directory = "my_files"
 stemming = "Spanish"
  
@@ -72,4 +72,4 @@ path = "document-3.txt"
 url = "/document3.html"
 title = "Mi segundo documento"
 `}
-  </Codeblock>
+</Codeblock>

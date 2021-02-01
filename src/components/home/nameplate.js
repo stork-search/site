@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Column, VerticalSpacer } from '../utils'
 import { PageTitle, StylisticText } from '../text'
 
-
 const Intro = () => {
   return (
     <Column>
@@ -12,7 +11,7 @@ const Intro = () => {
           fontSize: '1.8rem',
           fontWeight: 'bold',
           marginBottom: '0.4em',
-          letterSpacing: "-0.02em"
+          letterSpacing: '-0.02em',
         }}
       >
         Impossibly fast web search, made for static&nbsp;sites.

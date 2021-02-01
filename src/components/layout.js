@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet'
 
 import Header from './header.js'
 import Footer from './footer.js'
-import {Grid} from './utils'
+import { Grid } from './utils'
 
 const Layout = ({ children }) => {
   return (

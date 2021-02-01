@@ -12,7 +12,10 @@ export const getStaticProps = async (context) => {
 
 <Nameplate />
 
-<Demo />
+<Demo
+  loadedIndexes={props.loadedIndexes}
+  addLoadedIndex={props.addLoadedIndex}
+/>
 
 Stork is two things that work in tandem to put a beautiful, fast, and accurate search interface on your static site. First, it's a program that indexes your content and writes that index to disk. Second, it's a Javascript library that downloads that index, hooks into a search input, and displays optimal search results immediately to your user, as they type.
 

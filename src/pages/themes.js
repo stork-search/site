@@ -1,88 +1,83 @@
 import styled from 'styled-components'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 
-import {Column} from "../components/utils"
+import Stork from '../components/stork'
+import { Column } from '../components/utils'
 import { PageTitle } from '../components/text'
 import Codeblock from '../components/docs/codeblock'
+import { useEffect } from 'react'
 
 const DemoWrapper = styled.div`
-background-color:  ${props => props.background};
-padding: 3em 3em 16em;
-margin: 0 -3em;
-border: 1px solid hsla(0, 0%, 0%, 0.1);
+  background-color: ${(props) => props.background};
+  padding: 3em 3em 16em;
+  margin: 0 -3em;
+  border: 1px solid hsla(0, 0%, 0%, 0.1);
 `
 
-const Changelog = ({ data }) => (
-  <Column>
-    <PageTitle>Themes</PageTitle>
+const Themes = (props) => {
+  return (
+    <Column>
+      <PageTitle>Themes</PageTitle>
 
-    <Helmet>
-      <link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
-      <link rel="stylesheet" href="/basic-additions.css" />
-      <link rel="stylesheet" href="https://files.stork-search.net/dark.css" />
-      <script src="https://files.stork-search.net/stork.js?2020-12-17"></script>
-      <script src="/stork-load.js"></script>
-      <style>{`
+      <Head>
+        <link rel="stylesheet" href="https://files.stork-search.net/dark.css" />
+        <style>
+          {`
       .stork-results {
         max-height: 10rem;
         }
       `}
-      </style>
-    </Helmet>
+        </style>
+      </Head>
 
-    <p>
-      If you want to customize Stork to fit in seamlessly with your site, you
-      can write your own CSS to style Stork's generated HTML. If that sounds
-      like too much work, you can use one of the themes here.
-    </p>
+      <p>
+        If you want to customize Stork to fit in seamlessly with your site, you
+        can write your own CSS to style Stork's generated HTML. If that sounds
+        like too much work, you can use one of the themes here.
+      </p>
 
-    <p>
-      To use a Stork theme, include the specified CSS file somewhere in your{' '}
-      <code>{`<head>`}</code> tag.
-    </p>
+      <p>
+        To use a Stork theme, include the specified CSS file somewhere in your{' '}
+        <code>{`<head>`}</code> tag.
+      </p>
 
-    <h2>Basic</h2>
+      <h2>Basic</h2>
 
-    <Codeblock filename="" lang="html">
-      {`<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />`}
-    </Codeblock>
+      <Codeblock filename="" lang="html">
+        {`<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />`}
+      </Codeblock>
 
-    <DemoWrapper background="#fff">
-      <div className="stork-wrapper-basic" style={{ zIndex: 10 }}>
-        <input
-          data-stork="federalist"
-          className="stork-input"
+      <DemoWrapper background="#fff">
+        <Stork
+          loadedIndexes={props.loadedIndexes}
+          addLoadedIndex={props.addLoadedIndex}
+          name="federalist"
           placeholder="liberty"
-          style={{ fontSize: '1.3em', width: '100%', padding: '0.5em 0.8em' }}
+          wrapperClassnames={['stork-wrapper-basic']}
+          inputStyles={{ fontSize: '1.3em' }}
         />
-        <div data-stork="federalist-output" className="stork-output">
-          {' '}
-        </div>
-      </div>
       </DemoWrapper>
 
-    <h2>Dark</h2>
+      <h2>Dark</h2>
 
-    <Codeblock filename="" lang="html">
-      {`<link rel="stylesheet" href="https://files.stork-search.net/dark.css" />`}
-    </Codeblock>
+      <Codeblock filename="" lang="html">
+        {`<link rel="stylesheet" href="https://files.stork-search.net/dark.css" />`}
+      </Codeblock>
 
-    <DemoWrapper background="#222">
-      <div className="stork-wrapper-dark" style={{ zIndex: 10 }}>
-        <input
-          data-stork="federalist-2"
-          className="stork-input"
+      <DemoWrapper background="#222">
+        <Stork
+          loadedIndexes={props.loadedIndexes}
+          addLoadedIndex={props.addLoadedIndex}
+          name="federalist-2"
           placeholder="liberty"
-          style={{ fontSize: '1.3em', width: '100%', padding: '0.5em 0.8em' }}
+          wrapperClassnames={['stork-wrapper-dark']}
+          inputStyles={{ fontSize: '1.3em' }}
         />
-        <div data-stork="federalist-2-output" className="stork-output">
-          {' '}
-        </div>
-      </div>
-    </DemoWrapper>
+      </DemoWrapper>
 
-    <div style={{height: "12rem"}}></div>
-  </Column>
-)
+      <div style={{ height: '12rem' }}></div>
+    </Column>
+  )
+}
 
-export default Changelog
+export default Themes

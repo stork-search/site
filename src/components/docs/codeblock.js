@@ -1,14 +1,14 @@
-import React from "react"
-import styled from "styled-components"
-import Highlight, { defaultProps } from "prism-react-renderer"
-import {Column} from "../utils"
+import React from 'react'
+import styled from 'styled-components'
+import Highlight, { defaultProps } from 'prism-react-renderer'
+import { Column } from '../utils'
 
 export const FilenameBlock = styled.div`
   padding: 0.5em 1em;
   border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
   font-weight: bold;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background: black;
   color: white;
 `
@@ -28,7 +28,7 @@ const Codeblock = ({ filename, lang, children }) => {
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <Column>
-          {filename ? <FilenameBlock>{filename}</FilenameBlock> : ""}
+          {filename ? <FilenameBlock>{filename}</FilenameBlock> : ''}
           <pre className={className} style={{ marginTop: `0` }}>
             <CodeBlockCodeTag>
               {tokens.map((line, i) => (

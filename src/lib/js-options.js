@@ -66,14 +66,12 @@ const entryObject = [
   {
     key: 'title',
     type: 'String',
-    description:
-      "The title of the document",
+    description: 'The title of the document',
   },
   {
     key: 'url',
     type: 'String',
-    description:
-      "The URL to where the search result links",
+    description: 'The URL to where the search result links',
   },
   {
     key: 'fields',
@@ -88,7 +86,7 @@ const excerptObject = [
     key: 'text',
     type: 'String',
     description:
-      'The excerpt of text from the original file that contains the user\'s search query. Usually displayed in a list',
+      "The excerpt of text from the original file that contains the user's search query. Usually displayed in a list",
   },
   {
     key: 'score',
@@ -105,4 +103,4 @@ const excerptObject = [
   },
 ]
 
-export {registrationOptionData, resultObject, entryObject, excerptObject}
+export { registrationOptionData, resultObject, entryObject, excerptObject }

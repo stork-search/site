@@ -2,7 +2,7 @@ import React from 'react'
 import { Column, brandColor, FullWidth } from './utils'
 
 const Footer = () => (
-  <FullWidth background={brandColor} style={{margin: 0}}>
+  <FullWidth background={brandColor} style={{ margin: 0 }}>
     <Column>
       <p>&copy; 2019–2021</p>
       <p>

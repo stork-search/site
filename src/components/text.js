@@ -1,18 +1,21 @@
 import styled from 'styled-components'
 
+const StylisticTextWrapper = styled.div`
+  line-height: 1;
+  margin: 0;
+`
+
 const StylisticText = ({ children, style }) => {
-  const Wrapper = styled.div`
-    line-height: 1;
-margin: 0;
-  `
-  return <Wrapper style={{ ...style }}>{children}</Wrapper>
+  return (
+    <StylisticTextWrapper style={{ ...style }}>{children}</StylisticTextWrapper>
+  )
 }
 
 const PageTitle = styled.h1`
-    font-size: ${(props) => props.fontSize || "2.8rem"};
-    line-height: 1;
-    margin: 0;
-    letter-spacing: -0.03em;
+  font-size: ${(props) => props.fontSize || '2.8rem'};
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -0.03em;
 `
 
 const MetaText = styled.p`
@@ -24,4 +27,4 @@ const MetaText = styled.p`
   margin: 0.25em 0;
 `
 
-export {StylisticText, PageTitle, MetaText}
+export { StylisticText, PageTitle, MetaText }

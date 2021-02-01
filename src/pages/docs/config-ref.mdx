@@ -34,13 +34,13 @@ A Stork configuration file is a [TOML file](https://toml.io/en/) that you pass i
 $ stork --build my-config-file.toml
 ```
 
-The configuration file parser relies heavily on intuitive default values: if a field is inapplicable to your search index (or if you're happy with the listed default value), you can leave the field out of your configuration file. 
+The configuration file parser relies heavily on intuitive default values: if a field is inapplicable to your search index (or if you're happy with the listed default value), you can leave the field out of your configuration file.
 
-Stork configuration files are guaranteed to be parseable in all future versions of Stork, though the Stork build phase will warn you if you're using deprecated fields in your configuration file. Fields may be deprecated in point releases of Stork, at which point they will also be undocumented. Setting deprecated fields will have no effect on your index. 
+Stork configuration files are guaranteed to be parseable in all future versions of Stork, though the Stork build phase will warn you if you're using deprecated fields in your configuration file. Fields may be deprecated in point releases of Stork, at which point they will also be undocumented. Setting deprecated fields will have no effect on your index.
 
 ## Input Options
 
-Input options define how your files will be read and processed. Input options are key/value pairs under the `[input]` [TOML Table](https://toml.io/en/v1.0.0#table): 
+Input options define how your files will be read and processed. Input options are key/value pairs under the `[input]` [TOML Table](https://toml.io/en/v1.0.0#table):
 
 <Codeblock filename="stork-config.toml">{`[input]
 ${''}
@@ -57,7 +57,8 @@ Each file object represents a document that will be indexed by Stork, and an ent
 
 Files can either be specified using an "Array of Objects" syntax, which is more compact...
 
-<Codeblock filename="array-of-objects.toml">{`[input]
+<Codeblock filename="array-of-objects.toml">
+  {`[input]
 ${''}
 base_directory = "./files"
 files = [
@@ -68,7 +69,8 @@ files = [
 
 ... or using the [TOML "Array of Tables"](https://toml.io/en/v1.0.0#array-of-tables) syntax:
 
-<Codeblock filename="array-of-tables.toml">{`[input]
+<Codeblock filename="array-of-tables.toml">
+  {`[input]
 base_directory = "./files"
 ${' '}
 [[input.files]] 
@@ -108,7 +110,8 @@ timestamp_format = "MinutesAndSeconds"
 
 The output section of a Stork configuration file defines how the config file is written to disk and how the search results should be displayed when using the Javascript API.
 
-<Codeblock filename="output.toml">{`[input]
+<Codeblock filename="output.toml">
+  {`[input]
 ...
  
 [output]

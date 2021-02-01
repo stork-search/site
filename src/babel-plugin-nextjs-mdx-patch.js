@@ -20,8 +20,7 @@ module.exports = () => {
           DATA_FETCH_FNS.includes(path.node.value.name) &&
           path.findParent(
             (path) =>
-              path.isVariableDeclarator() &&
-              path.node.id.name === 'layoutProps',
+              path.isVariableDeclarator() && path.node.id.name === 'layoutProps'
           )
         ) {
           path.remove()
