@@ -14,42 +14,58 @@ Today, there are four ways to install the command-line tool:
 
 1. Installing with [Homebrew](https://brew.sh) (macOS):
 
-```
-$ brew install stork-search/stork-tap/stork
-```
+  ```
+  $ brew install stork-search/stork-tap/stork
+  ```
 
 2. Installing with [Cargo](https://crates.io/crates/stork-search) (cross-platform):
 
-```
-$ cargo install stork-search
-```
+  ```
+  $ cargo install stork-search
+  ```
 
 3. Downloading the compiled binary (Ubuntu):
 
-```
-$ wget https://files.stork-search.net/releases/latest/stork-ubuntu-latest
-$ chmod +x stork-ubuntu-latest
-```
+  ```
+  $ wget https://files.stork-search.net/releases/latest/stork-ubuntu-latest
+  $ chmod +x stork-ubuntu-latest
+  ```
 
-This option is only recommended in situations where you're automatically re-building an index file on a task runner. See [Stork and Netlify](/docs/stork-and-netlify) for an example.
+  This option is recommended in situations where you're automatically re-building an index file on a task runner. See [Stork and Netlify](/docs/stork-and-netlify) for an example.
 
 4. Building from source (cross-platform):
 
-- Stork is built with Rust; make sure you have [Cargo](https://github.com/rust-lang/cargo/) installed.
-- Download the [source code of the latest release](https://github.com/jameslittle230/stork/releases) (either the Zipfile or the Tarball), and uncompress it.
-- From the project directory, run `$ cargo build --release`
-- Run `./target/release/stork`, or copy the binary into your path
+  - Stork is built with Rust; make sure you have [Cargo](https://github.com/rust-lang/cargo/) installed.
+  - Download the [source code of the latest release](https://github.com/jameslittle230/stork/releases) (either the Zipfile or the Tarball), and uncompress it.
+  - From the project directory, run `$ cargo build --release`
+  - Run `./target/release/stork`, or copy the binary into your path
 
 If none of these options work for you, or if you want Stork distributed elsewhere, [open a Github issue](https://github.com/jameslittle230/stork/issues/new) and let me know.
 
 ## The Javascript module
 
-The Javascript portion of Stork needs to be included with the following `<script>` tag, and (because the WebAssembly is dynamically loaded) shouldn't be packaged as part of a bundle, otherwise your search interface might unexpectedly break.
+Today, there are two ways to install the Javascript module on your site:
+
+### From the Stork CDN:
+
+Include the following script tag on your site, before your closing `</body>` tag:
 
 <Codeblock lang="html">
   {`<script src="https://files.stork-search.net/stork.js"></script>`}
 </Codeblock>
 
-Stork dynamically loads a WebAssembly binary, which is updated regularly with bugfixes, compatibility improvements, and features.
+This will load the most recent Stork module along with the matching WASM binary. It will make a `stork` global variable available.
+
+### Self-hosting:
+
+Download `stork.js` and `stork.wasm` from the [latest Github release](https://github.com/jameslittle230/stork/releases) and publish those files on your web server. Be sure to serve `stork.wasm` with the [correct MIME type](/docs/self-hosting), and be sure to call `stork.initialize()` with the URL of your WASM binary.
+
+Visit the [self-hosting guide](/docs/self-hosting) for more information.
+
+## Updates
+
+Stork updates contain bug fixes, indexing enhancements, UI enhancements, and additional configuration options.
+
+The project aims to keep all Stork artifacts evergreen; in other words, an index configuration file you write will generate a valid index in all future versions of Stork, and an index itself will be useable on all future versions of the Stork Javascript library. However, some new features will only work with an updated Stork setup, and some new features will require that you rebuild your search index.
 
 To track updates, follow the [Stork Releases RSS feed](https://github.com/jameslittle230/stork/releases.atom).

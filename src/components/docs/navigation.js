@@ -53,6 +53,7 @@ const StyledLinkWrapper = styled.a`
   color: currentColor;
 
   &:link {
+    color: currentColor; // override :(
     font-weight: normal;
   }
 
@@ -92,7 +93,7 @@ const nav = () => {
       <DocsLink href="/docs/interface">
         Using the Stork Search Interface
       </DocsLink>
-      {/* <DocsLink href="/docs/interface">Building your own Interface</DocsLink> */}
+      <DocsLink href="/docs/advanced-js">Building your own Interface</DocsLink>
 
       <TOCTitle>Going Further</TOCTitle>
       <DocsLink href="/docs/languages">Indexing Non-English Content</DocsLink>
@@ -100,9 +101,9 @@ const nav = () => {
       <DocsLink href="/docs/html">Parsing HTML and Markdown</DocsLink>
 
       <TOCTitle>Guides</TOCTitle>
-      <DocsLink href="/docs/stork-and-netlify">Stork &amp; Netlify</DocsLink>
-      {/* <DocsLink href="/docs/stork-and-netlify">Stork &amp; Next.js</DocsLink> */}
-      {/* <DocsLink href="/docs/stork-and-netlify">Self-hosting Stork</DocsLink> */}
+      <DocsLink href="/docs/stork-and-netlify">Building a Search Index on every Netlify Deploy</DocsLink>
+      <DocsLink href="/docs/stork-and-nextjs">Lazy-loading the Stork UI on a Next.js site</DocsLink>
+      <DocsLink href="/docs/self-hosting">Self-hosting Stork</DocsLink>
 
       <TOCTitle>References</TOCTitle>
       <DocsLink href="/docs/config-ref">Index Configuration Reference</DocsLink>

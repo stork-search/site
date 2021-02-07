@@ -10,6 +10,10 @@ const DocsNoteWrapper = styled.div`
   border-radius: 3px;
   padding: 1em;
   font-size: 0.9em;
+
+  p {
+    margin: 0
+  }
 `
 
 const AlertIconWrapper = styled.span`
@@ -24,7 +28,7 @@ const AlertIconWrapper = styled.span`
   flex-shrink: 0;
   text-align: center;
   margin-right: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   border-radius: 50%;
 `
 
