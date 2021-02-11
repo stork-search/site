@@ -72,6 +72,10 @@ const Changelog = ({ stats, releases }) => {
                 <CenteredTableCell>{row.jsSize} kB</CenteredTableCell>
                 {row.duration ? (
                   <CenteredTableCell>{row.duration} sec.</CenteredTableCell>
+                ) : row.benchmarks ? (
+                  <CenteredTableCell>
+                    {row.benchmarks['search::federalist::liberty']} ms.
+                  </CenteredTableCell>
                 ) : (
                   <CenteredTableCell>—</CenteredTableCell>
                 )}
@@ -85,8 +89,10 @@ const Changelog = ({ stats, releases }) => {
         <p style={{ fontSize: '0.8em', marginTop: '1.5em' }}>
           *Benchmarks from 1.0.0 and before were run on my personal computer.
           Benchmarks from 1.0.4 and afterwards were run on an AWS EC2 server
-          with the benchmarks added to the repository. Benchmarks in between
-          1.0.0 and 1.0.4 were found to have been invalid.
+          t4.micro instance by running <code>cargo bench</code>; the listed
+          benchmark is for the <code>search::federalist::liberty</code>{' '}
+          benchmark. Benchmarks in between 1.0.0 and 1.0.4 were found to have
+          been invalid.
         </p>
       </div>
       <div>

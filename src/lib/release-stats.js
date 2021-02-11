@@ -4,6 +4,10 @@ export default [
     indexSize: 1125.46,
     wasmSize: 484.57,
     jsSize: 92.24,
+    benchmarks: {
+      "build::federalist": 157.80,
+      "search::federalist::liberty": 2.4904
+    }
   },
   {
     version: '1.0.3',
