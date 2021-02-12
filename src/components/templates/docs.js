@@ -7,11 +7,18 @@ import { Column } from '../utils'
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 20rem 50rem 1fr;
-  grid-gap: 1em;
+  grid-gap: 1rem;
   margin: 0 auto;
 
   --column-width: 42rem;
   --column-margin: 0;
+
+  @media (max-width: 68em) {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+  }
 `
 
 const Wide = ({ children }) => {

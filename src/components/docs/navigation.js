@@ -12,21 +12,14 @@ const TOC = styled.ul`
   font-size: 0.9rem;
   flex-shrink: 0;
 
-  @media (max-width: 62.5em) {
+  @media (max-width: 68rem) {
     text-align: left;
     border: none;
-    margin: 0;
-    margin-bottom: 1em;
-    padding: 0;
-    font-size: 1rem;
-    position: absolute;
-    background: white;
-    z-index: 20;
-    padding: 1em;
-    border: 1px solid gray;
-    border-radius: 3px;
-    box-shadow: rgba(50, 50, 93, 0.44) 0px 10px 20px -5px,
-      rgba(0, 0, 0, 0.55) 0px 20px 40px -10px;
+    margin: 1em 0;
+    overflow-y: auto;
+    max-height: 30vh;
+    padding-bottom: 0;
+    border: 1px solid hsla(0, 0%, 0%, 0.1);
   }
 `
 

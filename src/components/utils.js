@@ -9,6 +9,7 @@ const Column = ({ width, alignLeft, children, ...props }) => (
     css={`
       ${width ? `--column-width: ${width};` : ''}
       max-width: var(--column-width, 42rem);
+      width: 95%;
       margin: var(--column-margin, 0 auto);
     `}
     {...props}
