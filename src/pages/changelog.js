@@ -71,13 +71,13 @@ const Changelog = ({ stats, releases }) => {
                 <CenteredTableCell>{row.wasmSize} kB</CenteredTableCell>
                 <CenteredTableCell>{row.jsSize} kB</CenteredTableCell>
                 {row.duration ? (
-                  <CenteredTableCell>{row.duration} sec.</CenteredTableCell>
+                  <CenteredTableCell>{row.duration} sec. **</CenteredTableCell>
                 ) : row.benchmarks ? (
                   <CenteredTableCell>
                     {row.benchmarks['search::federalist::liberty']} ms.
                   </CenteredTableCell>
                 ) : (
-                  <CenteredTableCell>—</CenteredTableCell>
+                  <CenteredTableCell>— **</CenteredTableCell>
                 )}
               </tr>
             ))}
@@ -86,8 +86,16 @@ const Changelog = ({ stats, releases }) => {
 
         <p>{showMoreToggle(expandedStats)}</p>
 
-        <p style={{ fontSize: '0.8em', marginTop: '1.5em' }}>
-          *Benchmarks from 1.0.0 and before were run on my personal computer.
+        <p>
+          *Why this benchmark? Reproduceability, mostly. This test benchmarks
+          the speed of the search algorithm by itself, rather than in the WASM
+          runtime, removing any non-Stork-algorithm variance that might occur.
+          On my computer, according to in-browser performance tests, the browser
+          repaints with the search results roughly 10ms after the keypress
+          event.
+        </p>
+        <p>
+          **Benchmarks from 1.0.0 and before were run on my personal computer.
           Benchmarks from 1.0.4 and afterwards were run on an AWS EC2 server
           t4.micro instance by running <code>cargo bench</code>; the listed
           benchmark is for the <code>search::federalist::liberty</code>{' '}

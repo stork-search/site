@@ -17,7 +17,7 @@ export const getStaticProps = async (context) => {
   addLoadedIndex={props.addLoadedIndex}
 />
 
-Stork is two things that work in tandem to put a beautiful, fast, and accurate search interface on your static site. First, it's a program that indexes your content and writes that index to disk. Second, it's a Javascript library that downloads that index, hooks into a search input, and displays optimal search results immediately to your user, as they type.
+Stork is two things that work in tandem to put a beautiful, fast (10ms from keydown to repaint in the demo above), and accurate search interface on your static site. First, it's a program that indexes your content and writes that index to disk. Second, it's a Javascript library that downloads that index, hooks into a search input, and displays optimal search results immediately to your user, as they type.
 
 Stork is built with Rust, and the Javascript library uses WebAssembly behind the scenes. It's built with content creators in mind, in that it requires little-to-no code to get started and can be extended deeply. It's perfect for JAMstack sites and personal blogs, but can be used wherever you need a search interface.
 
