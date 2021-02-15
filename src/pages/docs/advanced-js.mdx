@@ -69,6 +69,8 @@ Calling this method while Stork is already attached to existing DOM methods will
 
 If you don't want to use the Stork DOM, you can call `stork.search()` to search an index. The method will return an array of results (see the [Javascript API reference](/docs/js-ref) for more details) which you can insert onto your page however you see fit.
 
-<Codeblock lang="javascript">{`stork.search("yourIndexName", "search query")`}</Codeblock>
+<Codeblock lang="javascript">
+  {`stork.search("yourIndexName", "search query")`}
+</Codeblock>
 
 It is an error to call this method before the initialization and registration promises have completed successfully.
