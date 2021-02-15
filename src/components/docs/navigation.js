@@ -86,17 +86,17 @@ const nav = () => {
       <DocsLink href="/docs/interface">
         Using the Stork Search Interface
       </DocsLink>
-      <DocsLink href="/docs/advanced-js">Building your own Interface</DocsLink>
 
       <TOCTitle>Going Further</TOCTitle>
+      <DocsLink href="/docs/advanced-js">Advanced Javascript Usage</DocsLink>
       <DocsLink href="/docs/languages">Indexing Non-English Content</DocsLink>
-      <DocsLink href="/docs/srt">Working with Subtitle Files</DocsLink>
       <DocsLink href="/docs/html">Parsing HTML and Markdown</DocsLink>
+      <DocsLink href="/docs/self-hosting">Self-hosting Stork</DocsLink>
 
       <TOCTitle>Guides</TOCTitle>
       <DocsLink href="/docs/stork-and-netlify">Building a Search Index on every Netlify Deploy</DocsLink>
-      <DocsLink href="/docs/stork-and-nextjs">Lazy-loading the Stork UI on a Next.js site</DocsLink>
-      <DocsLink href="/docs/self-hosting">Self-hosting Stork</DocsLink>
+      <DocsLink href="/docs/srt">Working with Subtitle Files</DocsLink>
+      {/* <DocsLink href="/docs/stork-and-nextjs">Lazy-loading the Stork UI on a Next.js site</DocsLink> */}
 
       <TOCTitle>References</TOCTitle>
       <DocsLink href="/docs/config-ref">Index Configuration Reference</DocsLink>
