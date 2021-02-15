@@ -1,0 +1,27 @@
+export const getStaticProps = async (context) => {
+  return {
+    props: { template: 'docs' },
+  }
+}
+
+# Self-hosting Stork
+
+The simplest method of getting started with Stork is to load the Javascript from the Stork CDN. The Javascript library will load the WASM blob from the same CDN. The files will both be the latest version of the Stork library, and are guaranteed to work together. This simplifies integration: you don't have to host the script or the WASM binary, and you don't have to make sure to coordinate the version of the two.
+
+However, loading an external script from a third-party CDN is not always ideal. To support users who want to self-host Stork, the Stork frontend lets you load the Javascript and WebAssembly from your own site.
+
+1. **Download the matching JS/WASM files.** Visit the latest [Stork Release page on Github](https://github.com/jameslittle230/stork/releases/latest) and download the Javascript and WASM build artifacts.
+
+2. **Serve those files from your web server.** Upload the Javascript and WASM files to your web server or web host and serve them publicly as you would a stylesheet or image.
+
+    Make sure to serve the WASM file with the `application/wasm` [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types). If you are putting these files behind your CDN, make sure to forward the `Content-Type` header from your file source, through that CDN.
+
+3. **Initialize Stork on your webpage with your WASM's URL.** The [Advanced Javascript](/docs/advanced-js) page describes the `stork.initialize()` method, which instructs Stork to load the WASM. Make sure you call this method -- even if you're using the simpler, `stork.register()` API -- before calling any other Stork methods:
+
+<Codeblock lang="html">
+  {`<script src="https://your-url.com/stork.js"></script>
+<script>
+  stork.initialize("https://your-url.com/stork.wasm")
+  stork.register("yourIndexName", "https://your-url.com/index-file.st")
+</script>`}
+</Codeblock>

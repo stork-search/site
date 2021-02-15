@@ -1,22 +1,15 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 
-import Header from './header'
-import Footer from './footer'
-import './layout.css'
+import Header from './header.js'
+import Footer from './footer.js'
+import { Grid } from './utils'
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <link
           rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>"
@@ -37,14 +30,10 @@ const Layout = ({ children }) => {
         />
       </Helmet>
       <Header />
-      <main>{children}</main>
-      <Footer />
+      <main><Grid>{children}</Grid></main>
+      <Footer /> */}
     </>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout

@@ -1,0 +1,143 @@
+export const getStaticProps = async (context) => {
+  return {
+    props: { template: 'docs' },
+  }
+}
+
+# Building a Search Index
+
+To build a search interface that searches through your content, you first need to build an **index file** using the `stork` command line program. If you haven't installed the command-line program, visit the [installation instructions](/docs/install) to get started.
+
+The command-line program will take in a **configuration file** and build an **index file**. An index file is a serialized, compressed blob that the Stork Javascript library will download and parse. It usually has the `.st` file extension, and is roughly the size of a JPEG.
+
+## The Configuration File
+
+To build a search index, Stork requires that you put together a configuration file that describes which documents it should index. This configuration file is written in [TOML](https://toml.io/).
+
+The most basic Stork configuration specifies a list of files to be indexed and a filename to which the computed index will be written:
+
+<Wide>
+  <Codeblock filename="basic.toml">
+    {`[input]
+base_directory = "my_files/"
+files = [
+    {path = "federalist-1.txt", url = "/federalist-1/", title = "Introduction"},
+    {path = "federalist-2.txt", url = "/federalist-2/", title = "Concerning Dangers from Foreign Force and Influence"},
+    {path = "federalist-3.txt", url = "/federalist-3/", title = "Concerning Dangers from Foreign Force and Influence 2"}
+]
+ 
+[output]
+filename = "federalist.st"`}
+  </Codeblock>
+</Wide>
+
+To build a search index from this configuration file, save the file to disk and pass it into the Stork command-line tool:
+
+```
+$ stork --build basic.toml
+```
+
+
+
+File paths in the config file are all relative to your **working directory when you run the Stork command**, including the base directory. For example, if you're in the `~/project/` directory when you run `$ stork --build basic.toml`, Stork will look for the files at:
+
+- `~/project/my_files/federalist-1.txt`
+- `~/project/my_files/federalist-2.txt`
+- `~/project/my_files/federalist-3.txt`
+
+and will output your index to `~/project/federalist.st`, regardless of where the configuration file exists in your filesystem.
+
+## Testing your index
+
+After writing a config file, you might want to test how well the search interface works before loading it onto your web site. Stork offers a test mode, where it will build your search index and load it into a simplified web interface so you can play with the search functionality while iterating on your configuration.
+
+To test out your index, run:
+
+```
+$ stork --test basic.toml
+```
+
+and open `http://localhost:1612`, the web page served by Stork.
+
+## Advanced file configuration
+
+The Stork File object has [many different parameters](/docs/config-ref) that can change the indexing behavior. However, the syntax shown above in `basic.toml`, described as an [array](https://toml.io/en/v1.0.0#array) of [inline tables](https://toml.io/en/v1.0.0#inline-table), requires that an entire file object is written on one line. If you have a lot of parameters in a file object, this could get unwieldy.
+
+TOML syntax specifies another syntax -- the [array of tables](https://toml.io/en/v1.0.0#array-of-tables) syntax -- that can be used to build up an array of file objects. This syntax might be preferable if your file objects have lots of parameters. 
+
+In this syntax, each object in the array is in its own multi-line block, and each parameter (and its value) is on its own line:
+
+<Wide>
+  <Codeblock filename="longer.toml">
+    {`[input]
+base_directory = "my_files"
+url_prefix = "https://www.congress.gov/resources/display/content/The+Federalist+Papers#"
+ 
+[[input.files]] 
+path = "federalist-1.txt"
+url = "TheFederalistPapers-1"
+title = "Introduction"
+ 
+[[input.files]]
+path = "federalist-2.txt"
+url = "TheFederalistPapers-2"
+title = "Concerning Dangers from Foreign Force and Influence"
+ 
+[[input.files]]
+path = "federalist-3.txt"
+url = "TheFederalistPapers-3"
+title = "Concerning Dangers from Foreign Force and Influence 2"
+ 
+[output]
+filename = "federalist.st"
+`}
+  </Codeblock>
+</Wide>
+
+You might prefer this syntax for more complicated configurations.
+
+## File Formats
+
+Stork's north star implementation would let you bring your content in whatever format it exists, and Stork would be able to recognize and index it with no preprocessing needed. Today, Stork can automatically recognize and extract text from four types of files:
+
+1. Plain text files,
+2. [SRT subtitle files](/docs/srt),
+3. [HTML files](/docs/html), and
+4. Markdown files.
+
+Stork will automatically detect the file format by inspecting its file extension; however, if your file extension is non-standard, you can specify the format of any file:
+
+```
+[[input.files]]
+path = "federalist-1.mdx"
+url = "TheFederalistPapers-1"
+title = "Introduction"
+filetype = "Markdown"
+```
+
+In the configuration file, you can specify that your files have [Front Matter](https://jekyllrb.com/docs/front-matter/). You can configure Stork to omit frontmatter from the files it reads by adding the `frontmatter_handling` key to your configuration:
+
+```
+[input]
+base_directory = "my_files"
+url_prefix = "https://www.congress.gov/resources/display/content/The+Federalist+Papers#"
+frontmatter_handling = "Omit"
+files = [...]
+```
+
+You can also override frontmatter handling on a file-by-file basis; see the [Configuration File Reference](/docs/config-ref) for details.
+
+## Additional Options
+
+You can visit the [Configuration File Reference](/docs/config-ref) to see the full list of acceptable configuration key-value pairs.
+
+The Stork configuration file lets you control many subtle aspects of how Stork indexes your content and how the search interface behaves, such as:
+
+- Configure which language the stemmer uses to stem each word in your corpus
+- Configure how much the words in the title get a search rank boost
+- Configure how the content previews are displayed in the web interface
+
+## Next steps
+
+- [See the complete Configuration File reference →](/docs/config-ref)
+- [Learn how to embed the web interface on your site →](/docs/interface)

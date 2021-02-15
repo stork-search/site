@@ -1,23 +1,52 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
-import PropTypes from 'prop-types'
-import { accentColor, Wrapper, Column, Title } from './utils'
+import Link from 'next/link'
+import { FullWidth, brandColor, VerticalSpacer } from './utils'
+// import { accentColor, Wrapper, Column, Title } from './utils'
 
-const HeaderLink = styled(Link)`
-  line-height: 1;
-  margin-left: 1em;
+const NameplateLink = ({ href, ...props }) => (
+  <Link href={href} passHref>
+    <a
+      css={`
+        text-decoration: none;
+        color: currentColor !important;
+        font-size: 1.4em;
 
-  @media (max-width: 35rem) {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-  }
+        &:hover {
+          text-decoration: underline;
+        }
 
-  @media (max-width: 25rem) {
-    display: block;
-    margin: 0.5em;
-  }
-`
+        &.active {
+          display: none;
+        }
+      `}
+      {...props}
+    />
+  </Link>
+)
+
+const HeaderLink = ({ href, ...props }) => (
+  <Link href={href} passHref>
+    <a
+      css={`
+        line-height: 1;
+        margin-left: 1em;
+        font-size: 1em;
+
+        @media (max-width: 35rem) {
+          margin-left: 0.5em;
+          margin-right: 0.5em;
+        }
+
+        @media (max-width: 25rem) {
+          display: block;
+          margin: 0.5em;
+        }
+      `}
+      {...props}
+    />
+  </Link>
+)
 
 const Flex = styled.div`
   display: flex;
@@ -30,46 +59,27 @@ const Flex = styled.div`
   }
 `
 
-const NameplateLink = styled(Link)`
-  text-decoration: none;
-  color: currentColor !important;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  &.active {
-    display: none;
-  }
-`
-
-const Header = ({ siteTitle }) => (
-  <Wrapper background={accentColor} rhythm="small">
-    <Column>
+const Header = ({ nameplateHidden }) => {
+  return (
+    <FullWidth
+      background={brandColor}
+      style={{ marginTop: 0, marginBottom: 0 }}
+    >
       <Flex>
-        <Title fontSize="1.2rem">
-          <NameplateLink to="/" activeClassName="active">
-            Stork Search
-          </NameplateLink>
-        </Title>
+        {nameplateHidden === true ? (
+          <span></span>
+        ) : (
+          <NameplateLink href="/">Stork Search</NameplateLink>
+        )}
         <div>
-          <HeaderLink to="/docs/install">Documentation</HeaderLink>
-          <HeaderLink to="/themes">Themes</HeaderLink>
-          {/* <HeaderLink to="/integrations">Integrations</a> */}
-          <HeaderLink to="/changelog">Changelog</HeaderLink>
-          <HeaderLink to="/roadmap">Roadmap</HeaderLink>
+          <HeaderLink href="/docs/install">Documentation</HeaderLink>
+          <HeaderLink href="/themes">Themes</HeaderLink>
+          <HeaderLink href="/changelog">Changelog</HeaderLink>
+          <HeaderLink href="/roadmap">Roadmap</HeaderLink>
         </div>
       </Flex>
-    </Column>
-  </Wrapper>
-)
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
+    </FullWidth>
+  )
 }
 
 export default Header

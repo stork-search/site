@@ -1,6 +1,6 @@
 [build]
-  publish = "public"
-  command = "gatsby build"
+  publish = "out"
+  command = "next build && next export"
 
 [build.processing.css]
   bundle = true

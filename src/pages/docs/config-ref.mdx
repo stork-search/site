@@ -1,0 +1,121 @@
+import Link from 'next/link'
+import { PageTitle } from '../../components/text'
+import Codeblock from '../../components/docs/codeblock'
+import { Column } from '../../components/utils'
+import ApiReferenceTable from '../../components/docs/api-reference'
+import {
+  inputOptionData,
+  fileOptionData,
+  srtOptionData,
+  outputOptionData,
+} from '../../lib/config-options'
+
+export const getStaticProps = async (context) => {
+  return {
+    props: {
+      template: 'docs',
+      data: {
+        inputOptionData,
+        fileOptionData,
+        srtOptionData,
+        outputOptionData,
+      },
+    },
+  }
+}
+
+# Stork Configuration File Reference
+
+Just getting started? [Learn how to build a search index](/docs/build)
+
+A Stork configuration file is a [TOML file](https://toml.io/en/) that you pass into the Stork build command. This file defines the way your index is created and processed, and also controls some aspects of how your search results are displayed.
+
+```
+$ stork --build my-config-file.toml
+```
+
+The configuration file parser relies heavily on intuitive default values: if a field is inapplicable to your search index (or if you're happy with the listed default value), you can leave the field out of your configuration file.
+
+Stork configuration files are guaranteed to be parseable in all future versions of Stork, though the Stork build phase will warn you if you're using deprecated fields in your configuration file. Fields may be deprecated in point releases of Stork, at which point they will also be undocumented. Setting deprecated fields will have no effect on your index.
+
+## Input Options
+
+Input options define how your files will be read and processed. Input options are key/value pairs under the `[input]` [TOML Table](https://toml.io/en/v1.0.0#table):
+
+<Codeblock filename="stork-config.toml">{`[input]
+${''}
+base_directory = "./files"
+key1 = "value"
+key2 = 123
+`}</Codeblock>
+
+<ApiReferenceTable options={props.data.inputOptionData} />
+
+## The File object
+
+Each file object represents a document that will be indexed by Stork, and an entry that will be displayed when your users search in a search box.
+
+Files can either be specified using an "Array of Objects" syntax, which is more compact...
+
+<Codeblock filename="array-of-objects.toml">
+  {`[input]
+${''}
+base_directory = "./files"
+files = [
+  {title = "Introduction", url = "https://google.com", path = "federalist-1.txt"}
+  {title = "Concerning Dangers from Foreign Force and Influence", url = "https://yahoo.com", path = "federalist-2.txt"}
+]`}
+</Codeblock>
+
+... or using the [TOML "Array of Tables"](https://toml.io/en/v1.0.0#array-of-tables) syntax:
+
+<Codeblock filename="array-of-tables.toml">
+  {`[input]
+base_directory = "./files"
+${' '}
+[[input.files]] 
+path = "federalist-1.txt"
+url = "https://google.com"
+title = "Introduction"
+ 
+[[input.files]]
+path = "federalist-2.txt"
+url = "https://yahoo.com"
+title = "Concerning Dangers from Foreign Force and Influence"`}
+</Codeblock>
+
+The two are equivalent.
+
+<ApiReferenceTable options={props.data.fileOptionData} />
+
+## The SRT Configuration object
+
+Read more about configuring SRT behavior on the [SRT documentation page](/docs/srt).
+
+You can add SRT configuration options by adding the key-value pairs under a `[input.srt_config]` table:
+
+<Codeblock filename="srt-config.toml">{`[input]
+url_prefix = "https://vimeo.com/"
+  
+[input.srt_config]
+timestamp_template_string = "#t={}"
+timestamp_format = "MinutesAndSeconds"
+  
+[[input.files]]
+...`}</Codeblock>
+
+<ApiReferenceTable options={props.data.srtOptionData} />
+
+## Output Configuration
+
+The output section of a Stork configuration file defines how the config file is written to disk and how the search results should be displayed when using the Javascript API.
+
+<Codeblock filename="output.toml">
+  {`[input]
+...
+ 
+[output]
+filename = "federalist.st"`}
+</Codeblock>
+
+<ApiReferenceTable options={props.data.outputOptionData} />
