@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -84,6 +84,16 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeAwareWrapper nameplateHidden={pageProps.nameplateHidden}>
       <Head>
+        <title>Stork Search - Impossibly Fast Web Search</title>
+        <link
+          rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>"
+        ></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"
+          rel="stylesheet"
+        ></link>
         <link
           rel="stylesheet"
           href="https://files.stork-search.net/basic.css"
