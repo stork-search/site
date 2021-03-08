@@ -11,6 +11,7 @@ const NameplateLink = ({ href, ...props }) => (
         text-decoration: none;
         color: currentColor !important;
         font-size: 1.4em;
+        flex-shrink: 0;
 
         &:hover {
           text-decoration: underline;
