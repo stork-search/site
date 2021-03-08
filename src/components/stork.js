@@ -20,7 +20,6 @@ const Stork = ({
     throw new Error('Set loadedIndexes prop!')
   }
   useEffect(() => {
-    console.log(loadedIndexes)
     if (!loadedIndexes.includes(name)) {
       window.stork.downloadIndex(name, indexUrls[name])
       addLoadedIndex(name)
