@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -14,6 +14,7 @@ import { Column } from '../components/utils'
 import { PageTitle } from '../components/text'
 import DocsNote from '../components/docs/docsnote'
 import CodeBlock from '../components/docs/codeblock'
+import { init } from '../matomo.ts'
 
 const DebugWrappedComponent = ({ debug, children, mdxType }) => {
   return (
@@ -81,10 +82,22 @@ function MyApp({ Component, pageProps }) {
     ...pageProps,
   }
 
+  const matomo = {
+    url: 'https://analytics.jameslittle.me',
+    siteId: 5,
+  }
+
+  useEffect(() => {
+    init(matomo)
+  })
+
   return (
     <ThemeAwareWrapper nameplateHidden={pageProps.nameplateHidden}>
       <Head>
-        <title>Stork Search - Impossibly Fast Web Search</title>
+        <title>
+          {pageProps.pageTitle ? `${pageProps.pageTitle} • ` : ''}Stork Search -
+          Impossibly Fast Web Search
+        </title>
         <link
           rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>"

@@ -20,8 +20,16 @@ const Stork = ({
     throw new Error('Set loadedIndexes prop!')
   }
   useEffect(() => {
+    const storkOptions = {
+      onQueryUpdate: (query, results) => {
+        window._paq.push(['trackSiteSearch', query, name, results.length])
+      },
+      onResultSelected: (query, result) => {
+        window._paq.push(['trackEvent', 'searchResultSelected', query, result.entry.title])
+      },
+    }
     if (!loadedIndexes.includes(name)) {
-      window.stork.downloadIndex(name, indexUrls[name])
+      window.stork.downloadIndex(name, indexUrls[name], storkOptions)
       addLoadedIndex(name)
     }
     window.stork.attach(name)
