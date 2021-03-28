@@ -14,7 +14,7 @@ The Stork Javascript library hooks into HTML that already exists on your page an
 
 <Codeblock lang="html">
   {`<input data-stork="foo" />
-<div data-stork="foo-results"></div>`}
+<div data-stork="foo-output"></div>`}
 </Codeblock>
 
 Stork requires an **input element** and an **output element** to attach to. Both those elements need to be tagged with a **registration name**, which is `foo` above (though yours can be whatever you'd like). You'll use the registration name later.
@@ -23,7 +23,7 @@ Stork requires an **input element** and an **output element** to attach to. Both
   The input element must conform to the selector{' '}
   <code>input[data-stork="foo"]</code>.<br />
   The output element must conform to the selector <code>
-    [data-stork="foo-results"]
+    [data-stork="foo-output"]
   </code>. The registration name must start with a letter.
 </DocsNote>
 
