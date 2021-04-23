@@ -17,19 +17,23 @@ export const getStaticProps = async (context) => {
   addLoadedIndex={props.addLoadedIndex}
 />
 
-Stork is two things that work in tandem to put a beautiful, fast (10ms from keydown to repaint in the demo above), and accurate search interface on your static site. First, it's a program that indexes your content and writes that index to disk. Second, it's a Javascript library that downloads that index, hooks into a search input, and displays optimal search results immediately to your user, as they type.
+Stork is a library for creating beautiful, fast, and accurate full-text search interfaces on the web.
 
-Stork is built with Rust, and the Javascript library uses WebAssembly behind the scenes. It's built with content creators in mind, in that it requires little-to-no code to get started and can be extended deeply. It's perfect for JAMstack sites and personal blogs, but can be used wherever you need a search interface.
+It comes in two parts. First, it's a command-line tool that indexes content and creates a search index file that you can upload to a web server. Second, it's a Javascript library that uses that search index file to build an interactive search interface that displays optimal search results immediately to your user, as they type.
+
+Stork is built with Rust, and the Javascript library uses WebAssembly behind the scenes. It's easy to get started and is even easier to customize so it fits your needs. It's perfect for Jamstack sites and personal blogs, but can be used wherever you need to bring search to your users.
 
 <LatestRelease release={props.release} />
 
 # Quick Start Guide
 
-To begin, let's first embed the Federalist Paper search box in the demo above in a web page. Once that's working, we'll generate a new index with custom content and feed that into the search box.
+Getting started with Stork is quick. First, we'll add the HTML to a web page to turn an `<input>` tag into an interactive search bar that searches through a pre-existing search index. Afterwards, we'll customize the search index so you can search through your own content.
 
-## Embed the Federalist Paper Search
+> You can also <a href="https://codepen.io/littleguy230/pen/oNBJBmK">see this demo on Codepen</a>!
 
-The demo above uses some custom CSS, but can generally be recreated with the following HTML:
+## Adding the interface
+
+Copy and paste the following to a new HTML file:
 
 <Wide>
   <Codeblock filename="index.html" lang="html">
@@ -41,11 +45,14 @@ The demo above uses some custom CSS, but can generally be recreated with the fol
     <link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
   </head>
   <body>
+    
     <div class="stork-wrapper">
       <input data-stork="federalist" class="stork-input" />
       <div data-stork="federalist-output" class="stork-output"></div>
     </div>
+    
     <script src="https://files.stork-search.net/stork.js"></script>
+    
     <script>
       stork.register(
         'federalist',
@@ -57,11 +64,11 @@ The demo above uses some custom CSS, but can generally be recreated with the fol
   </Codeblock>
 </Wide>
 
-Putting that code in a new HTML page will get you a copy of the demo. In the rest of the section, I'll explain what's happening here.
+### HTML
 
-### HTML Structure
+The Stork Javascript library takes over existing HTML that you include ahead of time. That way, you can define exactly how and where your input and search results appear on the page. 
 
-Stork hooks into existing HTML that you include on your page. Each Stork instance has to have an **input element** and an **output element**, and generally Stork themes will ask you to put the input and output in a wrapper element.
+Each search interface has to have an **input element** and an **output element**. (The wrapper is only used by the `basic.css` theme we included above.)
 
 <Codeblock lang="html">
   {`<div class="stork-wrapper">
@@ -70,11 +77,13 @@ Stork hooks into existing HTML that you include on your page. Each Stork instanc
 </div>`}
 </Codeblock>
 
-Both the input and output elements will be registered under a certain name (here, that name is "federalist"). In your own code, replace `federalist` with a short name that describes your search index.
+Your users will type into the input element and the search results will automatically appear in the output element.
+
+Both the input and output elements must be registered to a certain index: that way, the Stork Javascript library knows how to associate a search index with the interactive elements on a page. The `data-stork` attribute lets you make that association.
 
 ### Javascript
 
-Right before the closing `</body>` tag, we include the Stork script and register the index.
+Right before the closing `</body>` tag, include the Stork script and register the index.
 
 <Codeblock lang="html">
   {`<script src="https://files.stork-search.net/stork.js"></script>
@@ -86,13 +95,13 @@ Right before the closing `</body>` tag, we include the Stork script and register
 </script>`}
 </Codeblock>
 
-The `stork.register()` function takes two arguments: the name of your Stork instance, which must match the HTML attribute values; and the URL where the Stork index file can be found. Here, we're pointing to an index file I developed that searches through the contents of the Federalist Papers. Eventually, you'll build your own index, upload it to your web host, and point Stork at its URL instead.
+The `stork.register()` function takes two arguments: the registration name from above, and the URL where the search index file can be found. Here, we're pointing to a public demo I developed: a search index for the Federalist Papers.
 
-### Theme
+Now that the index is registered, the Stork Javascript library will load the search index and take over the HTML elements, letting you search through the 
 
-Stork is heavily customizable, and if you wanted, you could write CSS that makes the Stork output look exactly how you want. Alternatively, you can use one of the pre-existing themes to quickly spin up a polished look and feel for your search interface.
+### CSS
 
-Here, we're using the Basic theme. The Basic theme comes with an HTML specification and a stylesheet. The `<input>` tag must have the `class="stork-input"` attribute, and the output div must have the `class="stork-output"` attribute. Finally, we link the Basic theme's stylesheet in our page's `<head>`:
+Stork is heavily customizable, and if you wanted, you could write CSS that makes the Stork output look exactly how you want. Alternatively, you can use one of the [pre-existing themes](/themes) to quickly spin up a polished look and feel for your search interface. Here, we're using the Basic theme:
 
 <Codeblock lang="html">
   {`<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />`}
@@ -100,47 +109,41 @@ Here, we're using the Basic theme. The Basic theme comes with an HTML specificat
 
 ## Building your own index
 
-Now that you have a search interface on a webpage, you can replace the Federalist Papers with your own content—I bet you're getting sick of searching for "liberty".
+Now that you have a search interface up and running on a webpage, I'll show you how to build the demo index we've been using: a search index for the first twenty Federalist Papers: essays written by three of the United States' founding fathers to promote the United States Constitution.
 
-A Stork search index is built from a collection of sources, usually a set of files on your computer. When creating a search index, you create a **configuration file** that defines a list of sources and includes some metadata about each one. When you run the Stork command line application, Stork will build a search index based on the contents of those files and the specified metadata.
+A Stork search index is built from a collection of **documents**, usually a set of files on your computer. To build a search index, you create a **configuration file** that defines that list of documents and specifies some metadata about each one. When you run the Stork command line application, you'll pass in that configuration file and Stork will build a search index based on the contents of those files and the specified metadata.
 
-After you've [installed Stork](/docs), create a new file called `config.toml` near the documents you want to index, and add the following contents:
+After you've [installed the Stork command-line tool](/docs/install), download [this .zip file](https://files.stork-search.net/demo.zip). When you unzip it, you'll find a folder which contains a configuration file and a folder of text files. The configuration file looks like this:
 
 <Wide>
   <Codeblock filename="config.toml">
     {`[input]
-base_directory = "my_files/"
+base_directory = "federalist"
+url_prefix = "https://www.gutenberg.org/files/1404/1404-h/1404-h.htm#link2H_4_"
 files = [
-    {path = "federalist-1.txt", url = "/federalist-1/", title = "Introduction"},
-    {path = "federalist-2.txt", url = "/federalist-2/", title = "Concerning Dangers from Foreign Force and Influence"},
-    {path = "federalist-3.txt", url = "/federalist-3/", title = "Concerning Dangers from Foreign Force and Influence 2"}
-]
- 
-[output]
-filename = "my_index.st"`}
+    {path = "federalist-1.txt", url = "0001", title = "General Introduction"},
+    {path = "federalist-2.txt", url = "0002", title = "Concerning Dangers from Foreign Force and Influence"},
+    {path = "federalist-3.txt", url = "0003", title = "Concerning Dangers from Foreign Force and Influence pt 2"},
+    {path = "federalist-4.txt", url = "0004", title = "Concerning Dangers from Foreign Force and Influence pt 3"},
+    ...`}
   </Codeblock>
 </Wide>
 
-This [TOML file](https://github.com/toml-lang/toml) defines the base directory of all your documents and an array of File maps. Each File map in the array describes:
 
-- The path on disk where that file can be found, in relation to the base directory
-- The URL to where that search result will link
-- The title of the document
+This [TOML file](https://github.com/toml-lang/toml) tells Stork how to retrieve, parse, and display the content. There are many different ways Stork can handle retrieval, parsing, and display; see the [Configuration Reference](/docs/config-ref) to see all the options you can add to the configuration file or to each File object.
 
-See the [Configuration Reference](/docs/config-ref) to see all the options you can add to the configuration file or to each File object.
-
-To let you test your search index, Stork includes a demo web interface that automatically builds and loads your index from a configuration file. You can start the test interface via the command line:
+To test a configuration file while you're working on it, the Stork command-line tool includes a web interface that builds and presents an index from the configuration file. You can start the test interface via the following command:
 
 ```
-$ stork --test config.toml
+$ stork test --input config.toml
 ```
 
-Opening `http://localhost:1612` in your browser will open the test interface. Here, you can test the search and adjust your index as necessary.
+Opening `http://localhost:1612` in your browser will open a web page with your search index loaded. Here, you can test the search and adjust your index as necessary.
 
-When you're ready, you can build the Stork index file with the command line tool:
+When you're ready, you can build the Stork index file with the command:
 
 ```
-$ stork --build config.toml
+$ stork build --input config.toml --output my_index.st
 ```
 
 This will create a new file at `my_index.st`. This file is your search index, and contains the displayed results for the query your user inputs. The file should be uploaded to a public place, and its url should be passed into the `stork.register()` function.

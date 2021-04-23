@@ -24,28 +24,21 @@ files = [
     {path = "federalist-1.txt", url = "/federalist-1/", title = "Introduction"},
     {path = "federalist-2.txt", url = "/federalist-2/", title = "Concerning Dangers from Foreign Force and Influence"},
     {path = "federalist-3.txt", url = "/federalist-3/", title = "Concerning Dangers from Foreign Force and Influence 2"}
-]
- 
-[output]
-filename = "federalist.st"`}
+]`}
   </Codeblock>
 </Wide>
 
 To build a search index from this configuration file, save the file to disk and pass it into the Stork command-line tool:
 
 ```
-$ stork --build basic.toml
+$ stork build --input basic.toml --output federalist.st
 ```
 
-
-
-File paths in the config file are all relative to your **working directory when you run the Stork command**, including the base directory. For example, if you're in the `~/project/` directory when you run `$ stork --build basic.toml`, Stork will look for the files at:
+All file paths in the configuration file, including the base directory, are relative to the **working directory when you run the Stork command**. For example, if you're in the `~/project/` directory when you run `$ stork build --input basic.toml --output -`, Stork will look for the files at:
 
 - `~/project/my_files/federalist-1.txt`
 - `~/project/my_files/federalist-2.txt`
 - `~/project/my_files/federalist-3.txt`
-
-and will output your index to `~/project/federalist.st`, regardless of where the configuration file exists in your filesystem.
 
 ## Testing your index
 
@@ -54,7 +47,7 @@ After writing a config file, you might want to test how well the search interfac
 To test out your index, run:
 
 ```
-$ stork --test basic.toml
+$ stork test --input basic.toml
 ```
 
 and open `http://localhost:1612`, the web page served by Stork.
@@ -87,9 +80,6 @@ title = "Concerning Dangers from Foreign Force and Influence"
 path = "federalist-3.txt"
 url = "TheFederalistPapers-3"
 title = "Concerning Dangers from Foreign Force and Influence 2"
- 
-[output]
-filename = "federalist.st"
 `}
   </Codeblock>
 </Wide>

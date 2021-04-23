@@ -53,9 +53,9 @@ const Changelog = ({ stats, releases }) => {
           <thead>
             <tr>
               <th>Version</th>
-              <th>federalist.st size</th>
               <th>stork.wasm size</th>
               <th>stork.js size</th>
+              <th>federalist.st size</th>
               <th>Search duration*</th>
             </tr>
           </thead>
@@ -65,11 +65,11 @@ const Changelog = ({ stats, releases }) => {
                 <CenteredTableCell>
                   <strong>{row.version}</strong>
                 </CenteredTableCell>
+                <CenteredTableCell>{row.wasmSize} KB</CenteredTableCell>
+                <CenteredTableCell>{row.jsSize} KB</CenteredTableCell>
                 <CenteredTableCell>
                   {(row.indexSize / 1000).toFixed(2)} MB
                 </CenteredTableCell>
-                <CenteredTableCell>{row.wasmSize} kB</CenteredTableCell>
-                <CenteredTableCell>{row.jsSize} kB</CenteredTableCell>
                 {row.duration ? (
                   <CenteredTableCell>{row.duration} sec. **</CenteredTableCell>
                 ) : row.benchmarks ? (

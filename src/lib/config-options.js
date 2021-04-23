@@ -2,8 +2,8 @@ const inputOptionData = [
   {
     key: 'base_directory',
     type: 'String',
-    required: true,
-    default: null,
+    required: false,
+    default: 'Empty string',
     description:
       'The directory to which each file path is relative. This file path must also be relative to the working directory.',
   },
@@ -69,7 +69,15 @@ const inputOptionData = [
     description:
       'If a string is made of [CJK Ideographs](https://en.wikipedia.org/wiki/CJK_Unified_Ideographs) , its substrings should be shorter. This defines the minimum indexed substring length when indexing an ideographic string.',
   },
+  {
+    key: 'break_on_file_error',
+    type: 'Boolean',
+    default: 'false',
+    description: 'If a single document fails to be indexed, this flag controls whether the entire indexing process fails or if indexing continues with the failing document omitted.'
+  }
 ]
+
+const sourceDisclaimer = "Each file object must have either a `path`, `contents`, or `src_url` field, but not more than one."
 
 const fileOptionData = [
   {
@@ -93,14 +101,21 @@ const fileOptionData = [
     type: 'Optional String',
     default: 'null',
     description:
-      'The location of the document/file on disk, where the indexer can find it. Each file object must have either a `path` or a `contents` field, but not both.',
+      `The location of the document/file on disk, where the indexer can find it. ${sourceDisclaimer}`,
   },
   {
     key: 'contents',
     type: 'Optional String',
     default: 'null',
     description:
-      'The contents of the document, embedded inline in the configuration file. Each file object must have either a `path` or a `contents` field, but not both.',
+      `The contents of the document, embedded inline in the configuration file. ${sourceDisclaimer}`,
+  },
+  {
+    key: 'src_url',
+    type: 'Optional String',
+    default: 'null',
+    description:
+      `The URL that Stork should scrape to get the contents of the document. ${sourceDisclaimer} However, if \`src_url\` and \`url\` are the same, you may omit \`src_url\` altogether.`,
   },
   {
     key: 'html_selector_override',
@@ -121,7 +136,7 @@ const fileOptionData = [
     type: 'Optional String',
     default: 'null',
     description:
-      "One of: `PlainText`, `SRTSubtitle`, `HTML`, or `Markdown`. Stork needs to know what kind of file it is indexing so it can parse the file's contents properly. Usually, Stork can determine what kind of file it is looking at based on the file extension. If Stork cannot detect the type of a file, you can manually set the  filetype with this option.",
+      "One of: `PlainText`, `SRTSubtitle`, `HTML`, or `Markdown`. Stork needs to know what kind of file it is indexing so it can parse the file's contents properly. Sometimes, Stork can determine what kind of file it is looking at automatically. If Stork cannot detect the type of a file, you should manually set the filetype with this option.",
   },
 ]
 
@@ -150,13 +165,6 @@ const srtOptionData = [
 ]
 
 const outputOptionData = [
-  {
-    key: 'filename',
-    type: 'String',
-    default: 'output.st',
-    description:
-      'The filename of the generated index file. Stork will write this file at this location relative to where you run the `stork --build` command.',
-  },
   {
     key: 'exerpt_buffer',
     type: 'Integer',

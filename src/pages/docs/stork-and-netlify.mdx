@@ -20,13 +20,13 @@ You can check out the [final repository on Github](https://github.com/stork-sear
 
 </DocsNote>
 
-_Problem with this guide? [Let me know!](https://github.com/jameslittle230/stork-site/issues/new)_
-
 ## Step 1: Generate the Stork Configuration File
 
 A [Stork configuration file](/docs/build) is required to tell Stork how to index your content. Stork configuration files are, in essence, a listing of each document that should be indexed. We could write this file by hand, but we'll use Eleventy to build this configuration file for us.
 
-Every static site generator likely lets you build a page that lists out all your "posts" or "pages" or "articles." You might be using that functionality to build a "post archive" page, or perhaps an RSS feed. We can use that same functionality to build a Stork configuration file. I'll create a new Nunjucks file that will act as a template for my Stork configuration file. In it, I'll loop through `collections.posts` and generate a new TOML entry under `[[input.files]]` for each post with the post's path on disk, the URL it will ultimately have once it's published, and the post's title.
+Every static site generator lets you build a page that lists out all your "posts" or "pages" or "articles." You might be using that functionality to build a "post archive" page, or perhaps an RSS feed. We can use that same functionality to build a Stork configuration file. 
+
+I'll create a new Nunjucks file that will act as a template for my Stork configuration file. In it, I'll loop through `collections.posts` and generate a new TOML entry under `[[input.files]]` for each post with the post's path on disk, the URL it will ultimately have once it's published, and the post's title.
 
 I'm also configuring the output file to be located in the `_site` directory: the directory where Eleventy writes the final site.
 
@@ -35,22 +35,19 @@ I'm also configuring the output file to be located in the `_site` directory: the
 permalink: "stork-posts.toml"
 eleventyExcludeFromCollections: true
 ---
-${' '}
+ 
 [input]
 url_prefix = "{{metadata.url}}"
-${' '}
+ 
 {%- for post in collections.posts %}
 {% set absolutePostUrl %}{{ post.url | url }}{% endset %}
-${' '}
+ 
 [[input.files]]
 path = "{{post.inputPath}}"
 url = "{{absolutePostUrl}}"
 title = "{{post.data.title | safe}}"
-${' '}
-{%- endfor %}
-${' '}
-[output]
-filename = "_site/stork-posts.st"`}
+ 
+{%- endfor %}`}
 
   </Codeblock>
 
@@ -72,10 +69,10 @@ I'll add the following to a new file called `build.sh` in the root of my project
 <Wide>
   <Codeblock filename="build.sh" lang="bash">
     {`#!/usr/bin/env bash
-wget https://files.stork-search.net/releases/latest/stork-ubuntu-latest
+wget https://files.stork-search.net/releases/v1.2.0/stork-ubuntu-latest
 chmod +x stork-ubuntu-latest
 ELEVENTY_ENV=production npx @11ty/eleventy --config=eleventy.js
-./stork-ubuntu-latest --build _site/stork-posts.toml`}
+./stork-ubuntu-latest build --input _site/stork-posts.toml --output _site/stork-posts.st`}
   </Codeblock>
 </Wide>
 
@@ -127,7 +124,7 @@ Now that Netlify is automatically building the search index, I can build a new p
 
 Eleventy will use the default page layout and publish this page to `/search` when it builds the site. Visit <https://stork-netlify-example.netlify.app/search> to see the final result in action!
 
-## Next steps
+## Extra credit, for you to explore
 
 - On my personal site, I have multiple "collections" of content on my site, including a portfolio of projects I've worked on. What would you add to also index the portfolio project descriptions as well?
 - What would you change to get the search interface embedded in my site's header or footer, on every page of the site?

@@ -1,50 +1,23 @@
+import { releases } from '../../lib/github-api-client'
+import InstallTabs from '../../components/docs/install-tabs.js'
+
 export const getStaticProps = async (context) => {
   return {
-    props: { template: 'docs' },
+    props: { template: 'docs', latestRelease: (await releases)[0] },
   }
 }
 
 # Installing Stork
 
-There are two parts to Stork—the command line tool and the Javascript module—and both need to be installed separately.
+There are two parts to Stork: the command line tool, and the Javascript module. Here, you'll learn how to install both.
 
 ## The command line tool
 
-Today, there are four ways to install the command-line tool:
+<InstallTabs latestRelease={props.latestRelease} />
 
-1. Installing with [Homebrew](https://brew.sh) (macOS):
+## The Javascript library
 
-  ```
-  $ brew install stork-search/stork-tap/stork
-  ```
-
-2. Installing with [Cargo](https://crates.io/crates/stork-search) (cross-platform):
-
-  ```
-  $ cargo install stork-search
-  ```
-
-3. Downloading the compiled binary (Ubuntu):
-
-  ```
-  $ wget https://files.stork-search.net/releases/latest/stork-ubuntu-latest
-  $ chmod +x stork-ubuntu-latest
-  ```
-
-  This option is recommended in situations where you're automatically re-building an index file on a task runner. See [Stork and Netlify](/docs/stork-and-netlify) for an example.
-
-4. Building from source (cross-platform):
-
-  - Stork is built with Rust; make sure you have [Cargo](https://github.com/rust-lang/cargo/) installed.
-  - Download the [source code of the latest release](https://github.com/jameslittle230/stork/releases) (either the Zipfile or the Tarball), and uncompress it.
-  - From the project directory, run `$ cargo build --release`
-  - Run `./target/release/stork`, or copy the binary into your path
-
-If none of these options work for you, or if you want Stork distributed elsewhere, [open a Github issue](https://github.com/jameslittle230/stork/issues/new) and let me know.
-
-## The Javascript module
-
-Today, there are two ways to install the Javascript module on your site:
+You can either load the Javascript library from the Stork CDN (backed by Cloudfront) or by self-hosting it.
 
 ### From the Stork CDN:
 
@@ -54,11 +27,17 @@ Include the following script tag on your site, before your closing `</body>` tag
   {`<script src="https://files.stork-search.net/stork.js"></script>`}
 </Codeblock>
 
-This will load the most recent Stork module along with the matching WASM binary. It will make a `stork` global variable available.
+This will load the most recent Stork module along with the matching WASM binary. It will make a `stork` global variable available in the browser.
+
+To load a specific version of the Stork Javascript library, you can reference a specific version:
+
+<Codeblock lang="html">
+  {`<script src="https://files.stork-search.net/releases/${props.latestRelease.tagName}/stork.js"></script>`}
+</Codeblock>
 
 ### Self-hosting:
 
-Download `stork.js` and `stork.wasm` from the [latest Github release](https://github.com/jameslittle230/stork/releases) and publish those files on your web server. Be sure to serve `stork.wasm` with the [correct MIME type](/docs/self-hosting), and be sure to call `stork.initialize()` with the URL of your WASM binary.
+Download `stork.js` and `stork.wasm` from the [latest Github release](https://github.com/jameslittle230/stork/releases) and publish those files on your web server. Be sure to serve `stork.wasm` with the [correct MIME type](/docs/self-hosting), and be sure to call `stork.initialize()` with the URL where you're hosting the `stork.wasm`.
 
 Visit the [self-hosting guide](/docs/self-hosting) for more information.
 

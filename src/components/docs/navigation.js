@@ -83,20 +83,20 @@ const nav = () => {
       <TOCTitle>Getting Started</TOCTitle>
       <DocsLink href="/docs/install">Installation</DocsLink>
       <DocsLink href="/docs/build">Building an Index</DocsLink>
-      <DocsLink href="/docs/interface">
-        Using the Stork Search Interface
-      </DocsLink>
+      <DocsLink href="/docs/interface">Building a Search Interface</DocsLink>
 
       <TOCTitle>Going Further</TOCTitle>
       <DocsLink href="/docs/advanced-js">Advanced Javascript Usage</DocsLink>
+      {/* <DocsLink href="/docs/advanced-cli">Advanced Command Line Usage</DocsLink> */}
       <DocsLink href="/docs/languages">Indexing Non-English Content</DocsLink>
       <DocsLink href="/docs/html">Parsing HTML and Markdown</DocsLink>
+      {/* <DocsLink href="/docs/web-content">Indexing Content from the Web</DocsLink> */}
       <DocsLink href="/docs/self-hosting">Self-hosting Stork</DocsLink>
-
-      <TOCTitle>Guides</TOCTitle>
-      <DocsLink href="/docs/stork-and-netlify">Building a Search Index on every Netlify Deploy</DocsLink>
-      <DocsLink href="/docs/srt">Working with Subtitle Files</DocsLink>
+      <DocsLink href="/docs/stork-and-netlify">
+        Building a Search Index on every Netlify Deploy
+      </DocsLink>
       {/* <DocsLink href="/docs/stork-and-nextjs">Lazy-loading the Stork UI on a Next.js site</DocsLink> */}
+      <DocsLink href="/docs/srt">Working with Subtitle Files</DocsLink>
 
       <TOCTitle>References</TOCTitle>
       <DocsLink href="/docs/config-ref">Index Configuration Reference</DocsLink>

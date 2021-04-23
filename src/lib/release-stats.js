@@ -1,5 +1,15 @@
 export default [
   {
+    version: '1.2.0',
+    indexSize: 1125.45,
+    wasmSize: 518.52,
+    jsSize: 106.70,
+    // benchmarks: {
+    //   "build::federalist": 160.75,
+    //   "search::federalist::liberty": 2.5441
+    // }
+  },
+  {
     version: '1.1.0',
     indexSize: 1125.45,
     wasmSize: 487.04,

@@ -31,7 +31,7 @@ Just getting started? [Learn how to build a search index](/docs/build)
 A Stork configuration file is a [TOML file](https://toml.io/en/) that you pass into the Stork build command. This file defines the way your index is created and processed, and also controls some aspects of how your search results are displayed.
 
 ```
-$ stork --build my-config-file.toml
+$ stork build --input my-config-file.toml --output my-index.st
 ```
 
 The configuration file parser relies heavily on intuitive default values: if a field is inapplicable to your search index (or if you're happy with the listed default value), you can leave the field out of your configuration file.
@@ -108,14 +108,15 @@ timestamp_format = "MinutesAndSeconds"
 
 ## Output Configuration
 
-The output section of a Stork configuration file defines how the config file is written to disk and how the search results should be displayed when using the Javascript API.
+The optional output section of a Stork configuration file defines how the config file is written to disk and how the search results should be displayed when using the Javascript API.
 
 <Codeblock filename="output.toml">
   {`[input]
 ...
  
 [output]
-filename = "federalist.st"`}
+excerpts_per_result = 2
+displayed_results_count = 5`}
 </Codeblock>
 
 <ApiReferenceTable options={props.data.outputOptionData} />
