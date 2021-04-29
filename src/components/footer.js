@@ -18,16 +18,16 @@ function Footer() {
           </a>
         </p>
         <p>
-          Please{' '}
+          This site is open source. Please{' '}
           <a href="https://github.com/stork-search/site">
-            file a bug or edit this site
+            file a bug or open a PR
           </a>{' '}
           if you see something confusing or incorrect. PRs are always welcome!
         </p>
         <p>
           Logo by{' '}
           <a href="https://www.instagram.com/bruno_monts/">Bruno Monts</a>.
-          Thanks, Bruno!
+          Please contact James Little before using the Stork logo.
         </p>
       </Column>
     </FullWidth>
