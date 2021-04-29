@@ -27,7 +27,9 @@ function Footer() {
         <p>
           Logo by{' '}
           <a href="https://www.instagram.com/bruno_monts/">Bruno Monts</a>.
-          Please contact James Little before using the Stork logo.
+          Please contact James Little before using the Stork logo. Thanks
+          to Bruno and the <a href="https://fission.codes">fission.codes</a>{' '}
+          team for making this logo happen.
         </p>
       </Column>
     </FullWidth>
