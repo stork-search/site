@@ -1,9 +1,19 @@
 export default [
   {
+    version: '1.2.1',
+    indexSize: 1125.456,
+    wasmSize: 518.59,
+    jsSize: 106.70,
+    benchmarks: {
+      'build::federalist': 151.06998776,
+      'search::federalist::liberty': 2.0661,
+    },
+  },
+  {
     version: '1.2.0',
     indexSize: 1125.45,
     wasmSize: 518.52,
-    jsSize: 106.70,
+    jsSize: 106.7,
     // benchmarks: {
     //   "build::federalist": 160.75,
     //   "search::federalist::liberty": 2.5441
@@ -15,9 +25,9 @@ export default [
     wasmSize: 487.04,
     jsSize: 106.87,
     benchmarks: {
-      "build::federalist": 160.75,
-      "search::federalist::liberty": 2.5441
-    }
+      'build::federalist': 160.75,
+      'search::federalist::liberty': 2.5441,
+    },
   },
   {
     version: '1.0.4',
@@ -25,9 +35,9 @@ export default [
     wasmSize: 484.57,
     jsSize: 92.24,
     benchmarks: {
-      "build::federalist": 157.80,
-      "search::federalist::liberty": 2.4904
-    }
+      'build::federalist': 157.8,
+      'search::federalist::liberty': 2.4904,
+    },
   },
   {
     version: '1.0.3',

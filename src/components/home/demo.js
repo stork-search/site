@@ -17,7 +17,7 @@ const Demo = ({ loadedIndexes, addLoadedIndex }) => {
         addLoadedIndex={addLoadedIndex}
         name="federalist"
         placeholder="liberty"
-        inputStyles={{ fontSize: '1.3em' }}
+        wrapperStyles={{ fontSize: '1.3em' }}
         playerPianoQueries={[
           'liberty',
           'united states',
