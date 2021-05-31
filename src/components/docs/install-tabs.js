@@ -120,14 +120,6 @@ $ cargo install stork-search
           <ReactMarkdown>{contents[key]}</ReactMarkdown>
         </TabContents>
       ))}
-
-      <p>
-        If these options don't work for you, please{' '}
-        <a href="https://github.com/jameslittle230/stork/issues/new">
-          file a Github issue
-        </a>{' '}
-        describing the installation process you hope to see!
-      </p>
     </div>
   )
 }
