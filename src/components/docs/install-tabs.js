@@ -68,7 +68,7 @@ $ brew install stork-search/stork-tap/stork
 **Option 2:** Download a pre-compiled binary (Intel only):
 
 \`\`\`
-$ wget https://files.stork-search.net/releases/${version}/stork-macos-latest
+$ wget https://files.stork-search.net/releases/${version}/stork-macos-10-15
 $ chmod +x stork-macos-latest
 \`\`\`
 
@@ -82,8 +82,8 @@ $ cargo install stork-search
 **Option 1:** Download a pre-compiled binary:
 
 \`\`\`
-$ wget https://files.stork-search.net/releases/${version}/stork-ubuntu-latest
-$ chmod +x stork-ubuntu-latest
+$ wget https://files.stork-search.net/releases/${version}/stork-ubuntu-20-04
+$ chmod +x stork-ubuntu-20-04
 \`\`\`
 
 **Option 2:** If you have the Rust toolchain installed, use Cargo:
