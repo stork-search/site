@@ -60,7 +60,7 @@ Next, we'll configure Netlify to use that configuration file to generate the Sto
 By default, when Netlify builds my site, it runs `npx eleventy`, a Terminal command which will build the site. In this step, we want to change the Netlify build process so that it:
 
 1. Runs the Eleventy site generation to build my static pages and my Stork configuration file, then
-2. Runs `stork --build` on the generated configuration file to build an index file.
+2. Runs `stork build` on the generated configuration file to build an index file.
 
 Stork doesn't come preinstalled on Netlify's build machines, so in between steps 1 and 2, we have to install the Stork binary as well.
 
@@ -69,19 +69,19 @@ I'll add the following to a new file called `build.sh` in the root of my project
 <Wide>
   <Codeblock filename="build.sh" lang="bash">
     {`#!/usr/bin/env bash
-wget https://files.stork-search.net/releases/v1.2.0/stork-ubuntu-latest
-chmod +x stork-ubuntu-latest
+wget https://files.stork-search.net/releases/latest/stork-ubuntu-16-04
+chmod +x stork-ubuntu-16-04
 ELEVENTY_ENV=production npx @11ty/eleventy --config=eleventy.js
-./stork-ubuntu-latest build --input _site/stork-posts.toml --output _site/stork-posts.st`}
+./stork-ubuntu-16-04 build --input _site/stork-posts.toml --output _site/stork-posts.st`}
   </Codeblock>
 </Wide>
 
 From top to bottom, this script:
 
-1. Downloads the Stork binary from Github. Each release, a binary built for Ubuntu is automatically compiled and uploaded to the Github release,
-2. Makes that downloaded binary executable,
+1. Downloads the Stork command line program from Github, built for Ubuntu 16.04, the Ubuntu version that Netlify's build system uses,
+2. Makes that downloaded program executable,
 3. Runs Eleventy and builds the site, and
-4. Uses the Stork binary to build the generated Stork configuration file.
+4. Uses the Stork binary to generate a search index.
 
 Netlify lets users configure the **build command** to run when publishing a new version of the site (again, by default, it's running `npx eleventy`) by editing a file named `netlify.toml` in the root of the repository. I'll change the file so it has the following contents:
 
