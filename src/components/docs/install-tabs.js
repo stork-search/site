@@ -69,7 +69,7 @@ $ brew install stork-search/stork-tap/stork
 
 \`\`\`
 $ wget https://files.stork-search.net/releases/${version}/stork-macos-10-15
-$ chmod +x stork-macos-latest
+$ chmod +x stork-macos-10-15
 \`\`\`
 
 **Option 3:** If you have the Rust toolchain installed, use Cargo:
