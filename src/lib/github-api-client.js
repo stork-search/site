@@ -10,6 +10,7 @@ const releasesQuery = `
     releases(first: 20, orderBy: { field: CREATED_AT, direction: DESC }) {
       nodes {
         descriptionHTML
+        isDraft
         publishedAt
         tagName
         url
@@ -25,5 +26,6 @@ const makeRequest = (query) =>
 const releases = makeRequest(releasesQuery)
   .then((resp) => resp.data)
   .then((data) => data.data.repository.releases.nodes)
+  .then((data) => data.filter(d => !d.isDraft))
 
 export { releases }
