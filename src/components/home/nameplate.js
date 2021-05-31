@@ -2,20 +2,31 @@ import styled from 'styled-components'
 import { Column, VerticalSpacer } from '../utils'
 import { PageTitle, StylisticText } from '../text'
 
+const Logo = styled.div`
+  width: 13rem;
+  height: 13rem;
+  background: url("logo.svg") bottom right / 100% 100% no-repeat;
+  margin-top: -4rem;
+  margin-right: 2rem;
+  flex-shrink: 0;
+
+  @media (max-width: 40rem) {
+    width: 10rem;
+    height: 10rem;
+    margin-top: 0;
+  }
+
+  @media (max-width: 30rem) {
+    display: none;
+    margin: 0.5em;
+  }
+`
+
 const Intro = () => {
   return (
     <Column>
       <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <div
-          style={{
-            width: '13rem',
-            height: '13rem',
-            background: 'url(\'/logo.svg\') bottom right / 100% 100% no-repeat',
-            marginTop: '-4rem',
-            marginRight: '2rem',
-            flexShrink: 0
-          }}
-        ></div>
+        <Logo />
         <div>
           <PageTitle fontSize="4rem">Stork</PageTitle>
           <StylisticText
