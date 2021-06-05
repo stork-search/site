@@ -14,6 +14,7 @@ import { Column } from '../components/utils'
 export async function getStaticProps() {
   return {
     props: {
+      pageTitle: "Changelog",
       releases: await releases,
       stats,
     },

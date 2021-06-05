@@ -1,6 +1,6 @@
 export const getStaticProps = async (context) => {
   return {
-    props: { template: 'docs' },
+    props: { pageTitle: 'Building an Index', template: 'docs' },
   }
 }
 
@@ -56,7 +56,7 @@ and open `http://localhost:1612`, the web page served by Stork.
 
 The Stork File object has [many different parameters](/docs/config-ref) that can change the indexing behavior. However, the syntax shown above in `basic.toml`, described as an [array](https://toml.io/en/v1.0.0#array) of [inline tables](https://toml.io/en/v1.0.0#inline-table), requires that an entire file object is written on one line. If you have a lot of parameters in a file object, this could get unwieldy.
 
-TOML syntax specifies another syntax -- the [array of tables](https://toml.io/en/v1.0.0#array-of-tables) syntax -- that can be used to build up an array of file objects. This syntax might be preferable if your file objects have lots of parameters. 
+TOML syntax specifies another syntax -- the [array of tables](https://toml.io/en/v1.0.0#array-of-tables) syntax -- that can be used to build up an array of file objects. This syntax might be preferable if your file objects have lots of parameters.
 
 In this syntax, each object in the array is in its own multi-line block, and each parameter (and its value) is on its own line:
 
