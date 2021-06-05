@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import '../css/layout.css'
 import '../css/prism.css'
 import '../css/stork-basic-additions.css'
@@ -66,6 +67,8 @@ const templates = {
 }
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter()
+
   const template = pageProps.template
     ? templates[pageProps.template]
     : templates['default']
@@ -98,10 +101,51 @@ function MyApp({ Component, pageProps }) {
           {pageProps.pageTitle ? `${pageProps.pageTitle} • ` : ''}Stork Search -
           Impossibly Fast Web Search
         </title>
+
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
         <link
           rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>"
-        ></link>
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="manifest" href="/site.webmanifest" />
+
+        <meta
+          property="og:title"
+          content={`${
+            pageProps.pageTitle ? `${pageProps.pageTitle} • ` : ''
+          }Stork Search`}
+        />
+        <meta
+          property="og:description"
+          content="Impossibly fast web search, built for static sites."
+        />
+        <meta property="og:image" content="/og-banner.png" />
+        <meta
+          property="og:url"
+          content={`https://stork-search.net${router.pathname}`}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        <meta property="og:site_name" content="Stork Search" />
+        <meta
+          name="twitter:image:alt"
+          content="The Stork Logo, a happy bird holding a magnifying glass"
+        />
+
         <link rel="preconnect" href="https://fonts.gstatic.com"></link>
         <link
           href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"

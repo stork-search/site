@@ -14,6 +14,12 @@ const DemoWrapper = styled.div`
   border: 1px solid hsla(0, 0%, 0%, 0.1);
 `
 
+export const getStaticProps = async (context) => {
+  return {
+    props: { pageTitle: "Themes" },
+  }
+}
+
 const Themes = (props) => {
   return (
     <Column>

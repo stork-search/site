@@ -3,7 +3,11 @@ import InstallTabs from '../../components/docs/install-tabs.js'
 
 export const getStaticProps = async (context) => {
   return {
-    props: { template: 'docs', latestRelease: (await releases)[0] },
+    props: {
+      pageTitle: 'Installation',
+      template: 'docs',
+      latestRelease: (await releases)[0],
+    },
   }
 }
 
