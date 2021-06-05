@@ -133,7 +133,7 @@ function MyApp({ Component, pageProps }) {
           property="og:description"
           content="Impossibly fast web search, built for static sites."
         />
-        <meta property="og:image" content="http://stork-search.net/og-banner.png" />
+        <meta property="og:image" content="/og-banner.png" />
         <meta
           property="og:url"
           content={`https://stork-search.net${router.pathname}`}
