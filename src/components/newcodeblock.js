@@ -52,26 +52,37 @@ const getAnnotation = (annotations, lineIndex, tokenIndex) => {
     : null
 }
 
-const Popover = ({ children }) => (
-  <Tooltip
-    interactive={true}
-    arrow={true}
-    duration={250}
-    html={annotation.content}
-  >
-    <span
-      style={{
-        background: 'hsla(0, 0%, 100%, 0.2)',
-        padding: '0.1em 0.5em',
-        margin: '0 0.1em',
-        borderRadius: '4px',
-        cursor: 'pointer',
-      }}
-    >
-      {children}
-    </span>
-  </Tooltip>
-)
+const Popover = ({ annotation, children }) => {
+  const start = annotation.characters ? annotation.characters.start : 0
+  const end = annotation.characters
+    ? annotation.characters.end
+    : children.length
+  return (
+    <>
+      <span>{children.slice(0, start)}</span>
+      <Tooltip
+        interactive={true}
+        arrow={true}
+        duration={250}
+        html={annotation.content}
+        size="small"
+      >
+        <span
+          style={{
+            background: 'hsla(0, 0%, 100%, 0.2)',
+            padding: '0.1em 0.5em',
+            margin: '0 0.1em',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          {children.slice(start, end)}
+        </span>
+      </Tooltip>
+      {<span>{children.slice(end)}</span>}
+    </>
+  )
+}
 
 const CodeBlock = ({
   source,
@@ -126,6 +137,7 @@ const CodeBlock = ({
                       >
                         {line.map((token, key) => {
                           const annotation = getAnnotation(annotations, i, key)
+                          console.log(annotation)
                           const PopoverContainer = (props) =>
                             annotation ? (
                               <Popover annotation={annotation} {...props} />
@@ -134,16 +146,16 @@ const CodeBlock = ({
                             )
 
                           return (
-                            <PopoverContainer>
-                              <span {...getTokenProps({ token, key })}>
+                            <span {...getTokenProps({ token, key })}>
+                              <PopoverContainer>
                                 {/* Dedent from first token. Presumably if the first token in the first line has 
                                 whitespace, we should remove that amount of leading whitespace from the first 
                                 token of every other line. */}
                                 {key === 0
                                   ? token.content.slice(dedent)
                                   : token.content}
-                              </span>
-                            </PopoverContainer>
+                              </PopoverContainer>
+                            </span>
                           )
                         })}
                       </LineContent>
