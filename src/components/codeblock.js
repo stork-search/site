@@ -137,7 +137,6 @@ const CodeBlock = ({
                       >
                         {line.map((token, key) => {
                           const annotation = getAnnotation(annotations, i, key)
-                          console.log(annotation)
                           const PopoverContainer = (props) =>
                             annotation ? (
                               <Popover annotation={annotation} {...props} />

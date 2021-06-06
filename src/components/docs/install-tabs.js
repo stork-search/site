@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { brandColor } from '../utils'
-import CodeBlock from '../newcodeblock'
+import CodeBlock from '../codeblock'
 
 const borderColor = 'hsla(0, 0%, 70%, 1)'
 const borderRadius = '8px'

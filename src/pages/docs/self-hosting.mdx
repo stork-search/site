@@ -18,10 +18,11 @@ However, loading an external script from a third-party CDN is not always ideal. 
 
 3. **Initialize Stork on your webpage with your WASM's URL.** The [Advanced Javascript](/docs/advanced-js) page describes the `stork.initialize()` method, which instructs Stork to load the WASM. Make sure you call this method -- even if you're using the simpler, `stork.register()` API -- before calling any other Stork methods:
 
-<Codeblock lang="html">
-  {`<script src="https://your-url.com/stork.js"></script>
+<CodeBlock
+  language="html"
+  source={`<script src="https://your-url.com/stork.js"></script>
 <script>
   stork.initialize("https://your-url.com/stork.wasm")
   stork.register("yourIndexName", "https://your-url.com/index-file.st")
 </script>`}
-</Codeblock>
+/>

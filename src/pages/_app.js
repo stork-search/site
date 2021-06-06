@@ -16,7 +16,7 @@ import DocsTemplate, { Wide as DocsWide } from '../components/templates/docs'
 import { Column } from '../components/utils'
 import { PageTitle } from '../components/text'
 import DocsNote from '../components/docs/docsnote'
-import CodeBlock from '../components/docs/codeblock'
+import CodeBlock from '../components/codeblock'
 import { init } from '../matomo.ts'
 
 const DebugWrappedComponent = ({ debug, children, mdxType }) => {
@@ -163,7 +163,7 @@ function MyApp({ Component, pageProps }) {
       <MDXProvider
         components={{
           // wrapper: DebugWrapper,
-          Codeblock: CodeBlock,
+          CodeBlock: CodeBlock,
           DocsNote: DocsNote,
           a: Link,
           Wide: ThemeAwareWide,

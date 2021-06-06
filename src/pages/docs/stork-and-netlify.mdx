@@ -33,8 +33,9 @@ I'll create a new Nunjucks file that will act as a template for my Stork configu
 
 I'm also configuring the output file to be located in the `_site` directory: the directory where Eleventy writes the final site.
 
-<Codeblock filename="stork-posts.njk">
-  {`---
+<CodeBlock
+  title="stork-posts.njk"
+  source={`---
 permalink: "stork-posts.toml"
 eleventyExcludeFromCollections: true
 ---
@@ -51,8 +52,7 @@ url = "{{absolutePostUrl}}"
 title = "{{post.data.title | safe}}"
  
 {%- endfor %}`}
-
-  </Codeblock>
+/>
 
 Now, when Eleventy builds my site, it will create a file at `_site/stork-posts.toml` with the full Stork configuration file. (We can run `npm run eleventy build` and examine the contents of the `_site` directory to confirm this!)
 
@@ -70,13 +70,15 @@ Stork doesn't come preinstalled on Netlify's build machines, so in between steps
 I'll add the following to a new file called `build.sh` in the root of my project:
 
 <Wide>
-  <Codeblock filename="build.sh" lang="bash">
-    {`#!/usr/bin/env bash
+  <CodeBlock
+    title="build.sh"
+    language="bash"
+    source={`#!/usr/bin/env bash
 wget https://files.stork-search.net/releases/latest/stork-ubuntu-16-04
 chmod +x stork-ubuntu-16-04
 ELEVENTY_ENV=production npx @11ty/eleventy --config=eleventy.js
 ./stork-ubuntu-16-04 build --input _site/stork-posts.toml --output _site/stork-posts.st`}
-  </Codeblock>
+  />
 </Wide>
 
 From top to bottom, this script:
@@ -88,11 +90,13 @@ From top to bottom, this script:
 
 Netlify lets users configure the **build command** to run when publishing a new version of the site (again, by default, it's running `npx eleventy`) by editing a file named `netlify.toml` in the root of the repository. I'll change the file so it has the following contents:
 
-<Codeblock filename="netlify.toml" lang="toml">
-  {`[build]
+<CodeBlock
+  title="netlify.toml"
+  language="toml"
+  source={`[build]
 publish = "_site"
 command = "chmod +x build.sh && ./build.sh"`}
-</Codeblock>
+/>
 
 After I change the Netlify configuration and re-deployed my site, I'll check to make sure Netlify is generating the search index properly. At this point, your index should be available on Netlify's CDN; you should be able to visit `https://<your-site>/stork-posts.st` to download the index file
 
@@ -101,7 +105,7 @@ After I change the Netlify configuration and re-deployed my site, I'll check to 
 Now that Netlify is automatically building the search index, I can build a new page on my site that will display the Stork interface. I'll add the following page to my site:
 
 <Wide>
-<Codeblock filename="search.njk" lang="html">
+<CodeBlock title="search.njk" language="html" source=
     {`---
  layout: layouts/home.njk
  permalink: /search/
@@ -109,20 +113,19 @@ Now that Netlify is automatically building the search index, I can build a new p
    key: Search
    order: 4
  ---
-
+ 
 <h1>Search</h1>
 <link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
-
+ 
 <div class="stork-wrapper">
   <input data-stork="posts" class="stork-input" />
   <div data-stork="posts-output" class="stork-output"></div>
 </div>
-
+ 
 <script src="https://files.stork-search.net/stork.js"></script>
+ 
+<script>stork.register('posts', '/stork-posts.st');</script>`} />
 
-<script>stork.register('posts', '/stork-posts.st');</script>`}
-
-</Codeblock>
 </Wide>
 
 Eleventy will use the default page layout and publish this page to `/search` when it builds the site. Visit <https://stork-netlify-example.netlify.app/search> to see the final result in action!

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { PageTitle } from '../../components/text'
-import Codeblock from '../../components/docs/codeblock'
+import CodeBlock from '../../components/codeblock'
 import { Column } from '../../components/utils'
 import ApiReferenceTable from '../../components/docs/api-reference'
 import {
@@ -13,7 +13,7 @@ import {
 export const getStaticProps = async (context) => {
   return {
     props: {
-      pageTitle: "Index Configuration Reference",
+      pageTitle: 'Index Configuration Reference',
       template: 'docs',
       data: {
         inputOptionData,
@@ -43,12 +43,14 @@ Stork configuration files are guaranteed to be parseable in all future versions 
 
 Input options define how your files will be read and processed. Input options are key/value pairs under the `[input]` [TOML Table](https://toml.io/en/v1.0.0#table):
 
-<Codeblock filename="stork-config.toml">{`[input]
-${''}
+<CodeBlock
+  title="stork-config.toml"
+  source={`[input]
+ 
 base_directory = "./files"
 key1 = "value"
-key2 = 123
-`}</Codeblock>
+key2 = 123`}
+/>
 
 <ApiReferenceTable options={props.data.inputOptionData} />
 
@@ -58,22 +60,19 @@ Each file object represents a document that will be indexed by Stork, and an ent
 
 Files can either be specified using an "Array of Objects" syntax, which is more compact...
 
-<Codeblock filename="array-of-objects.toml">
-  {`[input]
+<CodeBlock title="array-of-objects.toml" source={`[input]
 ${''}
 base_directory = "./files"
 files = [
   {title = "Introduction", url = "https://google.com", path = "federalist-1.txt"}
   {title = "Concerning Dangers from Foreign Force and Influence", url = "https://yahoo.com", path = "federalist-2.txt"}
-]`}
-</Codeblock>
+]`} />
 
 ... or using the [TOML "Array of Tables"](https://toml.io/en/v1.0.0#array-of-tables) syntax:
 
-<Codeblock filename="array-of-tables.toml">
-  {`[input]
+<CodeBlock title="array-of-tables.toml" source={`[input]
 base_directory = "./files"
-${' '}
+ 
 [[input.files]] 
 path = "federalist-1.txt"
 url = "https://google.com"
@@ -82,8 +81,7 @@ title = "Introduction"
 [[input.files]]
 path = "federalist-2.txt"
 url = "https://yahoo.com"
-title = "Concerning Dangers from Foreign Force and Influence"`}
-</Codeblock>
+title = "Concerning Dangers from Foreign Force and Influence"`} />
 
 The two are equivalent.
 
@@ -95,7 +93,7 @@ Read more about configuring SRT behavior on the [SRT documentation page](/docs/s
 
 You can add SRT configuration options by adding the key-value pairs under a `[input.srt_config]` table:
 
-<Codeblock filename="srt-config.toml">{`[input]
+<CodeBlock title="srt-config.toml" source={`[input]
 url_prefix = "https://vimeo.com/"
   
 [input.srt_config]
@@ -103,7 +101,7 @@ timestamp_template_string = "#t={}"
 timestamp_format = "MinutesAndSeconds"
   
 [[input.files]]
-...`}</Codeblock>
+...`} />
 
 <ApiReferenceTable options={props.data.srtOptionData} />
 
@@ -111,13 +109,11 @@ timestamp_format = "MinutesAndSeconds"
 
 The optional output section of a Stork configuration file defines how the config file is written to disk and how the search results should be displayed when using the Javascript API.
 
-<Codeblock filename="output.toml">
-  {`[input]
+<CodeBlock title="output.toml" source={`[input]
 ...
  
 [output]
 excerpts_per_result = 2
-displayed_results_count = 5`}
-</Codeblock>
+displayed_results_count = 5`} />
 
 <ApiReferenceTable options={props.data.outputOptionData} />

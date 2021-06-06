@@ -35,17 +35,19 @@ You can either load the Javascript library from the Stork CDN (backed by Cloudfr
 
 Include the following script tag on your site, before your closing `</body>` tag:
 
-<Codeblock lang="html">
-  {`<script src="https://files.stork-search.net/stork.js"></script>`}
-</Codeblock>
+<CodeBlock
+  language="html"
+  source={`<script src="https://files.stork-search.net/stork.js"></script>`}
+/>
 
 This will load the most recent Stork module along with the matching WASM binary. It will make a `stork` global variable available in the browser.
 
 To load a specific version of the Stork Javascript library, you can reference a specific version:
 
-<Codeblock lang="html">
-  {`<script src="https://files.stork-search.net/releases/${props.latestRelease.tagName}/stork.js"></script>`}
-</Codeblock>
+<CodeBlock
+  language="html"
+  source={`<script src="https://files.stork-search.net/releases/${props.latestRelease.tagName}/stork.js"></script>`}
+/>
 
 ### Self-hosting:
 
