@@ -7,6 +7,8 @@ import '../css/layout.css'
 import '../css/prism.css'
 import '../css/stork-basic-additions.css'
 
+import React from 'react'
+
 import MarketingTemplate, {
   Wide as MarketingWide,
 } from '../components/templates/marketing'
