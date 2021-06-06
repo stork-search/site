@@ -110,7 +110,6 @@ const CodeBlock = ({
 
                   // If we want to display part of the whole snippet,
                   // filter out the unwanted lines.
-                  // @TODO: Dedent
                   .filter((_line, i) =>
                     partial
                       ? i + 1 >= partial.start && i + 1 <= partial.end
