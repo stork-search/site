@@ -21,6 +21,7 @@
     "react-dom": "latest",
     "react-helmet": "^6.0.0",
     "react-markdown": "^5.0.3",
+    "react-tippy": "^1.4.0",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
