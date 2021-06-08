@@ -40,8 +40,9 @@ We can imagine the YouTube link above split up into four parts:
 The following configuration file was used to build the demo above:
 
 <Wide>
-  <Codeblock filename="threeblue.toml">
-    {`[input]
+  <CodeBlock
+    title="threeblue.toml"
+    source={`[input]
 base_directory = "3b1b"
 url_prefix = "https://www.youtube.com/watch?v="
   
@@ -59,7 +60,7 @@ title = "The paradox of the derivative"
 path = "ch3.srt"
 url = "S0_qX4VJhMQ"
 title = "Derivative formulas through geometry"`}
-  </Codeblock>
+  />
 </Wide>
 
 How does this work, and how can we configure the behavior to support other types of timestamp link formats?
@@ -86,8 +87,9 @@ The Stork configuration file supports an object, `[input.srt_config]`, that lets
 The following configuration file will set the timestamp links to be in "Vimeo format" instead of "YouTube format":
 
 <Wide>
-  <Codeblock filename="vimeo.toml">
-    {`[input]
+  <CodeBlock
+    title="vimeo.toml"
+    source={`[input]
 url_prefix = "https://vimeo.com/"
   
 [input.srt_config]
@@ -97,9 +99,8 @@ timestamp_format = "MinutesAndSeconds"
 [[input.files]]
 path = "subtitles.srt"
 url = "81400335"
-title = "Vimeo Profile"
-`}
-  </Codeblock>
+title = "Vimeo Profile"`}
+  />
 </Wide>
 
 The `input.srt_config.timestamp_template_string` defines the URL suffix to be appended when your user searches for something. Stork will build the URL as usual—combining the [URL prefix](/docs/config-ref) with the URL from the [file object](/docs/config-ref), but will then add the timestamp_template_string to the end.

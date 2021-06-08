@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Stork from '../components/stork'
 import { Column } from '../components/utils'
 import { PageTitle } from '../components/text'
-import Codeblock from '../components/docs/codeblock'
+import CodeBlock from '../components/codeblock'
 import { useEffect } from 'react'
 
 const DemoWrapper = styled.div`
@@ -16,7 +16,7 @@ const DemoWrapper = styled.div`
 
 export const getStaticProps = async (context) => {
   return {
-    props: { pageTitle: "Themes" },
+    props: { pageTitle: 'Themes' },
   }
 }
 
@@ -27,13 +27,7 @@ const Themes = (props) => {
 
       <Head>
         <link rel="stylesheet" href="https://files.stork-search.net/dark.css" />
-        <style>
-          {`
-      .stork-results {
-        max-height: 10rem;
-        }
-      `}
-        </style>
+        <style>{`.stork-results { max-height: 10rem; }`}</style>
       </Head>
 
       <p>
@@ -49,9 +43,10 @@ const Themes = (props) => {
 
       <h2>Basic</h2>
 
-      <Codeblock filename="" lang="html">
-        {`<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />`}
-      </Codeblock>
+      <CodeBlock
+        language="html"
+        source={`<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />`}
+      />
 
       <DemoWrapper background="#fff">
         <Stork
@@ -66,9 +61,10 @@ const Themes = (props) => {
 
       <h2>Dark</h2>
 
-      <Codeblock filename="" lang="html">
-        {`<link rel="stylesheet" href="https://files.stork-search.net/dark.css" />`}
-      </Codeblock>
+      <CodeBlock
+        language="html"
+        source={`<link rel="stylesheet" href="https://files.stork-search.net/dark.css" />`}
+      />
 
       <DemoWrapper background="#222">
         <Stork

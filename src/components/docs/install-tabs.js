@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { brandColor } from '../utils'
+import CodeBlock from '../codeblock'
 
 const borderColor = 'hsla(0, 0%, 70%, 1)'
 const borderRadius = '8px'
@@ -58,46 +59,60 @@ const installTabs = ({ latestRelease }) => {
   const tabs = ['macOS', 'Ubuntu', 'Cross-platform']
 
   const contents = {
-    macOS: `
-**Option 1:** Install with [Homebrew](https://brew.sh):
+    macOS: (
+      <>
+        <ReactMarkdown>
+          **Option 1:** Install with [Homebrew](https://brew.sh):
+        </ReactMarkdown>
+        <CodeBlock source={`$ brew install stork-search/stork-tap/stork`} />
+        <ReactMarkdown>
+          **Option 2:** Download a pre-compiled binary (Intel only):
+        </ReactMarkdown>
 
-\`\`\`
-$ brew install stork-search/stork-tap/stork
-\`\`\`
+        <CodeBlock
+          source={`$ wget https://files.stork-search.net/releases/${version}/stork-macos-10-15
+$ chmod +x stork-macos-10-15`}
+        />
+        <ReactMarkdown>
+          **Option 3:** If you have the Rust toolchain installed, use Cargo:
+        </ReactMarkdown>
+        <CodeBlock source={`$ cargo install stork-search`} />
+      </>
+    ),
+    Ubuntu: (
+      <>
+        <ReactMarkdown>
+          **Option 1:** Download a pre-compiled binary:
+        </ReactMarkdown>
 
-**Option 2:** Download a pre-compiled binary (Intel only):
+        <CodeBlock
+          source={`$ wget https://files.stork-search.net/releases/${version}/stork-ubuntu-20-04
+$ chmod +x stork-ubuntu-20-04`}
+          annotations={[
+            {
+              line: 1,
+              token: 0,
+              characters: { start: 54, end: 72 },
+              content: <span>Alternatively, use <code>stork-ubuntu-16-04</code> for a binary that works on Ubuntu 16.04.</span>,
+            },
+          ]}
+        />
 
-\`\`\`
-$ wget https://files.stork-search.net/releases/${version}/stork-macos-10-15
-$ chmod +x stork-macos-10-15
-\`\`\`
+        <ReactMarkdown>
+          **Option 2:** If you have the Rust toolchain installed, use Cargo:
+        </ReactMarkdown>
 
-**Option 3:** If you have the Rust toolchain installed, use Cargo:
-
-\`\`\`
-$ cargo install stork-search
-\`\`\`
-    `,
-    Ubuntu: `
-**Option 1:** Download a pre-compiled binary:
-
-\`\`\`
-$ wget https://files.stork-search.net/releases/${version}/stork-ubuntu-20-04
-$ chmod +x stork-ubuntu-20-04
-\`\`\`
-
-**Option 2:** If you have the Rust toolchain installed, use Cargo:
-
-\`\`\`
-$ cargo install stork-search
-\`\`\``,
-    'Cross-platform': `
-Install the Rust toolchain and install Stork with Cargo:
-
-\`\`\`
-$ cargo install stork-search
-\`\`\`
-    `,
+        <CodeBlock source={`$ cargo install stork-search`} />
+      </>
+    ),
+    'Cross-platform': (
+      <>
+        <ReactMarkdown>
+          Install the Rust toolchain and install Stork with Cargo:
+        </ReactMarkdown>
+        <CodeBlock source={`$ cargo install stork-search`} />
+      </>
+    ),
   }
 
   return (
@@ -117,7 +132,7 @@ $ cargo install stork-search
 
       {Object.keys(contents).map((key) => (
         <TabContents className={key === activeTab ? 'active' : ''}>
-          <ReactMarkdown>{contents[key]}</ReactMarkdown>
+          {contents[key]}
         </TabContents>
       ))}
     </div>

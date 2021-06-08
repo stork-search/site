@@ -1,3 +1,6 @@
+import federalistDotToml from "../../components/code-snippets/federalistDotToml"
+import federalistArrayTablesDotToml from "../../components/code-snippets/federalistArrayTablesDotToml"
+
 export const getStaticProps = async (context) => {
   return {
     props: { pageTitle: 'Building an Index', template: 'docs' },
@@ -17,15 +20,7 @@ To build a search index, Stork requires that you put together a configuration fi
 The most basic Stork configuration specifies a list of files to be indexed and a filename to which the computed index will be written:
 
 <Wide>
-  <Codeblock filename="basic.toml">
-    {`[input]
-base_directory = "my_files/"
-files = [
-    {path = "federalist-1.txt", url = "/federalist-1/", title = "Introduction"},
-    {path = "federalist-2.txt", url = "/federalist-2/", title = "Concerning Dangers from Foreign Force and Influence"},
-    {path = "federalist-3.txt", url = "/federalist-3/", title = "Concerning Dangers from Foreign Force and Influence 2"}
-]`}
-  </Codeblock>
+  <CodeBlock title="basic.toml" source={federalistDotToml} />
 </Wide>
 
 To build a search index from this configuration file, save the file to disk and pass it into the Stork command-line tool:
@@ -61,27 +56,7 @@ TOML syntax specifies another syntax -- the [array of tables](https://toml.io/en
 In this syntax, each object in the array is in its own multi-line block, and each parameter (and its value) is on its own line:
 
 <Wide>
-  <Codeblock filename="longer.toml">
-    {`[input]
-base_directory = "my_files"
-url_prefix = "https://www.congress.gov/resources/display/content/The+Federalist+Papers#"
- 
-[[input.files]] 
-path = "federalist-1.txt"
-url = "TheFederalistPapers-1"
-title = "Introduction"
- 
-[[input.files]]
-path = "federalist-2.txt"
-url = "TheFederalistPapers-2"
-title = "Concerning Dangers from Foreign Force and Influence"
- 
-[[input.files]]
-path = "federalist-3.txt"
-url = "TheFederalistPapers-3"
-title = "Concerning Dangers from Foreign Force and Influence 2"
-`}
-  </Codeblock>
+  <CodeBlock title="longer.toml" source={federalistArrayTablesDotToml} />
 </Wide>
 
 You might prefer this syntax for more complicated configurations.

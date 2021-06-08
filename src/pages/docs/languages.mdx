@@ -37,14 +37,15 @@ This transformation from "tributaries" to "tributar" is English-specific. Stork 
 
 The stemming language algorithm used for each file is determined by your Stork config file. With no language specified, Stork will default to English stemming. To change the global stemming algorithm, set it in your config file:
 
-<Codeblock filename="basic.toml (partial)">
-  {`[input]
+<CodeBlock
+  title="basic.toml (partial)"
+  source={`[input]
 base_directory = "my_files/"
 stemming = "Dutch"
 files = [
     ...
 ]`}
-</Codeblock>
+/>
 
 All the files in your files array will be indexed using the Dutch stemming algorithm.
 
@@ -52,8 +53,9 @@ If you don't want the words in your content to be stemmed (or if it's in an unsu
 
 The stemming configuration can be set on a per-file basis, as well. For example, if you have three files in Spanish but one in French, you can specify that the Spanish stemming algorithm be used generally, but the French algorithm be used for the French language file:
 
-<Codeblock filename="longer.toml (partial)">
-  {`[input]
+<CodeBlock
+  title="longer.toml (partial)"
+  source={`[input]
 base_directory = "my_files"
 stemming = "Spanish"
  
@@ -73,4 +75,4 @@ path = "document-3.txt"
 url = "/document3.html"
 title = "Mi segundo documento"
 `}
-</Codeblock>
+/>

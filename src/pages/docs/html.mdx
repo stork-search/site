@@ -14,21 +14,18 @@ When parsing a file, Stork will look for a container tag, identified by a [CSS s
 
 If you don't want to use the `<main>` tag, you can change the default for all your HTML files in your Stork configuration. The `html_selector` configuration option controls the container tag Stork will look for. For example, in this configuration file:
 
-<Codeblock filename="papers.toml">
-  {`[input]
+<CodeBlock title="papers.toml" source={`[input]
 base_directory = "html/"
 html_selector = "article.main-contents"
 files = [
     {path = "federalist-1.html", url = "/federalist-1/", title = "Introduction"},
     {path = "federalist-2.html", url = "/federalist-2/", title = "Concerning Dangers from Foreign Force and Influence"},
     {path = "federalist-3.html", url = "/federalist-3/", title = "Concerning Dangers from Foreign Force and Influence 2"}
-]`}
-</Codeblock>
+]`} />
 
 Stork will index only the body of the article in the following HTML document:
 
-<Codeblock filename="federalist-1.html" lang="html">
-  {`<!doctype html>
+<CodeBlock title="federalist-1.html" language="html" source={`<!doctype html>
 <html>
   <body>
     <header> <!-- header contents --> </header>
@@ -45,15 +42,13 @@ Stork will index only the body of the article in the following HTML document:
       
     </main>
   </body>
-</html>`}
-</Codeblock>
+</html>`} />
 
 Stork works best if you give it plain prose. You might want to strip away certain tags like code blocks, SVGs, or other elements that will get dynamically replaced by Javascript before generating your index.
 
 If you want to override the container tag for any individual file, pass in the `html_selector_override` configuration option in the file array:
 
-<Codeblock filename="override.toml">
-  {`[input]
+<CodeBlock title="override.toml" source={`[input]
 base_directory = "html/"
 html_selector = "article.main-contents"
  
@@ -66,5 +61,4 @@ html_selector_override = "#inner-contents"
 [[input.files]]
 path = "federalist-2.txt"
 url = "TheFederalistPapers-2"
-title = "Concerning Dangers from Foreign Force and Influence"`}
-</Codeblock>
+title = "Concerning Dangers from Foreign Force and Influence"`} />

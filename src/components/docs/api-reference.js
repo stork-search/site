@@ -39,7 +39,7 @@ const Required = () => <RequiredWrapper>Required</RequiredWrapper>
 const ApiReferenceTable = ({ options }) => (
   <>
     {options.map((option) => (
-      <Option>
+      <Option key={option.key}>
         <p style={{ margin: 0 }}>
           <KeyElement>{option.key}</KeyElement> •{' '}
           <Type>
