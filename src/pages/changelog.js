@@ -111,7 +111,7 @@ const Changelog = ({ stats, releases }) => {
           .map((release) => (
             <div key={release.url}>
               <h2 style={{ marginBottom: 0 }}>{release.tagName}</h2>
-              <p style={{ marginTop: 0, marginBottom: '0.4em' }}>
+              <div style={{ marginTop: 0, marginBottom: '0.4em' }}>
                 <StylisticText>
                   <MetaText>
                     <Link href={release.url}>
@@ -125,7 +125,7 @@ const Changelog = ({ stats, releases }) => {
                     </Link>
                   </MetaText>
                 </StylisticText>
-              </p>
+              </div>
               <div
                 dangerouslySetInnerHTML={{ __html: release.descriptionHTML }}
               />
