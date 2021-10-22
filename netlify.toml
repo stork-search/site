@@ -1,6 +1,9 @@
 [build]
+  command = "npm run build"
   publish = "out"
-  command = "next build && next export"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [build.processing.css]
   bundle = true
