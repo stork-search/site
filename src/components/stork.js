@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 const indexUrls = {
   federalist: 'https://files.stork-search.net/federalist.st',
   'federalist-2': 'https://files.stork-search.net/federalist.st',
+  'federalist-3': 'https://files.stork-search.net/federalist.st',
   threeblue: 'https://files.stork-search.net/3b1b.st',
 }
 
@@ -16,6 +17,10 @@ const Stork = ({
   inputStyles,
   playerPianoQueries,
 }) => {
+  if (!indexUrls[name]) {
+    throw new Error(`Index ${name} not found in Stork component`)
+  }
+
   if (!loadedIndexes) {
     throw new Error('Set loadedIndexes prop!')
   }
@@ -25,7 +30,12 @@ const Stork = ({
         window._paq.push(['trackSiteSearch', query, name, results.length])
       },
       onResultSelected: (query, result) => {
-        window._paq.push(['trackEvent', 'searchResultSelected', query, result.entry.title])
+        window._paq.push([
+          'trackEvent',
+          'searchResultSelected',
+          query,
+          result.entry.title,
+        ])
       },
     }
     if (!loadedIndexes.includes(name)) {
