@@ -3,6 +3,12 @@ html {
   -webkit-text-size-adjust: 100%; /* 2 */
 }
 
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 0.9rem;
+  }
+}
+
 body {
   margin: 0;
 }
