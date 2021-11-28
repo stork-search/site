@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
-import { FullWidth, brandColor, VerticalSpacer } from './utils'
-// import { accentColor, Wrapper, Column, Title } from './utils'
+import { FullWidth, brandColor } from './utils'
 
 const NameplateLink = ({ href, ...props }) => (
   <Link href={href} passHref>
@@ -34,12 +33,12 @@ const HeaderLink = ({ href, ...props }) => (
         margin-left: 1em;
         font-size: 1em;
 
-        @media (max-width: 35rem) {
+        @media (max-width: 40rem) {
           margin-left: 0.5em;
           margin-right: 0.5em;
         }
 
-        @media (max-width: 25rem) {
+        @media (max-width: 30rem) {
           display: block;
           margin: 0.5em;
         }
@@ -54,7 +53,7 @@ const Flex = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: 35rem) {
+  @media (max-width: 40rem) {
     display: block;
     text-align: center;
   }
@@ -77,6 +76,7 @@ const Header = ({ nameplateHidden }) => {
           <HeaderLink href="/themes">Themes</HeaderLink>
           <HeaderLink href="/changelog">Changelog</HeaderLink>
           <HeaderLink href="/roadmap">Roadmap</HeaderLink>
+          <HeaderLink href="https://ko-fi.com/jameslittle230">Ko-Fi</HeaderLink>
         </div>
       </Flex>
     </FullWidth>
