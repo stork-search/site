@@ -1,24 +1,24 @@
 const inputOptionData = [
   {
+    key: 'files',
+    type: 'Array of [File objects](#file)',
+    default: 'Empty Array',
+    description: 'The list of documents Stork should index.',
+  },
+  {
     key: 'base_directory',
     type: 'String',
     required: false,
     default: 'Empty string',
     description:
-      'The directory to which each file path is relative. This file path must also be relative to the working directory.',
-  },
-  {
-    key: 'files',
-    type: 'Array of [File objects](#file)',
-    default: 'Empty Array',
-    description: 'The list of file objects Stork will index.',
+      'If Stork is indexing files on your filesystem, this is the base directory that should be used to resolve relative paths. This path will be in relation to the working directory when you run the `stork build` command.',
   },
   {
     key: 'url_prefix',
     type: 'String',
     default: 'Empty String',
     description:
-      "If all your files point to URLs with the same prefix, you can put the prefix here so you don't repeat it in each file object.",
+      'Each file has a target URL to which it links. If all those target URLs have the same prefix, you can set that prefix here to make shorter file objects.',
   },
   {
     key: 'title_boost',
@@ -33,6 +33,13 @@ const inputOptionData = [
     default: '"main"',
     description:
       'For all HTML files, this will control the container tag where Stork will index content. Expects a CSS selector. [See more](/docs/html/)',
+  },
+  {
+    key: 'exclude_html_selector',
+    type: 'Optional String',
+    default: 'Null',
+    description:
+      'For all HTML files, content within this CSS selector will be excluded from the index.',
   },
   {
     key: 'frontmatter_handling',
@@ -73,11 +80,13 @@ const inputOptionData = [
     key: 'break_on_file_error',
     type: 'Boolean',
     default: 'false',
-    description: 'If a single document fails to be indexed, this flag controls whether the entire indexing process fails or if indexing continues with the failing document omitted.'
-  }
+    description:
+      'If a single document fails to be indexed, this flag controls whether the entire indexing process fails or if indexing continues with the failing document omitted.',
+  },
 ]
 
-const sourceDisclaimer = "Each file object must have either a `path`, `contents`, or `src_url` field, but not more than one."
+const sourceDisclaimer =
+  'Each file object must have either a `path`, `contents`, or `src_url` field, but not more than one.'
 
 const fileOptionData = [
   {
@@ -100,22 +109,19 @@ const fileOptionData = [
     key: 'path',
     type: 'Optional String',
     default: 'null',
-    description:
-      `The location of the document/file on disk, where the indexer can find it. ${sourceDisclaimer}`,
+    description: `The location of the document/file on disk, where the indexer can find it. ${sourceDisclaimer}`,
   },
   {
     key: 'contents',
     type: 'Optional String',
     default: 'null',
-    description:
-      `The contents of the document, embedded inline in the configuration file. ${sourceDisclaimer}`,
+    description: `The contents of the document, embedded inline in the configuration file. ${sourceDisclaimer}`,
   },
   {
     key: 'src_url',
     type: 'Optional String',
     default: 'null',
-    description:
-      `The URL that Stork should scrape to get the contents of the document. ${sourceDisclaimer} However, if \`src_url\` and \`url\` are the same, you may omit \`src_url\` altogether.`,
+    description: `The URL that Stork should scrape to get the contents of the document. ${sourceDisclaimer} However, if \`src_url\` and \`url\` are the same, you may omit \`src_url\` altogether.`,
   },
   {
     key: 'html_selector_override',
@@ -123,6 +129,13 @@ const fileOptionData = [
     default: 'null',
     description:
       'Overrides the global `html_selector` configuration option for this document.',
+  },
+  {
+    key: 'exclude_html_selector_override',
+    type: 'Optional String',
+    default: 'null',
+    description:
+      'Overrides the global `exclude_html_selector` configuration option for this document.',
   },
   {
     key: 'stemming_override',
@@ -136,7 +149,7 @@ const fileOptionData = [
     type: 'Optional String',
     default: 'null',
     description:
-      "One of: `PlainText`, `SRTSubtitle`, `HTML`, or `Markdown`. Stork needs to know what kind of file it is indexing so it can parse the file's contents properly. Sometimes, Stork can determine what kind of file it is looking at automatically. If Stork cannot detect the type of a file, you should manually set the filetype with this option.",
+      "If specified, one of: `PlainText`, `SRTSubtitle`, `HTML`, or `Markdown`. Stork needs to know what kind of file it is indexing so it can parse the file's contents properly. Sometimes, Stork can determine what kind of file it is looking at automatically. If Stork cannot detect the type of a file, you should manually set the filetype with this option.",
   },
 ]
 
@@ -185,6 +198,13 @@ const outputOptionData = [
     default: '10',
     description:
       'Defines the maximum number of search results displayed in the list. Pushing this too high will result in performance issues.',
+  },
+  {
+    key: 'save_nearest_html_id',
+    type: 'Boolean',
+    default: 'False',
+    description:
+      'If true, correlates each word in an HTML document with the nearest ID in the document. The Stork web interface will link directly to that ID, helping your users jump directly to the content they search for.',
   },
   {
     key: 'debug',
