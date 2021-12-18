@@ -179,7 +179,7 @@ const srtOptionData = [
 
 const outputOptionData = [
   {
-    key: 'exerpt_buffer',
+    key: 'excerpt_buffer',
     type: 'Integer',
     default: '8',
     description:
