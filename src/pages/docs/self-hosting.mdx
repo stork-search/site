@@ -23,6 +23,7 @@ However, loading an external script from a third-party CDN is not always ideal. 
   source={`<script src="https://your-url.com/stork.js"></script>
 <script>
   stork.initialize("https://your-url.com/stork.wasm")
-  stork.register("yourIndexName", "https://your-url.com/index-file.st")
+  stork.downloadIndex("sitesearch", "/search-index.st")
+  stork.attach("sitesearch")
 </script>`}
 />
