@@ -56,7 +56,7 @@ const installTabs = ({ latestRelease }) => {
   const version = latestRelease.tagName || 'latest'
   const [activeTab, setActiveTab] = useState('macOS')
 
-  const tabs = ['macOS', 'Ubuntu', 'Cross-platform']
+  const tabs = ['macOS', 'Ubuntu', 'Amazon Linux', 'Cross-platform']
 
   const contents = {
     macOS: (
@@ -76,7 +76,11 @@ $ chmod +x stork-macos-10-15`}
         <ReactMarkdown>
           **Option 3:** If you have the Rust toolchain installed, use Cargo:
         </ReactMarkdown>
-        <CodeBlock source={`$ cargo install stork-search`} />
+        <CodeBlock source={`$ cargo install stork-search --locked`} />
+        <ReactMarkdown>
+          The `--locked` flag is required; discussed further in [issue
+          #188](https://github.com/jameslittle230/stork/issues/188)
+        </ReactMarkdown>
       </>
     ),
     Ubuntu: (
@@ -93,7 +97,12 @@ $ chmod +x stork-ubuntu-20-04`}
               line: 1,
               token: 0,
               characters: { start: 54, end: 72 },
-              content: <span>Alternatively, use <code>stork-ubuntu-16-04</code> for a binary that works on Ubuntu 16.04.</span>,
+              content: (
+                <span>
+                  Alternatively, use <code>stork-ubuntu-16-04</code> for a
+                  binary that works on Ubuntu 16.04.
+                </span>
+              ),
             },
           ]}
         />
@@ -102,7 +111,30 @@ $ chmod +x stork-ubuntu-20-04`}
           **Option 2:** If you have the Rust toolchain installed, use Cargo:
         </ReactMarkdown>
 
-        <CodeBlock source={`$ cargo install stork-search`} />
+        <CodeBlock source={`$ cargo install stork-search --locked`} />
+
+        <ReactMarkdown>
+          The `--locked` flag is required; discussed further in [issue
+          #188](https://github.com/jameslittle230/stork/issues/188)
+        </ReactMarkdown>
+      </>
+    ),
+    'Amazon Linux': (
+      <>
+        <ReactMarkdown>
+          **Option 1:** Download a pre-compiled binary:
+        </ReactMarkdown>
+
+        <CodeBlock
+          source={`$ wget https://files.stork-search.net/releases/${version}/stork-amazon-linux
+$ chmod +x stork-amazon-linux`}
+        />
+
+        <ReactMarkdown>
+          **Option 2:** Build from source. Note that Stork cannot be built with
+          the `web-scraping` feature on Amazon Linux because of OpenSSL
+          incompatibilities.
+        </ReactMarkdown>
       </>
     ),
     'Cross-platform': (
@@ -110,7 +142,11 @@ $ chmod +x stork-ubuntu-20-04`}
         <ReactMarkdown>
           Install the Rust toolchain and install Stork with Cargo:
         </ReactMarkdown>
-        <CodeBlock source={`$ cargo install stork-search`} />
+        <CodeBlock source={`$ cargo install stork-search --locked`} />
+        <ReactMarkdown>
+          The `--locked` flag is required; discussed further in [issue
+          #188](https://github.com/jameslittle230/stork/issues/188)
+        </ReactMarkdown>
       </>
     ),
   }
@@ -120,6 +156,7 @@ $ chmod +x stork-ubuntu-20-04`}
       <Tabs>
         {tabs.map((tab) => (
           <Tab
+            key={tab}
             onClick={() => {
               setActiveTab(tab)
             }}
@@ -131,7 +168,7 @@ $ chmod +x stork-ubuntu-20-04`}
       </Tabs>
 
       {Object.keys(contents).map((key) => (
-        <TabContents className={key === activeTab ? 'active' : ''}>
+        <TabContents key={key} className={key === activeTab ? 'active' : ''}>
           {contents[key]}
         </TabContents>
       ))}
