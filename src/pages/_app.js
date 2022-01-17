@@ -157,7 +157,7 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
           href="https://files.stork-search.net/releases/v1.4.0/basic.css"
         />
-        <script src="https://files.stork-search.net/releases/v1.3.0/stork.js"></script>
+        <script src="https://files.stork-search.net/releases/v1.4.0/stork.js"></script>
         <script>stork.initialize()</script>
       </Head>
       <MDXProvider
