@@ -3,7 +3,10 @@ const indexDotHtml = `<!DOCTYPE html>
   <head>
     <meta charset="utf-8" />
     <title>Federalist Search</title>
-    <link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
+    <link 
+      rel="stylesheet" 
+      href="https://files.stork-search.net/releases/v1.4.0/basic.css" 
+    />
   </head>
   <body>
     <div class="stork-wrapper">
@@ -11,11 +14,11 @@ const indexDotHtml = `<!DOCTYPE html>
       <div data-stork="federalist-output" class="stork-output"></div>
     </div>
       
-    <script src="https://files.stork-search.net/stork.js"></script>
+    <script src="https://files.stork-search.net/releases/v1.4.0/stork.js"></script>
     <script>
       stork.register(
         'federalist',
-        'https://files.stork-search.net/federalist.st'
+        'https://files.stork-search.net/releases/v1.4.0/federalist.st'
       )
     </script>
   </body>

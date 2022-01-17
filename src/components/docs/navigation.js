@@ -93,7 +93,7 @@ const nav = () => {
       {/* <DocsLink href="/docs/web-content">Indexing Content from the Web</DocsLink> */}
       <DocsLink href="/docs/self-hosting">Self-hosting Stork</DocsLink>
       <DocsLink href="/docs/stork-and-netlify">
-        Building a Search Index on every Netlify Deploy
+        Building a Search Index in CI
       </DocsLink>
       {/* <DocsLink href="/docs/stork-and-nextjs">Lazy-loading the Stork UI on a Next.js site</DocsLink> */}
       <DocsLink href="/docs/srt">Working with Subtitle Files</DocsLink>
