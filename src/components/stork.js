@@ -51,7 +51,10 @@ const Stork = ({
     window.stork.attach(name)
   }, [])
   return (
-    <div className={wrapperClassnames} style={wrapperStyles}>
+    <div
+      className={'stork-wrapper-basic' || wrapperClassnames}
+      style={wrapperStyles}
+    >
       <input
         data-stork={name}
         className="stork-input"
