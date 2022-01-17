@@ -17,7 +17,6 @@ const Demo = ({ loadedIndexes, addLoadedIndex }) => {
         addLoadedIndex={addLoadedIndex}
         name="federalist"
         placeholder="liberty"
-        wrapperStyles={{ fontSize: '1.3em' }}
         playerPianoQueries={[
           'liberty',
           'united states',
@@ -26,7 +25,9 @@ const Demo = ({ loadedIndexes, addLoadedIndex }) => {
           'iPhone',
         ]}
       />
-      <p style={{ fontSize: '0.8em' }}>*Well, just the first twenty.</p>
+      <p style={{ fontSize: '0.8em', marginBottom: 0 }}>
+        *Well, just the first twenty.
+      </p>
     </FullWidth>
   )
 }

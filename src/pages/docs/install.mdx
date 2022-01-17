@@ -29,7 +29,7 @@ If these options don't work for you, please [file a Github issue](https://github
 
 ## The Javascript library
 
-You can either load the Javascript library from the Stork CDN (backed by Cloudfront) or by self-hosting it.
+You can either load the Javascript library from the Stork CDN (backed by AWS Cloudfront) or by self-hosting it.
 
 ### From the Stork CDN:
 
@@ -37,17 +37,10 @@ Include the following script tag on your site, before your closing `</body>` tag
 
 <CodeBlock
   language="html"
-  source={`<script src="https://files.stork-search.net/stork.js"></script>`}
-/>
-
-This will load the most recent Stork module along with the matching WASM binary. It will make a `stork` global variable available in the browser.
-
-To load a specific version of the Stork Javascript library, you can reference a specific version:
-
-<CodeBlock
-  language="html"
   source={`<script src="https://files.stork-search.net/releases/${props.latestRelease.tagName}/stork.js"></script>`}
 />
+
+When a new Stork version comes out, update the version that is pinned in the URL.
 
 ### Self-hosting:
 
@@ -55,10 +48,23 @@ Download `stork.js` and `stork.wasm` from the [latest Github release](https://gi
 
 Visit the [self-hosting guide](/docs/self-hosting) for more information.
 
-## Updates
+## Updates and Semantic Versioning
 
 Stork updates contain bug fixes, indexing enhancements, UI enhancements, and additional configuration options.
 
-The project aims to keep all Stork artifacts evergreen; in other words, an index configuration file you write will generate a valid index in all future versions of Stork, and an index itself will be useable on all future versions of the Stork Javascript library. However, some new features will only work with an updated Stork setup, and some new features will require that you rebuild your search index.
+All files on the `files.stork-search.net` CDN are versioned. If you're loading the JS, CSS, or any command line binaries from the CDN, make sure to update the version number in the URL to stay up-to-date.
+
+The project will maintain semantic versioning adherence in the following areas:
+
+- Any working configuration file will still work with any later version of the Stork indexing binary, up to the next major version
+- Any command line invocation will still give the same output for any later binaries, up to the next major version
+- Any working calls to the Stork JS API (.register(), .initialize(), .search() and others) will still work with any later versions of stork.js, up to the next major version
+- Any index file can be loaded with any later versions of stork.js/stork.wasm, up to the next major version
+
+However, the project cannot guarantee semantic versioning adherence in the following areas (although if Stork is causing major issues with these, please reach out):
+
+- The API of the Rust stork-search library published to crates.io
+- HTML and CSS side effects of Stork themes (although the dynamically generated HTML structure will remain the same, to not break custom themes)
+- Development processes
 
 To track updates, follow the [Stork Releases RSS feed](https://github.com/jameslittle230/stork/releases.atom).

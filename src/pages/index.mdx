@@ -20,9 +20,9 @@ export const getStaticProps = async (context) => {
   addLoadedIndex={props.addLoadedIndex}
 />
 
-Stork is a library for creating beautiful, fast, and accurate full-text search interfaces on the web.
+Stork is a library for creating beautiful, fast, and accurate full-text search interfaces.
 
-It comes in two parts. First, it's a command-line tool that indexes content and creates a search index file that you can upload to a web server. Second, it's a Javascript library that uses that search index file to build an interactive search interface that displays optimal search results immediately to your user, as they type.
+It comes in two parts. First, it's a **command-line tool** that indexes content and creates a search index file that you can upload to a web server. Second, it's a **Javascript library** that uses that search index file to build an interactive search interface that displays optimal search results immediately to your user, as they type.
 
 Stork is built with Rust, and the Javascript library uses WebAssembly behind the scenes. It's easy to get started and is even easier to customize so it fits your needs. It's perfect for Jamstack sites and personal blogs, but can be used wherever you need to bring search to your users.
 
@@ -30,9 +30,11 @@ Stork is built with Rust, and the Javascript library uses WebAssembly behind the
 
 # Quick Start Guide
 
-Getting started with Stork is quick. First, we'll add the HTML to a web page to turn an `<input>` tag into an interactive search bar that searches through a pre-existing search index. Afterwards, we'll customize the search index so you can search through your own content.
+It'll take less than five minutes to build the demo at the top of the page.
 
-You can also <a href="https://codepen.io/littleguy230/pen/oNBJBmK">see this demo on Codepen</a>!
+There are two steps involved. First, we'll add the HTML to a web page to turn an `<input>` tag into an interactive search bar that searches through a pre-existing search index. Afterwards, we'll customize the search index so you can search through your own content.
+
+_You can also <a href="https://codepen.io/littleguy230/pen/oNBJBmK">see this demo on Codepen</a>!_
 
 ## Adding the interface
 
@@ -55,7 +57,7 @@ Each search interface has to have an **input element** and an **output element**
 
 <CodeBlock
   source={indexDotHtml}
-  partial={{ start: 9, end: 12 }}
+  partial={{ start: 12, end: 15 }}
   language="html"
 />
 
@@ -69,7 +71,7 @@ Right before the closing `</body>` tag, include the Stork script and register th
 
 <CodeBlock
   source={indexDotHtml}
-  partial={{ start: 14, end: 20 }}
+  partial={{ start: 17, end: 23 }}
   language="html"
 />
 
@@ -83,7 +85,7 @@ Stork is heavily customizable, and if you wanted, you could write CSS that makes
 
 <CodeBlock
   source={indexDotHtml}
-  partial={{ start: 6, end: 6 }}
+  partial={{ start: 6, end: 9 }}
   language="html"
 />
 
