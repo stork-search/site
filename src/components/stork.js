@@ -2,13 +2,15 @@ import { useEffect } from 'react'
 
 const indexUrls = {
   federalist: 'https://files.stork-search.net/releases/v1.4.0/federalist.st',
-  'federalist-2':
+  'federalist-basic':
     'https://files.stork-search.net/releases/v1.4.0/federalist.st',
-  'federalist-3':
+  'federalist-dark':
     'https://files.stork-search.net/releases/v1.4.0/federalist.st',
-  'federalist-4':
+  'federalist-flat':
     'https://files.stork-search.net/releases/v1.4.0/federalist.st',
-  'federalist-5':
+  'federalist-edible':
+    'https://files.stork-search.net/releases/v1.4.0/federalist.st',
+  'federalist-edible-dark':
     'https://files.stork-search.net/releases/v1.4.0/federalist.st',
   threeblue: 'https://files.stork-search.net/releases/v1.4.0/3b1b.st',
 }
@@ -51,7 +53,7 @@ const Stork = ({
     window.stork.attach(name)
   }, [])
   return (
-    <div className={'stork-wrapper' || wrapperClassnames} style={wrapperStyles}>
+    <div className={wrapperClassnames || 'stork-wrapper'} style={wrapperStyles}>
       <input
         data-stork={name}
         className="stork-input"
