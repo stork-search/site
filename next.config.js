@@ -12,6 +12,7 @@ module.exports = withMDX({
         source: '/sticker',
         destination: 'https://buy.stripe.com/5kAdTm2MF8ejcIU4gg',
         permanent: false,
+        basePath: false,
       },
     ]
   },

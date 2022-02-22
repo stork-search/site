@@ -4,9 +4,9 @@ import { PageTitle, StylisticText } from '../text'
 import Link from 'next/link'
 
 const Logo = () => (
-  <Link href="/sticker">
+  <a href="/sticker">
     <InnerLogo />
-  </Link>
+  </a>
 )
 
 const InnerLogo = styled.div`
