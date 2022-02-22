@@ -1,17 +1,25 @@
 [build]
-  command = "npm run build"
-  publish = "out"
+command = "npm run build"
+publish = "out"
 
 [[plugins]]
-  package = "@netlify/plugin-nextjs"
+package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+from = "/sticker"
+to = "https://buy.stripe.com/5kAdTm2MF8ejcIU4gg"
+force = true
 
 [build.processing.css]
-  bundle = true
-  minify = true
+bundle = true
+minify = true
+
 [build.processing.js]
-  bundle = true
-  minify = true
+bundle = true
+minify = true
+
 [build.processing.html]
-  pretty_urls = true
+pretty_urls = true
+
 [build.processing.images]
-  compress = true
+compress = true
