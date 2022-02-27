@@ -29,27 +29,27 @@ However, loading an external script from a third-party CDN is not always ideal. 
 
 ## Writing Content-Security Policies
 
-Stork relies on the ability to execute WASM in the browser. Most Content-Security-Policy definitions will block WASM execution by default. You might see this manifest as a generic WASM load error:
+Stork relies on the ability to execute WASM in the browser. Most [Content-Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) definitions will block WASM execution by default. You might see this manifest as a generic WASM load error:
 
 ```
 Uncaught (in promise) StorkError: Error while loading WASM at /stork.wasm
-```
 
-or
-
-```
 Wasm code generation disallowed by embedder
 ```
 
-There are not many good options to both have a restrictive CSP and execute WASM in the browser, even if you self-host the WASM file. You'll have to allow WASM execution within your `script-src` directive. There are multiple ways you might want to do so:
+Unfortunately, there are not many good options to both have a restrictive CSP and execute WASM in the browser, even if you self-host the WASM file. In order for Stork to function, you'll have to allow WASM execution within your `script-src` directive. The following CSP is the minimally permissive CSP that will still allow Stork to function in all major browsers:
 
-Google Chrome supports the `'wasm-unsafe-eval'` (or sometimes, `'wasm-eval'`) policies in your `script-src` directive to allow WASM execution. However, Safari and Firefox require that you specify the `unsafe-eval` policy in your `script-src` directive, which makes your restrictive CSP much less restrictive.
+```
+default-src 'self'; script-src 'unsafe-eval';
+```
+
+Google Chrome supports the `'wasm-unsafe-eval'` (or sometimes, `'wasm-eval'`) policies in your `script-src` directive to allow WASM execution. However, as of this writing, Safari and Firefox require that you specify the `unsafe-eval` policy in your `script-src` directive, which makes your restrictive CSP much less restrictive.
 
 <DocsNote>
   Future work might include investigating usage of{' '}
   <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#strict-dynamic">
     the strict-dynamic directive
   </a>
-  , which may allow punching a small hole in a CSP to allow for targeted WASM
-  execution permissions.
+  , which may allow punching a small hole in a CSP to allow for targeted WASM execution
+  permissions for a given Javascript file.
 </DocsNote>
