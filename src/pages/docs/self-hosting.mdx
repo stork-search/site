@@ -14,7 +14,7 @@ However, loading an external script from a third-party CDN is not always ideal. 
 
 2. **Serve those files from your web server.** Upload the Javascript and WASM files to your web server or web host and serve them publicly as you would a stylesheet or image.
 
-    Make sure to serve the WASM file with the `application/wasm` [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types). If you are putting these files behind your CDN, make sure to forward the `Content-Type` header from your file source, through that CDN.
+   Make sure to serve the WASM file with the `application/wasm` [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types). If you are putting these files behind your CDN, make sure to forward the `Content-Type` header from your file source, through that CDN.
 
 3. **Initialize Stork on your webpage with your WASM's URL.** The [Advanced Javascript](/docs/advanced-js) page describes the `stork.initialize()` method, which instructs Stork to load the WASM. Make sure you call this method -- even if you're using the simpler, `stork.register()` API -- before calling any other Stork methods:
 
@@ -26,3 +26,30 @@ However, loading an external script from a third-party CDN is not always ideal. 
   stork.register("yourIndexName", "https://your-url.com/index-file.st")
 </script>`}
 />
+
+## Writing Content-Security Policies
+
+Stork relies on the ability to execute WASM in the browser. Most [Content-Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) definitions will block WASM execution by default. You might see this manifest as a generic WASM load error:
+
+```
+Uncaught (in promise) StorkError: Error while loading WASM at /stork.wasm
+
+Wasm code generation disallowed by embedder
+```
+
+Unfortunately, there are not many good options to both have a restrictive CSP and execute WASM in the browser, even if you self-host the WASM file. In order for Stork to function, you'll have to allow WASM execution within your `script-src` directive. The following CSP is the minimally permissive CSP that will still allow Stork to function in all major browsers:
+
+```
+default-src 'self'; script-src 'unsafe-eval';
+```
+
+Google Chrome supports the `'wasm-unsafe-eval'` (or sometimes, `'wasm-eval'`) policies in your `script-src` directive to allow WASM execution. However, as of this writing, Safari and Firefox require that you specify the `unsafe-eval` policy in your `script-src` directive, which makes your restrictive CSP much less restrictive.
+
+<DocsNote>
+  Future work might include investigating usage of{' '}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#strict-dynamic">
+    the strict-dynamic directive
+  </a>
+  , which may allow punching a small hole in a CSP to allow for targeted WASM execution
+  permissions for a given Javascript file.
+</DocsNote>
