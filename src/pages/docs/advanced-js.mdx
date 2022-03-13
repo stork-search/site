@@ -15,9 +15,9 @@ To begin, you'll still need to load the Stork Javascript library onto your webpa
 
 <CodeBlock
   language="html"
-  source={`<script src="https://files.stork-search.net/releases/v1.4.1-rc.6/stork.js"></script>
+  source={`<script src="https://files.stork-search.net/releases/v1.4.1/stork.js"></script>
 <!-- Or -->
-<script src="https://your-url.com/stork@1.4.1-rc.6.js"></script>`}
+<script src="https://your-url.com/stork@1.4.1.js"></script>`}
 />
 
 There are three "lifecycle" methods when working with the Stork frontend: **initialization**, **index registration**, and, if you choose, **DOM attachment**. These three events must take place in order, but each can be safely retried.
@@ -32,7 +32,7 @@ This will load the WASM from the Stork CDN. If you are [self-hosting Stork](/doc
 
 <CodeBlock
   language="javascript"
-  source={`stork.initialize('https://your-url.com/stork@1.4.1-rc.6.wasm')`}
+  source={`stork.initialize('https://your-url.com/stork@1.4.1.wasm')`}
 />
 
 The `initialize()` method returns a promise that will succeed when initialization succeeds, and will fail when initialization fails.
