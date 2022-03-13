@@ -37,7 +37,7 @@ const Demo = ({ theme, placeOnDark, storkProps, children }) => {
       {children}
       <CodeBlock
         language="html"
-        source={dedent`<link rel="stylesheet" href="https://files.stork-search.net/releases/v1.4.1-rc.5/${theme}.css" />
+        source={dedent`<link rel="stylesheet" href="https://files.stork-search.net/releases/v1.4.1-rc.6/${theme}.css" />
         <div class="stork-wrapper${themeClassNameSuffix}">
           <input data-stork="${registrationName}" class="stork-input" />
           <div data-stork="${registrationName}-output" class="stork-output"></div>
@@ -80,19 +80,19 @@ const Themes = (props) => {
         {/* basic.css is included by _app.js */}
         <link
           rel="stylesheet"
-          href="https://files.stork-search.net/releases/v1.4.1-rc.5/dark.css"
+          href="https://files.stork-search.net/releases/v1.4.1-rc.6/dark.css"
         />
         <link
           rel="stylesheet"
-          href="https://files.stork-search.net/releases/v1.4.1-rc.5/flat.css"
+          href="https://files.stork-search.net/releases/v1.4.1-rc.6/flat.css"
         />
         <link
           rel="stylesheet"
-          href="https://files.stork-search.net/releases/v1.4.1-rc.5/edible.css"
+          href="https://files.stork-search.net/releases/v1.4.1-rc.6/edible.css"
         />
         <link
           rel="stylesheet"
-          href="https://files.stork-search.net/releases/v1.4.1-rc.5/edible-dark.css"
+          href="https://files.stork-search.net/releases/v1.4.1-rc.6/edible-dark.css"
         />
         <style>{`.stork-results { max-height: 10rem; }`}</style>
       </Head>
