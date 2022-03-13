@@ -5,7 +5,7 @@ const indexDotHtml = `<!DOCTYPE html>
     <title>Federalist Search</title>
     <link 
       rel="stylesheet" 
-      href="https://files.stork-search.net/releases/v1.4.0/basic.css" 
+      href="https://files.stork-search.net/releases/v1.4.1-rc.4/basic.css" 
     />
   </head>
   <body>
@@ -14,11 +14,11 @@ const indexDotHtml = `<!DOCTYPE html>
       <div data-stork="federalist-output" class="stork-output"></div>
     </div>
       
-    <script src="https://files.stork-search.net/releases/v1.4.0/stork.js"></script>
+    <script src="https://files.stork-search.net/releases/v1.4.1-rc.4/stork.js"></script>
     <script>
       stork.register(
         'federalist',
-        'https://files.stork-search.net/releases/v1.4.0/federalist.st'
+        'https://files.stork-search.net/releases/v1.4.1-rc.4/federalist.st'
       )
     </script>
   </body>
