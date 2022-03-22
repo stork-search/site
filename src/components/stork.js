@@ -1,18 +1,18 @@
 import { useEffect } from 'react'
 
 const indexUrls = {
-  federalist: 'https://files.stork-search.net/releases/v1.4.1/federalist.st',
+  federalist: 'https://files.stork-search.net/releases/v1.4.2/federalist.st',
   'federalist-basic':
-    'https://files.stork-search.net/releases/v1.4.1/federalist.st',
+    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
   'federalist-dark':
-    'https://files.stork-search.net/releases/v1.4.1/federalist.st',
+    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
   'federalist-flat':
-    'https://files.stork-search.net/releases/v1.4.1/federalist.st',
+    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
   'federalist-edible':
-    'https://files.stork-search.net/releases/v1.4.1/federalist.st',
+    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
   'federalist-edible-dark':
-    'https://files.stork-search.net/releases/v1.4.1/federalist.st',
-  threeblue: 'https://files.stork-search.net/releases/v1.4.1/3b1b.st',
+    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
+  threeblue: 'https://files.stork-search.net/releases/v1.4.2/3b1b.st',
 }
 
 const Stork = ({
