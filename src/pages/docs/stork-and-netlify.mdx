@@ -74,7 +74,7 @@ I'll add the following to a new file called `build.sh` in the root of my project
     title="build.sh"
     language="bash"
     source={`#!/usr/bin/env bash
-wget https://files.stork-search.net/releases/v1.4.1/stork-ubuntu-20-04
+wget https://files.stork-search.net/releases/v1.4.2/stork-ubuntu-20-04
 chmod +x stork-ubuntu-20-04
 ELEVENTY_ENV=production npx @11ty/eleventy --config=eleventy.js
 ./stork-ubuntu-20-04 build --input _site/stork-posts.toml --output _site/stork-posts.st`}
@@ -115,14 +115,14 @@ Now that Netlify is automatically building the search index, I can build a new p
  ---
  
 <h1>Search</h1>
-<link rel="stylesheet" href="https://files.stork-search.net/releases/v1.4.1/basic.css" />
+<link rel="stylesheet" href="https://files.stork-search.net/releases/v1.4.2/basic.css" />
  
 <div class="stork-wrapper">
   <input data-stork="posts" class="stork-input" />
   <div data-stork="posts-output" class="stork-output"></div>
 </div>
  
-<script src="https://files.stork-search.net/releases/v1.4.1/stork.js"></script>
+<script src="https://files.stork-search.net/releases/v1.4.2/stork.js"></script>
  
 <script>stork.register('posts', '/stork-posts.st');</script>`} />
 
