@@ -10,6 +10,11 @@ from = "/sticker"
 to = "https://buy.stripe.com/5kAdTm2MF8ejcIU4gg"
 force = true
 
+[[redirects]]
+from = "/chat"
+to = "https://discord.gg/5qMvggCNY3"
+force = true
+
 [build.processing.css]
 bundle = true
 minify = true

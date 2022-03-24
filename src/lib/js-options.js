@@ -39,7 +39,7 @@ const registrationOptionData = [
     type: 'Function: `(query, result) => void`',
     default: 'undefined',
     description:
-      'A callback function that will be called every time the search query updates and new results are displayed. This function is called with two arguments: the string typed into the search field, and the **Result** object the user selected. If you return a Promise from this function, Stork will await that promise before changing the window location.',
+      'A callback function that will be called every time a user selects a search result from the list. This function is called with two arguments: the string typed into the search field, and the **Result** object the user selected. If you return a Promise from this function, Stork will await that promise before changing the window location.',
   },
   {
     key: 'onResultsHidden',

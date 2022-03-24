@@ -11,11 +11,10 @@ function Footer() {
           Stork is built and shepherded by{' '}
           <a href="https://jameslittle.me">James Little</a>, who's really
           excited that you're checking it out. If you have any questions or
-          comments, feel free to{' '}
-          <a href="https://twitter.com/jameslittle230">tweet at him</a> or{' '}
-          <a href="https://github.com/jameslittle230/stork">
-            open an issue on Github.
+          comments, feel free to <a href="https://github.com/jameslittle230/stork">
+            open an issue on Github
           </a>
+          or <a href="/chat">chat about the project on Discord.</a>
         </p>
         <p>
           This site is open source. Please{' '}
