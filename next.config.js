@@ -14,6 +14,12 @@ module.exports = withMDX({
         permanent: false,
         basePath: false,
       },
+      {
+        source: '/chat',
+        destination: 'https://discord.gg/5qMvggCNY3',
+        permanent: false,
+        basePath: false,
+      },
     ]
   },
 })

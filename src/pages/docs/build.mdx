@@ -42,7 +42,9 @@ After writing a config file, you might want to test how well the search interfac
 To test out your index, run:
 
 ```
-$ stork test --input basic.toml
+$ stork test --config basic.toml
+# or
+$ stork test --index my-index.st
 ```
 
 and open `http://localhost:1612`, the web page served by Stork.
