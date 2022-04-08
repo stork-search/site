@@ -3,6 +3,8 @@ import Footer from '../footer'
 import Header from '../header'
 import DocsNavigation from '../docs/navigation'
 import { brandColor, Column } from '../utils'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 const Grid = styled.div`
   display: grid;
@@ -52,6 +54,9 @@ const CsatWrapper = styled.div`
     display: block;
     margin: 0.1rem 0 0.3rem;
     width: 50%;
+    height: 6em;
+    font-size: 0.85em;
+    border-radius: 4px;
   }
 
   p {
@@ -63,24 +68,150 @@ const Wide = ({ children }) => {
   return <Column width="100%">{children}</Column>
 }
 
-const Csat = () => (
-  <Wide>
-    <CsatWrapper>
-      <p>
-        Was this page helpful? <button>Yes!</button> <button>No</button>
-      </p>
-      <p>Please let me know if you have any feedback:</p>
-      <textarea></textarea>
-      <button>Submit →</button>
-      <p>
-        If you see an issue, please{' '}
-        <a href="https://github.com/jameslittle230/stork-site/issues/new">
-          file a bug!
-        </a>
-      </p>
-    </CsatWrapper>
-  </Wide>
-)
+const Csat = () => {
+  const [wasHelpful, setWasHelpful] = useState(0)
+  const [feedbackText, setFeedbackText] = useState('')
+  const [lastSubmittedFeedbackText, setLastSubmittedFeedbackText] = useState('')
+  const [userMessage, setUserMessage] = useState('')
+
+  const router = useRouter()
+
+  const emoji = (wasHelpful) => {
+    switch (wasHelpful) {
+      case 1:
+        return '👍'
+      case 2:
+        return '👎'
+      default:
+        return '?'
+    }
+  }
+
+  const currentPage = () => {
+    return router.pathname
+  }
+
+  const handleSubmitHelpfulness = (newState) => {
+    setWasHelpful(newState)
+
+    fetch('https://api.jameslittle.me/slack', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        text: `Stork feedback - ${emoji(newState)} - ${currentPage()}`,
+        blocks: [
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `Stork feedback (${emoji(newState)})`,
+            },
+          },
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `Looking at page: \`${currentPage()}\``,
+            },
+          },
+        ],
+      }),
+    })
+  }
+
+  const handleSubmitFeedback = (event) => {
+    if (feedbackText.length === 0) {
+      setUserMessage("You can't submit feedback unless you write something.")
+      return
+    }
+
+    if (feedbackText.length > 1600) {
+      setUserMessage("That's a little long. Mind trimming it down?")
+      return
+    }
+
+    if (feedbackText === lastSubmittedFeedbackText) {
+      setUserMessage("Please don't just spam the submit button.")
+      return
+    }
+
+    setUserMessage('Sending...')
+    fetch('https://api.jameslittle.me/slack', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        text: `Stork feedback - ${emoji(
+          wasHelpful
+        )} - ${currentPage()} - ${feedbackText}`,
+        blocks: [
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `Stork feedback (${emoji(wasHelpful)})`,
+            },
+          },
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `> ${feedbackText}`,
+            },
+          },
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `Looking at page: \`${currentPage()}\``,
+            },
+          },
+        ],
+      }),
+    }).then((res) => {
+      setLastSubmittedFeedbackText(feedbackText)
+      setUserMessage('Feedback sent! Thanks.')
+    })
+  }
+
+  return (
+    <Wide>
+      <CsatWrapper>
+        <p>
+          Was this page helpful?{' '}
+          <button onClick={() => handleSubmitHelpfulness(1)}>Yes!</button>{' '}
+          <button onClick={() => handleSubmitHelpfulness(2)}>No</button>
+        </p>
+        {wasHelpful === 1 ? (
+          <p>Glad this page was helpful! Could you tell me what you liked?</p>
+        ) : null}
+        {wasHelpful === 2 ? (
+          <p>Sorry to hear. Could you tell me what could be better?</p>
+        ) : null}
+
+        {wasHelpful > 0 ? (
+          <>
+            <textarea
+              value={feedbackText}
+              onChange={(e) => setFeedbackText(e.target.value)}
+            ></textarea>
+            <button onClick={handleSubmitFeedback}>Submit →</button>{' '}
+          </>
+        ) : null}
+        {userMessage ? <p>{userMessage}</p> : null}
+        <p>
+          If you see an issue, please{' '}
+          <a href="https://github.com/jameslittle230/stork-site/issues/new">
+            file a bug!
+          </a>
+        </p>
+      </CsatWrapper>
+    </Wide>
+  )
+}
 
 export default (props) => {
   return (
@@ -88,10 +219,10 @@ export default (props) => {
       <Header />
       <Grid>
         <div />
-        <DocsNavigation />
-        <div style={{ padding: '2rem 0 5rem 0', flexGrow: 0 }}>
+        <DocsNavigation className="docs-navigation" />
+        <div style={{ padding: '1.5rem 0 5rem 0', flexGrow: 0 }}>
           <main>{props.children}</main>
-          {/* <Csat /> */}
+          <Csat />
         </div>
       </Grid>
       <Footer />
