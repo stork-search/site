@@ -7,7 +7,7 @@ function Footer() {
     <FullWidth background={brandColor} style={{ margin: 0 }}>
       <Column>
         <p>
-          &copy; 2019–{year}. Stork is built and shepherded by{' '}
+          &copy; 2019–{year}. Stork is maintained by{' '}
           <a href="https://jameslittle.me">James Little</a>, who's really
           excited that you're checking it out.
         </p>
