@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 const brandColor = 'hsla(103, 24%, 77%, 1)'
+const buttonColor = '#104c3c'
+const buttonHoverColor = '#156650'
 const grayBackground = 'hsla(0, 0%, 0%, 0.1)'
 
 const Column = ({ width, alignLeft, children, ...props }) => (
@@ -9,7 +11,7 @@ const Column = ({ width, alignLeft, children, ...props }) => (
     css={`
       ${width ? `--column-width: ${width};` : ''}
       max-width: var(--column-width, 42rem);
-      width: 95%;
+      width: 100%;
       margin: var(--column-margin, 0 auto);
     `}
     {...props}
@@ -17,6 +19,7 @@ const Column = ({ width, alignLeft, children, ...props }) => (
     {children}
   </div>
 )
+
 const VerticalSpacerWrapper = styled.div`
   padding: ${(props) => props.padding || '1em'} 0;
   margin: 2em 0 2em;
@@ -34,6 +37,8 @@ const FullWidth = ({ background, children, padding, ...props }) => (
   <div
     css={`
       background-color: ${background};
+      padding: 0 5%;
+      margin: 0 -2.5%;
     `}
   >
     <VerticalSpacer padding={padding} {...props}>
@@ -42,4 +47,32 @@ const FullWidth = ({ background, children, padding, ...props }) => (
   </div>
 )
 
-export { brandColor, grayBackground, FullWidth, VerticalSpacer, Column }
+const StorkButton = styled.button`
+  background: ${buttonColor};
+  border-radius: 6px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  cursor: pointer;
+  display: inline-block;
+
+  &:hover {
+    background: ${buttonHoverColor};
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+`
+
+export {
+  brandColor,
+  buttonColor,
+  buttonHoverColor,
+  grayBackground,
+  StorkButton,
+  FullWidth,
+  VerticalSpacer,
+  Column,
+}

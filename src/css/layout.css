@@ -190,7 +190,6 @@ template {
 *:before,
 *:after {
   box-sizing: border-box;
-  position: relative;
 }
 
 html {

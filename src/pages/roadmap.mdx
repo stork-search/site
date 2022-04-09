@@ -1,32 +1,38 @@
 export const getStaticProps = async (context) => {
   return {
-    props: { pageTitle: "Roadmap" },
+    props: { pageTitle: 'Roadmap' },
   }
 }
 
 # Roadmap
 
-As with any software project, Stork is not done: there are more features that will get built. In the interest of transparency, I want to describe the project's principles, goals, and next steps so that Stork's users are not solely reliant on the features available today, but can foresee the Stork of the future.
+In the interest of transparency, this page describes the project's principles, goals, and next steps. Ideally, people evaluating Stork should not need to solely rely on the features available today, but can judge Stork's viability based on the broader direction of the project.
 
-Stork is a single-person project that I build in my spare time. Development will likely be slow, but I'm always receptive to communication via Github, Email, or Twitter.
+Stork is a single-person project that I build in my spare time. Development will likely be slow, but I'm always receptive to communication via [Github](https://github.com/jameslittle230/stork), [Twitter](https://twitter.com/jameslittle230), or email.
 
 ## Overarching goals:
 
-- Reduce index size and keep WebAssembly bundle size low
-- Keep search fast (responsive on a per-keystroke basis)
-- Going from installation to useable search interface should be as fast as possible
-- Expose many configuration knobs to tweak, but maintain sensible and opinionated defaults (so people don't have to tweak those knobs)
+- All files loaded onto web pages at runtime should be as small as possible.
+- Don't slow down the experience of using the webpage.
+- Screen-reader users should find Stork as easy-to-use as non-screen-reader users.
+- Keep search fast (responsive on a per-keystroke basis).
+- If not possible, keep the UI fast.
+- It should be fast and easy to set up Stork on your own site, with your own content.
+- Expose many configuration knobs to tweak, but maintain sensible and opinionated defaults (so people don't have to tweak those knobs).
 - Index different types of content (prose, subtitles, even code) and different languages, not just long-form English texts.
-- Maintain compatibility with old config files and indexes
+- Maintain compatibility with old config files and indexes.
 
 ## Large Features
 
 - Support fuzzy search
+- Run queries and index deserialization on a web worker
 - Create and read sharded indexes
 - Display embedded images in the results interface
 - Allow users to attach metadata to documents that can be displayed in the results interface
-- Add more themes
+- Allow end-users to filter search results based on that metadata
+- Publish frontend to NPM and make it installable
 - Build and publish some integrations with other projects, e.g. various static site generators, Wordpress, etc.
+- Add more themes
 
 ## Completed features
 

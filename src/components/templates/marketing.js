@@ -10,7 +10,7 @@ const Marketing = ({ nameplateHidden, ...props }) => {
   return (
     <>
       <Header nameplateHidden={nameplateHidden} />
-      <main style={{ padding: '1.5rem 0 5rem 0' }}>{props.children}</main>
+      <main style={{ padding: '1.5rem 2.5% 5rem 2.5%' }}>{props.children}</main>
       <Footer />
     </>
   )
