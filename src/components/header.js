@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { FullWidth, brandColor } from './utils'
@@ -72,11 +71,15 @@ const Header = ({ nameplateHidden }) => {
           <NameplateLink href="/">Stork Search</NameplateLink>
         )}
         <div>
-          <HeaderLink href="/docs/install">Documentation</HeaderLink>
-          <HeaderLink href="/themes">Themes</HeaderLink>
-          <HeaderLink href="/changelog">Changelog</HeaderLink>
-          <HeaderLink href="/roadmap">Roadmap</HeaderLink>
-          <HeaderLink href="https://ko-fi.com/jameslittle230">Ko-Fi</HeaderLink>
+          <div>
+            <HeaderLink href="/docs/install">Documentation</HeaderLink>
+            <HeaderLink href="/changelog">Changelog</HeaderLink>
+            <HeaderLink href="/roadmap">Roadmap</HeaderLink>
+            <HeaderLink href="https://ko-fi.com/jameslittle230">
+              Donate
+            </HeaderLink>
+            <HeaderLink href="/chat">Discord</HeaderLink>
+          </div>
         </div>
       </Flex>
     </FullWidth>
