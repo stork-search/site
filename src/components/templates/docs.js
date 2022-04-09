@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import Footer from '../footer'
 import Header from '../header'
 import DocsNavigation from '../docs/navigation'
-import { brandColor, Column } from '../utils'
+import { brandColor, StorkButton, Column } from '../utils'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-const Grid = styled.div`
+const DocsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 20rem 50rem 1fr;
   grid-gap: 1rem;
@@ -15,9 +15,8 @@ const Grid = styled.div`
   --column-width: 42rem;
   --column-margin: 0;
 
-  @media (max-width: 68em) {
-    display: flex;
-    flex-direction: column;
+  @media (max-width: 65em) {
+    display: block;
     width: 90%;
     margin: 0 auto;
   }
@@ -30,22 +29,7 @@ const CsatWrapper = styled.div`
   padding: 1rem;
 
   button {
-    background: #104c3c;
-    border-radius: 6px;
-    border: none;
-    color: white;
-    font-weight: bold;
-    padding: 5px 10px;
-    cursor: pointer;
     font-size: 0.8em;
-
-    &:hover {
-      background: #156650;
-    }
-
-    &:active {
-      transform: translateY(2px);
-    }
   }
 
   textarea {
@@ -182,8 +166,12 @@ const Csat = () => {
       <CsatWrapper>
         <p>
           Was this page helpful?{' '}
-          <button onClick={() => handleSubmitHelpfulness(1)}>Yes!</button>{' '}
-          <button onClick={() => handleSubmitHelpfulness(2)}>No</button>
+          <StorkButton onClick={() => handleSubmitHelpfulness(1)}>
+            Yes!
+          </StorkButton>{' '}
+          <StorkButton onClick={() => handleSubmitHelpfulness(2)}>
+            No
+          </StorkButton>
         </p>
         {wasHelpful === 1 ? (
           <p>Glad this page was helpful! Could you tell me what you liked?</p>
@@ -217,14 +205,14 @@ export default (props) => {
   return (
     <>
       <Header />
-      <Grid>
-        <div />
-        <DocsNavigation className="docs-navigation" />
+      <DocsWrapper>
+        <div className="just-filler-to-fill-the-first-grid-column" />
+        <DocsNavigation />
         <div style={{ padding: '1.5rem 0 5rem 0', flexGrow: 0 }}>
           <main>{props.children}</main>
           <Csat />
         </div>
-      </Grid>
+      </DocsWrapper>
       <Footer />
     </>
   )
