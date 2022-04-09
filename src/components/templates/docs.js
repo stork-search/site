@@ -15,7 +15,7 @@ const DocsWrapper = styled.div`
   --column-width: 42rem;
   --column-margin: 0;
 
-  @media (max-width: 65em) {
+  @media (max-width: 73em) {
     display: block;
     width: 90%;
     margin: 0 auto;

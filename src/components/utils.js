@@ -37,7 +37,8 @@ const FullWidth = ({ background, children, padding, ...props }) => (
   <div
     css={`
       background-color: ${background};
-      padding: 0 2.5%;
+      padding: 0 5%;
+      margin: 0 -2.5%;
     `}
   >
     <VerticalSpacer padding={padding} {...props}>

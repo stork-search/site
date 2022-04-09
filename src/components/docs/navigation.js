@@ -2,16 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import {
-  brandColor,
-  buttonColor,
-  buttonHoverColor,
-  StorkButton,
-} from '../utils'
-
-const join = (sep, ...args) => {
-  args.filter((a) => !!a).join(sep)
-}
+import { brandColor, StorkButton } from '../utils'
 
 const TOCWrapper = styled.div`
   border-right: 1px solid gray;
@@ -27,7 +18,7 @@ const TOC = styled.ul`
   font-size: 0.9rem;
   flex-shrink: 0;
 
-  @media (max-width: 65em) {
+  @media (max-width: 73em) {
     position: fixed;
     right: 0;
     top: 0;
@@ -81,7 +72,7 @@ const StyledLinkWrapper = styled.a`
     background: ${brandColor};
   }
 
-  @media (max-width: 65em) {
+  @media (max-width: 73em) {
     padding-right: 7em;
   }
 `
@@ -118,16 +109,12 @@ const MobileNavToggleButton = styled(StorkButton)`
     38px 38px 190px rgba(0, 0, 0, 0.23)
       ${(props) => (props.pressed ? `, inset 0 0 12px rgb(0 0 0 / 45%)` : ``)};
 
-  &:hover {
-    background: ${buttonHoverColor};
-  }
-
   padding: 1em;
   border-radius: 10px;
   color: white;
   font-weight: bold;
 
-  @media (min-width: 65em) {
+  @media (min-width: 73em) {
     display: none;
   }
 `
