@@ -12,7 +12,7 @@ const indexUrls = {
     'https://files.stork-search.net/releases/v1.4.2/federalist.st',
   'federalist-edible-dark':
     'https://files.stork-search.net/releases/v1.4.2/federalist.st',
-  threeblue: 'https://files.stork-search.net/releases/v1.4.2/3b1b.st',
+  threeblue: 'https://files.stork-search.net/3b1b.st',
 }
 
 const Stork = ({
