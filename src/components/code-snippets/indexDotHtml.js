@@ -1,3 +1,5 @@
+import version from '../../lib/stork-cdn-version'
+
 const indexDotHtml = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +7,7 @@ const indexDotHtml = `<!DOCTYPE html>
     <title>Federalist Search</title>
     <link 
       rel="stylesheet" 
-      href="https://files.stork-search.net/releases/v1.4.2/basic.css" 
+      href="https://files.stork-search.net/releases/${version}/basic.css" 
     />
   </head>
   <body>
@@ -14,11 +16,11 @@ const indexDotHtml = `<!DOCTYPE html>
       <div data-stork="federalist-output" class="stork-output"></div>
     </div>
       
-    <script src="https://files.stork-search.net/releases/v1.4.2/stork.js"></script>
+    <script src="https://files.stork-search.net/releases/${version}/stork.js"></script>
     <script>
       stork.register(
         'federalist',
-        'https://files.stork-search.net/releases/v1.4.2/federalist.st'
+        'https://files.stork-search.net/releases/${version}/federalist.st'
       )
     </script>
   </body>

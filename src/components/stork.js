@@ -1,18 +1,15 @@
 import { useEffect } from 'react'
 
+import version from '../lib/stork-cdn-version'
+
 const indexUrls = {
-  federalist: 'https://files.stork-search.net/releases/v1.4.2/federalist.st',
-  'federalist-basic':
-    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
-  'federalist-dark':
-    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
-  'federalist-flat':
-    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
-  'federalist-edible':
-    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
-  'federalist-edible-dark':
-    'https://files.stork-search.net/releases/v1.4.2/federalist.st',
-  threeblue: 'https://files.stork-search.net/3b1b.st',
+  federalist: `https://files.stork-search.net/releases/${version}/federalist.st`,
+  'federalist-basic': `https://files.stork-search.net/releases/${version}/federalist.st`,
+  'federalist-dark': `https://files.stork-search.net/releases/${version}/federalist.st`,
+  'federalist-flat': `https://files.stork-search.net/releases/${version}/federalist.st`,
+  'federalist-edible': `https://files.stork-search.net/releases/${version}/federalist.st`,
+  'federalist-edible-dark': `https://files.stork-search.net/releases/${version}/federalist.st`,
+  threeblue: `https://files.stork-search.net/3b1b.st`,
 }
 
 const Stork = ({

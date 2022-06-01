@@ -7,6 +7,8 @@ import '../css/layout.css'
 import '../css/prism.css'
 import '../css/stork-basic-additions.css'
 
+import version from '../lib/stork-cdn-version'
+
 import React from 'react'
 
 import MarketingTemplate, {
@@ -155,9 +157,11 @@ function MyApp({ Component, pageProps }) {
         ></link>
         <link
           rel="stylesheet"
-          href="https://files.stork-search.net/releases/v1.4.2/basic.css"
+          href={`https://files.stork-search.net/releases/${version}/basic.css`}
         />
-        <script src="https://files.stork-search.net/releases/v1.4.2/stork.js"></script>
+        <script
+          src={`https://files.stork-search.net/releases/${version}/stork.js`}
+        ></script>
         <script>stork.initialize()</script>
       </Head>
       <MDXProvider
