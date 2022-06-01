@@ -1,8 +1,14 @@
 export default [
-  // {
-  //   version: '1.5.0',
-  //   stats: {},
-  // },
+  {
+    version: '1.5.0',
+    stats: {
+      'stork.js': 23.122,
+      'stork.wasm': 350.44,
+      'federalist.st': 1125.456,
+      'build/federalist': 230.0555,
+      'search/federalist/liberty': 1.9234,
+    },
+  },
   {
     version: '1.4.2',
     stats: {
