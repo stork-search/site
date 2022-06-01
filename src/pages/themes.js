@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import Head from 'next/head'
 
+import version from '../lib/stork-cdn-version'
+
 import Stork from '../components/stork'
 import { Column } from '../components/utils'
 import { PageTitle } from '../components/text'
@@ -37,7 +39,7 @@ const Demo = ({ theme, placeOnDark, storkProps, children }) => {
       {children}
       <CodeBlock
         language="html"
-        source={dedent`<link rel="stylesheet" href="https://files.stork-search.net/releases/v1.4.2/${theme}.css" />
+        source={dedent`<link rel="stylesheet" href="https://files.stork-search.net/releases/${version}/${theme}.css" />
         <div class="stork-wrapper${themeClassNameSuffix}">
           <input data-stork="${registrationName}" class="stork-input" />
           <div data-stork="${registrationName}-output" class="stork-output"></div>
@@ -80,19 +82,19 @@ const Themes = (props) => {
         {/* basic.css is included by _app.js */}
         <link
           rel="stylesheet"
-          href="https://files.stork-search.net/releases/v1.4.2/dark.css"
+          href={`https://files.stork-search.net/releases/${version}/dark.css`}
         />
         <link
           rel="stylesheet"
-          href="https://files.stork-search.net/releases/v1.4.2/flat.css"
+          href={`https://files.stork-search.net/releases/${version}/flat.css`}
         />
         <link
           rel="stylesheet"
-          href="https://files.stork-search.net/releases/v1.4.2/edible.css"
+          href={`https://files.stork-search.net/releases/${version}/edible.css`}
         />
         <link
           rel="stylesheet"
-          href="https://files.stork-search.net/releases/v1.4.2/edible-dark.css"
+          href={`https://files.stork-search.net/releases/${version}/edible-dark.css`}
         />
         <style>{`.stork-results { max-height: 10rem; }`}</style>
       </Head>

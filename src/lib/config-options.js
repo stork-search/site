@@ -190,7 +190,7 @@ const outputOptionData = [
     type: 'Integer',
     default: '5',
     description:
-      'Defines the maximum number of excerpts that will be shown for each search result, if multiple excerpts match the search query.',
+      'Defines the maximum number of excerpts that will be shown for each search result, if multiple excerpts match the search query. If set to `0`, the indexer will be able to optimize the search index filesize, making it up to 40% smaller.',
   },
   {
     key: 'displayed_results_count',

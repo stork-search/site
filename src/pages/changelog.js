@@ -14,7 +14,7 @@ import { Column } from '../components/utils'
 export async function getStaticProps() {
   return {
     props: {
-      pageTitle: "Changelog",
+      pageTitle: 'Changelog',
       releases: await releases,
       stats,
     },
@@ -23,6 +23,13 @@ export async function getStaticProps() {
 
 const CenteredTableCell = styled.td`
   text-align: center;
+`
+
+const ReleaseHeading = styled.h2`
+  border-top: 2px solid #bbb;
+  margin-top: 0.75em;
+  padding-top: 0.75em;
+  margin-bottom: 0;
 `
 
 const Changelog = ({ stats, releases }) => {
@@ -43,7 +50,7 @@ const Changelog = ({ stats, releases }) => {
   return (
     <Column>
       <PageTitle>Changelog</PageTitle>
-      <h1>Stats for numbers-type people</h1>
+      <h1>Release Statistics</h1>
       <p>
         All file sizes are pre-compression. All files that come from
         files.stork-search.net are gzipped; you should compress your search
@@ -58,59 +65,63 @@ const Changelog = ({ stats, releases }) => {
               <th>stork.js size</th>
               <th>federalist.st size</th>
               <th>Search duration*</th>
+              <th>Build duration*</th>
             </tr>
           </thead>
           <tbody>
-            {stats.slice(0, expandedStats ? stats.length : 5).map((row) => (
-              <tr key={row.version}>
-                <CenteredTableCell>
-                  <strong>{row.version}</strong>
-                </CenteredTableCell>
-                <CenteredTableCell>{row.wasmSize} KB</CenteredTableCell>
-                <CenteredTableCell>{row.jsSize} KB</CenteredTableCell>
-                <CenteredTableCell>
-                  {(row.indexSize / 1000).toFixed(2)} MB
-                </CenteredTableCell>
-                {row.duration ? (
-                  <CenteredTableCell>{row.duration} sec. **</CenteredTableCell>
-                ) : row.benchmarks ? (
+            {stats
+              .slice(0, expandedStats ? stats.length : 5)
+              .map(({ version, stats }) => (
+                <tr key={version}>
                   <CenteredTableCell>
-                    {row.benchmarks['search::federalist::liberty']} ms.
+                    <strong>{version}</strong>
                   </CenteredTableCell>
-                ) : (
-                  <CenteredTableCell>— **</CenteredTableCell>
-                )}
-              </tr>
-            ))}
+
+                  {[
+                    stats['stork.wasm']
+                      ? `${stats['stork.wasm'].toFixed(2)} KB`
+                      : '-',
+
+                    stats['stork.wasm']
+                      ? `${stats['stork.js'].toFixed(2)} KB`
+                      : '-',
+
+                    stats['federalist.st']
+                      ? `${(stats['federalist.st'] / 1000).toFixed(3)} MB`
+                      : '-',
+
+                    stats['search/federalist/liberty']
+                      ? `${stats['search/federalist/liberty'].toFixed(2)} ms.`
+                      : '-',
+
+                    stats['build/federalist']
+                      ? `${stats['build/federalist'].toFixed(2)} ms.`
+                      : '-',
+                  ].map((string) => (
+                    <CenteredTableCell>{string}</CenteredTableCell>
+                  ))}
+                </tr>
+              ))}
           </tbody>
         </table>
 
-        <p>{showMoreToggle(expandedStats)}</p>
+        {stats.length > 5 && <p>{showMoreToggle(expandedStats)}</p>}
 
-        <p>
-          *Why this benchmark? Reproduceability, mostly. This test benchmarks
-          the speed of the search algorithm by itself, rather than in the WASM
-          runtime, removing any non-Stork-algorithm variance that might occur.
-          On my computer, according to in-browser performance tests, the browser
-          repaints with the search results roughly 10ms after the keypress
-          event.
-        </p>
-        <p>
-          **Benchmarks from 1.0.0 and before were run on my personal computer.
-          Benchmarks from 1.0.4 and afterwards were run on an AWS EC2 server
-          t4.micro instance by running <code>cargo bench</code>; the listed
-          benchmark is for the <code>search::federalist::liberty</code>{' '}
-          benchmark. Benchmarks in between 1.0.0 and 1.0.4 were found to have
-          been invalid.
+        <p style={{ lineHeight: 1 }}>
+          <small>
+            Benchmarks run on an AWS EC2 t4.medium instance running Ubuntu
+            20.04, initiated from the <code>scripts/generate-stats.py</code>{' '}
+            script.
+          </small>
         </p>
       </div>
-      <div>
+      <div className="releases">
         <h1>Releases</h1>
         {releases
           .filter((r) => !!r && !!r.publishedAt)
           .map((release) => (
             <div key={release.url}>
-              <h2 style={{ marginBottom: 0 }}>{release.tagName}</h2>
+              <ReleaseHeading>{release.tagName}</ReleaseHeading>
               <div style={{ marginTop: 0, marginBottom: '0.4em' }}>
                 <StylisticText>
                   <MetaText>

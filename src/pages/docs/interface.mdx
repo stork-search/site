@@ -4,6 +4,8 @@ export const getStaticProps = async (context) => {
   }
 }
 
+import version from '../../lib/stork-cdn-version'
+
 # Building a Search Interface
 
 Once you've [built an index file](/docs/build) and uploaded it somewhere accessible (like a CDN or your web host), you'll need to use the Stork Javascript library to load the index and build an interactive search interface.
@@ -34,7 +36,7 @@ The Stork Javascript library downloads the index file and uses a WebAssembly bin
 
 <CodeBlock
   language="html"
-  source={`<script src="https://files.stork-search.net/releases/v1.4.2/stork.js"></script>`}
+  source={`<script src="https://files.stork-search.net/releases/${version}/stork.js"></script>`}
 />
 
 If you want more control over where you load external scripts from, you can self-host the Stork Javascript and WebAssembly files. For more information, see [Self-hosting Stork](/docs/self-hosting).
@@ -62,7 +64,7 @@ Stork also offers pre-built themes, which it exposes through CSS files on the St
 
 <CodeBlock
   language="html"
-  source={`<link rel="stylesheet" href="https://files.stork-search.net/releases/v1.4.2/basic.css" />`}
+  source={`<link rel="stylesheet" href="https://files.stork-search.net/releases/${version}/basic.css" />`}
 />
 
 You can see the entire selection of themes in the [theme gallery](/themes).

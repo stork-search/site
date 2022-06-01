@@ -225,6 +225,10 @@ h6 {
   line-height: 1.1;
 }
 
+h1 {
+  font-size: 2.5em;
+}
+
 h2 {
   font-size: 2.1em;
 }
@@ -291,4 +295,10 @@ td > pre {
   border-radius: 0.2em;
   margin: 0 0.25em;
   top: -0.08em;
+}
+
+/* see changelog.md */
+.releases h3, .releases h4 {
+  margin-top: 0.75em;
+  margin-bottom: 0;
 }
