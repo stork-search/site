@@ -55,6 +55,12 @@ const registrationOptionData = [
     description:
       'A callback function that will be called when the user clears the search input field, either by pressing the [x] button in the interface or by pressing `esc` twice.',
   },
+  {
+    key: 'transformResultUrl',
+    type: 'Function: `(string) => string`',
+    default: '(url) => url',
+    description: `A function that will transform search result URLs before they get output to the DOM as clickable links in the dropdown menu.`,
+  },
 ]
 
 const resultObject = [
