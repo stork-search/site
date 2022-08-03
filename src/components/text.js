@@ -27,4 +27,5 @@ const MetaText = styled.p`
   margin: 0.25em 0;
 `
 
+export default null
 export { StylisticText, PageTitle, MetaText }

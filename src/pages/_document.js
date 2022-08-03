@@ -34,6 +34,12 @@ export default class MyDocument extends Document {
         <Head />
         <body className="stork-multitheme">
           <Main />
+          <script
+            data-goatcounter="https://stork-search.goatcounter.com/count"
+            data-goatcounter-settings='{"no_onload": true}' // because the useEffect in app.js does this for us
+            async
+            src="//gc.zgo.at/count.js"
+          ></script>
           <NextScript />
         </body>
       </Html>
