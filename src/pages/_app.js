@@ -19,7 +19,6 @@ import { Column } from '../components/utils'
 import { PageTitle } from '../components/text'
 import DocsNote from '../components/docs/docsnote'
 import CodeBlock from '../components/codeblock'
-import { init } from '../matomo.ts'
 
 const DebugWrappedComponent = ({ debug, children, mdxType }) => {
   return (
@@ -89,14 +88,13 @@ function MyApp({ Component, pageProps }) {
     ...pageProps,
   }
 
-  const matomo = {
-    url: 'https://analytics.jameslittle.me',
-    siteId: 5,
-  }
-
   useEffect(() => {
-    init(matomo)
-  })
+    if (typeof window !== 'undefined') {
+      window.goatcounter.count({
+        path: router.asPath,
+      })
+    }
+  }, [router])
 
   return (
     <ThemeAwareWrapper nameplateHidden={pageProps.nameplateHidden}>
