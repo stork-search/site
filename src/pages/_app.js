@@ -89,7 +89,10 @@ function MyApp({ Component, pageProps }) {
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.goatcounter !== 'undefined'
+    ) {
       window.goatcounter.count({
         path: router.asPath,
       })

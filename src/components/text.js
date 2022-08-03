@@ -28,5 +28,4 @@ const MetaText = styled.p`
 `
 
 export default null
-
 export { StylisticText, PageTitle, MetaText }
