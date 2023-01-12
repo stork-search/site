@@ -1,5 +1,9 @@
 export default [
   {
+    version: '1.6.0',
+    stats: {},
+  },
+  {
     version: '1.5.0',
     stats: {
       'stork.js': 23.122,
