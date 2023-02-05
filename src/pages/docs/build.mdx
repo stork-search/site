@@ -1,39 +1,219 @@
-import federalistDotToml from "../../components/code-snippets/federalistDotToml"
-import federalistArrayTablesDotToml from "../../components/code-snippets/federalistArrayTablesDotToml"
+import { SetPreferenceOnClick, When } from "@/components/docs/DocsPreferences";
 
-export const getStaticProps = async (context) => {
-  return {
-    props: { pageTitle: 'Building an Index', template: 'docs' },
-  }
-}
+# Build a Search Index
 
-# Building a Search Index
-
-To build a search interface that searches through your content, you first need to build an **index file** using the `stork` command line program. If you haven't installed the command-line program, visit the [installation instructions](/docs/install) to get started.
-
-The command-line program will take in a **configuration file** and build an **index file**. An index file is a serialized, compressed blob that the Stork Javascript library will download and parse. It usually has the `.st` file extension, and is roughly the size of a JPEG.
+To start using Stork, you need to build a **search index**: a file that Stork can load to respond to search queries. To build a search index, you need to give Stork a **configuration file** that tells Stork all the documents you want indexed, along with some metadata about how to index those documents.
 
 ## The Configuration File
 
-To build a search index, Stork requires that you put together a configuration file that describes which documents it should index. This configuration file is written in [TOML](https://toml.io/).
+A Stork configuration file describes all the documents that should be indexed. This configuration file can either be written in <SetPreferenceOnClick name="config-format" value="json">JSON</SetPreferenceOnClick> or <SetPreferenceOnClick name="config-format" value="toml">TOML</SetPreferenceOnClick>.
 
-The most basic Stork configuration specifies a list of files to be indexed and a filename to which the computed index will be written:
+Stork can read contents from <SetPreferenceOnClick name="document-source" value="web">the web</SetPreferenceOnClick>, from <SetPreferenceOnClick name="document-source" value="filesystem">the filesystem</SetPreferenceOnClick>, or from <SetPreferenceOnClick name="document-source" value="inline">inline within the configuration file</SetPreferenceOnClick>.
 
-<Wide>
-  <CodeBlock title="basic.toml" source={federalistDotToml} />
-</Wide>
+<When prefset={{"config-format": "toml", "document-source": "web"}}>
 
-To build a search index from this configuration file, save the file to disk and pass it into the Stork command-line tool:
+```toml[data-filename="basic.toml"]
+[[input.files]]
+title = "1: General Introduction"
+url = "https://federalist.stork-search.net/1.html"
+
+[[input.files]]
+title = "2-5: Concerning Dangers from Foreign Force and Influence"
+url = "https://federalist.stork-search.net/2-5.html"
+
+[[input.files]]
+title = "6-7: Concerning Dangers from Dissentions Between the States"
+url = "https://federalist.stork-search.net/6-7.html"
 
 ```
-$ stork build --input basic.toml --output federalist.st
+
+</When>
+
+<When prefset={{"config-format": "toml", "document-source": "inline"}}>
+
+```toml[data-filename="basic.toml"]
+[[input.files]]
+title = "1: General Introduction"
+contents = "After an unequivocal experience of the inefficiency of the subsisting federal government, you are called upon to deliberate on a new Constitution for the United States of America..."
+url = "https://federalist.stork-search.net/1.html"
+
+[[input.files]]
+title = "2-5: Concerning Dangers from Foreign Force and Influence"
+contents = "When the people of America reflect that they are now called upon to decide a question, which, in its consequences, must prove one of the most important that ever engaged their attention..."
+url = "https://federalist.stork-search.net/2-5.html"
+
+[[input.files]]
+title = "6-7: Concerning Dangers from Dissentions Between the States"
+contents = "The three last numbers of this paper have been dedicated to an enumeration of the dangers to which we should be exposed, in a state of disunion, from the arms and arts of foreign nations..."
+url = "https://federalist.stork-search.net/6-7.html"
+
 ```
 
-All file paths in the configuration file, including the base directory, are relative to the **working directory when you run the Stork command**. For example, if you're in the `~/project/` directory when you run `$ stork build --input basic.toml --output -`, Stork will look for the files at:
+</When>
+
+<When prefset={{"config-format": "toml", "document-source": "filesystem"}}>
+
+```toml[data-filename="basic.toml"]
+[[input.files]]
+path = "general-introduction.txt"
+title = "1: General Introduction"
+url = "https://federalist.stork-search.net/1.html"
+
+[[input.files]]
+path = "foreign-force.txt"
+title = "2-5: Concerning Dangers from Foreign Force and Influence"
+url = "https://federalist.stork-search.net/2-5.html"
+
+[[input.files]]
+path = "dissentions-between-states.txt"
+title = "6-7: Concerning Dangers from Dissentions Between the States"
+url = "https://federalist.stork-search.net/6-7.html"
+```
+
+</When>
+
+<When prefset={{"config-format": "json", "document-source": "web"}}>
+
+```json[data-filename="basic.json"]
+{
+  "input": {
+    "files": [
+      {
+        "title": "1: General Introduction",
+        "url": "https://federalist.stork-search.net/1.html"
+      },
+      {
+        "title": "2-5: Concerning Dangers from Foreign Force and Influence",
+        "url": "https://federalist.stork-search.net/2-5.html"
+      },
+      {
+        "title": "6-7: Concerning Dangers from Dissentions Between the States",
+        "url": "https://federalist.stork-search.net/6-7.html"
+      }
+    ]
+  }
+}
+```
+
+</When>
+
+<When prefset={{"config-format": "json", "document-source": "inline"}}>
+
+```json[data-filename="basic.json"]
+{
+  "input": {
+    "files": [
+      {
+        "title": "1: General Introduction",
+        "contents": "After an unequivocal experience of the inefficiency of the subsisting federal government, you are called upon to deliberate on a new Constitution for the United States of America..."
+        "url": "https://federalist.stork-search.net/1.html"
+      },
+      {
+        "title": "2-5: Concerning Dangers from Foreign Force and Influence",
+        "contents": "When the people of America reflect that they are now called upon to decide a question, which, in its consequences, must prove one of the most important that ever engaged their attention..."
+        "url": "https://federalist.stork-search.net/2-5.html"
+      },
+      {
+        "title": "6-7: Concerning Dangers from Dissentions Between the States",
+        "contents": "The three last numbers of this paper have been dedicated to an enumeration of the dangers to which we should be exposed, in a state of disunion, from the arms and arts of foreign nations..."
+        "url": "https://federalist.stork-search.net/6-7.html"
+      }
+    ]
+  }
+}
+```
+
+</When>
+
+<When prefset={{"config-format": "json", "document-source": "filesystem"}}>
+
+```json[data-filename="basic.json"]
+{
+  "input": {
+    "files": [
+      {
+        "path": "general-introduction.txt",
+        "title": "1: General Introduction",
+        "url": "https://federalist.stork-search.net/1.html"
+      },
+      {
+        "path": "foreign-force.txt",
+        "title": "2-5: Concerning Dangers from Foreign Force and Influence",
+        "url": "https://federalist.stork-search.net/2-5.html"
+      },
+      {
+        "path": "dissentions-between-states.txt",
+        "title": "6-7: Concerning Dangers from Dissentions Between the States",
+        "url": "https://federalist.stork-search.net/6-7.html"
+      }
+    ]
+  }
+}
+```
+
+</When>
+
+<When name="document-source" value="filesystem">
+
+When Stork is looking for files on the filesystem, you can define a **base directory** to which all the specified paths are relative. This base directory configuration is part of the input config:
+
+<When name="config-format" value="toml" borderless>
+
+```toml
+[input]
+base_directory = "my_files"
+
+[[input.files]]
+path = "general-introduction.txt"
+# ...
+```
+
+</When>
+
+<When name="config-format" value="json" borderless>
+
+```json
+{
+  "input": {
+    "base_directory": "my_files"
+    "files": [
+      {
+        "path": "general-introduction.txt",
+        // ...
+      },
+      // ...
+    ]
+  }
+}
+```
+
+</When>
+
+All file paths in the configuration file, including the base directory, are relative to the **working directory when you run the Stork command**. For example, if you're in the `~/project/` directory when you run `stork build`, Stork will look for the files at:
 
 - `~/project/my_files/federalist-1.txt`
 - `~/project/my_files/federalist-2.txt`
 - `~/project/my_files/federalist-3.txt`
+
+</When>
+
+To build a search index from this configuration file, save the file to disk and pass it into the Stork command-line tool:
+
+<When name="config-format" value="toml">
+
+```sh
+$ stork build --input basic.toml --output federalist.st
+```
+
+</When>
+
+<When name="config-format" value="json">
+
+```sh
+$ stork build --input basic.json --output federalist.st
+```
+
+</When>
 
 ## Testing your index
 
@@ -41,68 +221,64 @@ After writing a config file, you might want to test how well the search interfac
 
 To test out your index, run:
 
-```
-$ stork test --config basic.toml
-# or
+```sh
 $ stork test --index my-index.st
 ```
 
 and open `http://localhost:1612`, the web page served by Stork.
 
-## Advanced file configuration
-
-The Stork File object has [many different parameters](/docs/config-ref) that can change the indexing behavior. However, the syntax shown above in `basic.toml`, described as an [array](https://toml.io/en/v1.0.0#array) of [inline tables](https://toml.io/en/v1.0.0#inline-table), requires that an entire file object is written on one line. If you have a lot of parameters in a file object, this could get unwieldy.
-
-TOML syntax specifies another syntax -- the [array of tables](https://toml.io/en/v1.0.0#array-of-tables) syntax -- that can be used to build up an array of file objects. This syntax might be preferable if your file objects have lots of parameters.
-
-In this syntax, each object in the array is in its own multi-line block, and each parameter (and its value) is on its own line:
-
-<Wide>
-  <CodeBlock title="longer.toml" source={federalistArrayTablesDotToml} />
-</Wide>
-
-You might prefer this syntax for more complicated configurations.
-
 ## File Formats
 
-Stork's north star implementation would let you bring your content in whatever format it exists, and Stork would be able to recognize and index it with no preprocessing needed. Today, Stork can automatically recognize and extract text from four types of files:
+Today, Stork can automatically recognize and extract text from four types of files:
 
 1. Plain text files,
 2. [SRT subtitle files](/docs/srt),
 3. [HTML files](/docs/html), and
 4. Markdown files.
 
-Stork will automatically detect the file format by inspecting its file extension; however, if your file extension is non-standard, you can specify the format of any file:
+Stork will automatically detect the file format by inspecting its file extension; however, if your file extension is non-standard (such as `.mdx` for a Markdown file), you can specify the format of any file in the configuration:
 
-```
+<When name="config-format" value="toml">
+
+```toml
 [[input.files]]
 path = "federalist-1.mdx"
-url = "TheFederalistPapers-1"
-title = "Introduction"
+title = "1: General Introduction"
+url = "https://federalist.stork-search.net/1.html"
 filetype = "Markdown"
 ```
 
-In the configuration file, you can specify that your files have [Front Matter](https://jekyllrb.com/docs/front-matter/). You can configure Stork to omit frontmatter from the files it reads by adding the `frontmatter_handling` key to your configuration:
+</When>
 
-```
-[input]
-base_directory = "my_files"
-url_prefix = "https://www.congress.gov/resources/display/content/The+Federalist+Papers#"
-frontmatter_handling = "Omit"
-files = [...]
+<When name="config-format" value="json">
+
+```json
+{
+  "input": {
+    "files": [
+      {
+        "path": "federalist-1.mdx",
+        "title": "1: General Introduction",
+        "url": "https://federalist.stork-search.net/1.html",
+        "filetype": "Markdown"
+      }
+      // ...
+    ]
+  }
+}
 ```
 
-You can also override frontmatter handling on a file-by-file basis; see the [Configuration File Reference](/docs/config-ref) for details.
+</When>
 
 ## Additional Options
 
 You can visit the [Configuration File Reference](/docs/config-ref) to see the full list of acceptable configuration key-value pairs.
 
-The Stork configuration file lets you control many subtle aspects of how Stork indexes your content and how the search interface behaves, such as:
+The Stork configuration file lets you control many aspects of how Stork indexes your content and how the search interface behaves, such as:
 
-- Configure which language the stemmer uses to stem each word in your corpus
-- Configure how much the words in the title get a search rank boost
-- Configure how the content previews are displayed in the web interface
+- How frontmatter in a document should be parsed
+- Which HTML selectors in an HTML document should be indexed and which should be ignored
+- Which language the stemmer uses to stem each word in your corpus
 
 ## Next steps
 

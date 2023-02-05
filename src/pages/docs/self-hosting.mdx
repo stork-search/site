@@ -1,8 +1,4 @@
-export const getStaticProps = async (context) => {
-  return {
-    props: { pageTitle: 'Self-hosting Stork', template: 'docs' },
-  }
-}
+import { SetPreferenceOnClick, When } from "@/components/docs/DocsPreferences";
 
 # Self-hosting Stork
 
@@ -18,14 +14,12 @@ However, loading an external script from a third-party CDN is not always ideal. 
 
 3. **Initialize Stork on your webpage with your WASM's URL.** The [Advanced Javascript](/docs/advanced-js) page describes the `stork.initialize()` method, which instructs Stork to load the WASM. Make sure you call this method -- even if you're using the simpler, `stork.register()` API -- before calling any other Stork methods:
 
-<CodeBlock
-  language="html"
-  source={`<script src="https://your-url.com/stork.js"></script>
+```html
 <script>
-  stork.initialize("https://your-url.com/stork.wasm")
-  stork.register("yourIndexName", "https://your-url.com/index-file.st")
-</script>`}
-/>
+  stork.initialize("https://your-url.com/stork.wasm");
+  stork.register("yourIndexName", "https://your-url.com/index-file.st");
+</script>
+```
 
 ## Writing Content-Security Policies
 
@@ -45,11 +39,9 @@ default-src 'self'; script-src 'unsafe-eval';
 
 Google Chrome supports the `'wasm-unsafe-eval'` (or sometimes, `'wasm-eval'`) policies in your `script-src` directive to allow WASM execution. However, as of this writing, Safari and Firefox require that you specify the `unsafe-eval` policy in your `script-src` directive, which makes your restrictive CSP much less restrictive.
 
-<DocsNote>
-  Future work might include investigating usage of{' '}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#strict-dynamic">
-    the strict-dynamic directive
-  </a>
-  , which may allow punching a small hole in a CSP to allow for targeted WASM execution
-  permissions for a given Javascript file.
-</DocsNote>
+<Callout>
+  Future work might include investigating usage of [the strict-dynamic
+  directive](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#strict-dynamic),
+  which may allow punching a small hole in a CSP to allow for targeted WASM
+  execution permissions for a given Javascript file.
+</Callout>

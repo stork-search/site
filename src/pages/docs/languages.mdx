@@ -1,18 +1,16 @@
-export const getStaticProps = async (context) => {
-  return {
-    props: { pageTitle: 'Indexing Non-English Content', template: 'docs' },
-  }
-}
+import { SetPreferenceOnClick, When } from "@/components/docs/DocsPreferences";
 
 # Indexing Non-English Content
+
+<Callout>
+  This content hasn't yet been audited for correctness in Stork 2.0 yet.
+</Callout>
 
 Stork is not an inherently English-language-specific tool. If your content is in a different language, Stork can parse and index that content.
 
 The only language-specific functionality of Stork is the **stemmer**: the functionality that lets you search for the word "tributaries" and get results for the word "tributary." In this case, Stork's stemmer will recognize "tributar" as the root of the word "tributary" and use that to improve search results.
 
 This transformation from "tributaries" to "tributar" is English-specific. Stork supports stemming in the following languages:
-
-<div style={{columnCount: 2}}>
 
 - Arabic
 - Danish
@@ -33,19 +31,16 @@ This transformation from "tributaries" to "tributar" is English-specific. Stork 
 - Tamil
 - Turkish
 
-</div>
-
 The stemming language algorithm used for each file is determined by your Stork config file. With no language specified, Stork will default to English stemming. To change the global stemming algorithm, set it in your config file:
 
-<CodeBlock
-  title="basic.toml (partial)"
-  source={`[input]
+```toml
+[input]
 base_directory = "my_files/"
 stemming = "Dutch"
 files = [
-    ...
-]`}
-/>
+    # ...
+]
+```
 
 All the files in your files array will be indexed using the Dutch stemming algorithm.
 
@@ -53,26 +48,24 @@ If you don't want the words in your content to be stemmed (or if it's in an unsu
 
 The stemming configuration can be set on a per-file basis, as well. For example, if you have three files in Spanish but one in French, you can specify that the Spanish stemming algorithm be used generally, but the French algorithm be used for the French language file:
 
-<CodeBlock
-  title="longer.toml (partial)"
-  source={`[input]
+```toml
+[input]
 base_directory = "my_files"
 stemming = "Spanish"
- 
-[[input.files]] 
+
+[[input.files]]
 path = "document-1.txt"
 url = "/document1.html"
 title = "Mi primer documento"
- 
+
 [[input.files]]
 path = "document-2.txt"
 url = "/document2.html"
 title = "Mon document en français"
 stemming_override = "French"
- 
+
 [[input.files]]
 path = "document-3.txt"
 url = "/document3.html"
 title = "Mi segundo documento"
-`}
-/>
+```
