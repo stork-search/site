@@ -4,10 +4,90 @@ import { SetPreferenceOnClick, When } from "@/components/docs/DocsPreferences";
 
 Just getting started? [Learn how to build a search index](/docs/build)
 
-A Stork configuration file is a [TOML file](https://toml.io/en/) that you pass into the Stork build command. This file defines the way your index is created and processed, and also controls some aspects of how your search results are displayed.
+A Stork configuration file is a [TOML file](https://toml.io/en/) or JSON file that you pass into the Stork build command. This file defines the way your index is created and processed, and also controls some aspects of how your search results are displayed.
 
 ```
 $ stork build --input my-config-file.toml --output my-index.st
 ```
 
 The configuration file parser relies heavily on intuitive default values: if a field is inapplicable to your search index (or if you're happy with the listed default value), you can leave the field out of your configuration file.
+
+## Input options
+
+Input options define the list of documents that should be read and indexed, as well as the way those files are processed.
+
+```toml
+[input]
+base_directory = "/my-files"
+url_prefix = "https://example.com/"
+title_boost = "Large"
+stemming = "Spanish"
+frontmatter_config = "Ignore"
+# See below:
+# html_config = ...
+# srt_config = ...
+
+[[input.files]]
+# ...
+```
+
+### HTML Configuration
+
+The HTML configuration object defines how text should be extracted from HTML documents.
+
+```toml
+[input.html_config]
+save_nearest_id = true
+title_selector = "h1.page-title"
+included_selectors = ['article']
+excluded_selectors = ['pre', 'aside']
+```
+
+### SRT Configuration
+
+The SRT configuration object defines how URLs are generated from timestamp information embedded in SRT subtitle files.
+
+```toml
+[input.srt_config]
+timestamp_template_string = "#t={}"
+timestamp_format = "MinutesAndSeconds"
+```
+
+### Files
+
+Each document that is indexed need to be defined in the configuration.
+
+Documents can be read from the filesystem, from the web, or from within the configuration file itself.
+
+Within the file object, you can override some of the global configuration objects that you defined in the `input` section.
+
+```toml
+# This syntax adds a new element to the `input.files` array.
+# https://toml.io/en/v1.0.0#array-of-tables
+[[input.files]]
+title = "1: General Introduction" # Required
+url = "https://federalist.stork-search.net/1.html" # Required
+
+# One of the following 3 is required:
+path = "general-introduction.txt"
+src_url = "https://federalist.stork-search.net/1.html" # Can be omitted if it's the same as `url`
+contents = "After an unequivocal experience of the inefficiency of the subsisting federal government, you are called upon to deliberate on a new Constitution for the United States of America..."
+
+filetype = "Markdown"
+
+# The below options all override the previously-specified input options.
+stemming = "French"
+html_config = {title_selector = "h1.custom-page-title", included_selectors = ['article', 'aside'], excluded_selectors = ['pre']}
+srt_config = {timestamp_format = "NumberOfSeeconds"}
+frontmatter_config = "Omit"
+```
+
+## Output options
+
+Output options define the behavior of the indexer.
+
+```toml
+[output]
+minimum_query_length = 2
+break_on_first_error = true
+```
