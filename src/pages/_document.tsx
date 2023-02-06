@@ -20,6 +20,12 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script
+            data-goatcounter="https://stork-search.goatcounter.com/count"
+            data-goatcounter-settings='{"no_onload": true}' // The useEffect in app.js will perform counts
+            async
+            src="//gc.zgo.at/count.js"
+          ></script>
         </body>
       </Html>
     );

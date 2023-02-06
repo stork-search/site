@@ -12,6 +12,8 @@ import { BaseLayout } from "@/components/layout/BaseLayout";
 import { useRouter } from "next/router";
 import { DocsLayout } from "@/components/layout/DocsLayout";
 import { PreferencesProvider } from "@/components/docs/PreferencesProvider";
+import { HeadContents } from "@/components/HeadContents";
+import { useEffect } from "react";
 
 const StorkProvider = ({ children }: { children: any }) => <>{children}</>;
 const ReleasesProvider = ({ children }: { children: any }) => <>{children}</>;
@@ -31,6 +33,21 @@ const Shell = ({ children }: { children: any }) => {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      // @ts-ignore
+      typeof window.goatcounter !== "undefined"
+    ) {
+      // @ts-ignore
+      window.goatcounter.count({
+        path: router.asPath,
+      });
+    }
+  }, [router]);
+
   const components = {
     wrapper: Wrapper,
     pre: Pre,
@@ -38,20 +55,15 @@ export default function App({ Component, pageProps }: AppProps) {
     Callout,
   };
 
-  console.log(pageProps);
-
-  const getLayout =
-    // @ts-ignore
-    Component.GetLayout || ((page) => <>{page}</>);
-
   return (
     <StorkProvider>
+      <HeadContents pageProps={pageProps} />
       <ReleasesProvider>
         <PreferencesProvider>
           <GlobalStyle />
           <Shell>
             <MDXProvider components={components}>
-              {getLayout(<Component {...pageProps} />)}
+              <Component {...pageProps} />
             </MDXProvider>
           </Shell>
         </PreferencesProvider>
