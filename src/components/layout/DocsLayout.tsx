@@ -2,6 +2,7 @@ import { StorkUI } from "@/stork/StorkProvider";
 import { useContext } from "react";
 import styled from "styled-components";
 import { Button } from "../Button";
+import { Csat } from "../docs/Csat";
 import { DocsNavigation } from "../docs/DocsNavigation";
 import { DocsPreferences } from "../docs/DocsPreferences";
 import { Footer } from "../Footer";
@@ -65,6 +66,7 @@ export const DocsLayout = ({ children }: { children: any }) => {
         <DocsPreferences />
       </RightColumn>
       <CenterColumn>
+        <Csat />
         <Footer />
       </CenterColumn>
     </Grid>

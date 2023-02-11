@@ -3,78 +3,66 @@ import type { AppProps } from "next/app";
 import GlobalStyle from "@/components/globalstyles";
 import { Wrapper } from "@/components/text/Wrapper";
 import { Code, Pre } from "@/components/text/Pre";
+import { Callout } from "@/components/text/Callout";
+import { useRouter } from "next/router";
+import { PreferencesProvider } from "@/components/docs/PreferencesProvider";
+import { HeadContents } from "@/components/HeadContents";
+import { StorkProvider } from "@/stork/StorkProvider";
+import { Layout } from "@/components/layout/Layout";
+import { ReleasesProvider } from "@/releases/Releases";
+
 import "@/styles/prism.css";
 import "@/styles/navigation.css";
 import "@/styles/slider.css";
 
-import { Callout } from "@/components/text/Callout";
-import { BaseLayout } from "@/components/layout/BaseLayout";
-import { useRouter } from "next/router";
-import { DocsLayout } from "@/components/layout/DocsLayout";
-import { PreferencesProvider } from "@/components/docs/PreferencesProvider";
-import { HeadContents } from "@/components/HeadContents";
-import { useEffect } from "react";
-import { StorkProvider } from "@/stork/StorkProvider";
-
-const ReleasesProvider = ({ children }: { children: any }) => <>{children}</>;
-
-const Shell = ({ children }: { children: any }) => {
-  const router = useRouter();
-
-  if (router.pathname.startsWith("/docs")) {
-    return <DocsLayout>{children}</DocsLayout>;
+declare global {
+  interface Window {
+    goatcounter: any;
   }
+}
 
-  if (router.pathname === "/") {
-    return <BaseLayout hideNameplate>{children}</BaseLayout>;
+const MDXComponents = {
+  wrapper: Wrapper,
+  pre: Pre,
+  code: Code,
+  Callout,
+};
+
+const storkIndexes = {
+  federalist: {
+    url: "https://files.stork-search.net/releases/v2.0.0-beta.1/federalist.st",
+  },
+  "3b1b": {
+    url: "https://files.stork-search.net/releases/v2.0.0-beta.1/3b1b.st",
+  },
+};
+
+const tickAnalytics = (path: string) => {
+  if (
+    typeof window !== "undefined" &&
+    typeof window.goatcounter !== "undefined"
+  ) {
+    window.goatcounter.count({ path });
   }
-
-  return <BaseLayout>{children}</BaseLayout>;
 };
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
-  useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      // @ts-ignore
-      typeof window.goatcounter !== "undefined"
-    ) {
-      // @ts-ignore
-      window.goatcounter.count({
-        path: router.asPath,
-      });
-    }
-  }, [router]);
-
-  const components = {
-    wrapper: Wrapper,
-    pre: Pre,
-    code: Code,
-    Callout,
-  };
+  router.events?.on("routeChangeComplete", () => {
+    tickAnalytics(router.asPath);
+  });
 
   return (
-    <StorkProvider
-      indexes={{
-        federalist: {
-          url: "https://files.stork-search.net/releases/v2.0.0-beta.1/federalist.st",
-        },
-        "3b1b": {
-          url: "https://files.stork-search.net/releases/v2.0.0-beta.1/3b1b.st",
-        },
-      }}
-    >
+    <StorkProvider indexes={storkIndexes}>
       <HeadContents pageProps={pageProps} />
-      <ReleasesProvider>
+      <ReleasesProvider releases={pageProps.releases}>
         <PreferencesProvider>
           <GlobalStyle />
-          <Shell>
-            <MDXProvider components={components}>
+          <Layout>
+            <MDXProvider components={MDXComponents}>
               <Component {...pageProps} />
             </MDXProvider>
-          </Shell>
+          </Layout>
         </PreferencesProvider>
       </ReleasesProvider>
     </StorkProvider>

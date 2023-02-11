@@ -1,3 +1,4 @@
+import { useReleases } from "@/releases/Releases";
 import Link from "next/link";
 import styled from "styled-components";
 import { Row } from "../layout/grid";
@@ -41,19 +42,25 @@ const CTA = styled.p`
   margin-top: 0.5em !important;
 `;
 
-export const LatestRelease = () => (
-  <Row background="accent">
-    <Flex>
-      <div>
-        <Title>Latest version:</Title>
-        <ReleaseNumber>2.0.0</ReleaseNumber>
-        <ReleaseDate>Released on 2023-02-04</ReleaseDate>
-      </div>
-      <CTA>
-        <Link href="https://github.com/jameslittle230/stork">
-          View on Github →
-        </Link>
-      </CTA>
-    </Flex>
-  </Row>
-);
+export const LatestRelease = () => {
+  const releases = useReleases();
+  console.log(releases);
+  const { publishedAt, tagName, url } = releases[0];
+
+  return (
+    <Row background="accent">
+      <Flex>
+        <div>
+          <Title>Latest version:</Title>
+          <ReleaseNumber>{tagName}</ReleaseNumber>
+          <ReleaseDate>
+            Released on {new Date(publishedAt).toISOString().split("T")[0]}
+          </ReleaseDate>
+        </div>
+        <CTA>
+          <Link href={url}>View on Github →</Link>
+        </CTA>
+      </Flex>
+    </Row>
+  );
+};

@@ -1,11 +1,18 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  background: linear-gradient(#fff, #d3d3d3);
-  border: 2px solid gray;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
+  background: #104c3c;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
   cursor: pointer;
-  font-size: 1rem;
-  font-family: inherit;
+  display: inline-block;
+  &:hover {
+    background: #156650;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
 `;

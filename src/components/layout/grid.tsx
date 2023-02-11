@@ -142,7 +142,7 @@ export const Container = ({ children }: { children: any }) => (
 );
 
 const colors = {
-  accent: "rgb(190, 210, 182)",
+  accent: "var(--brand-color)",
   offset: "rgba(0, 0, 0, 0.1)",
   alert: "#ede977",
 };

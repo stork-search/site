@@ -36,8 +36,8 @@ export const StorkProvider = ({
   children: any;
 }) => {
   const stork = useRef<any>();
-  const wasmInitializePromise = useRef<Promise<any> | null>(null);
   const downloadedIndexes = useRef<string[]>([]);
+  const wasmInitializePromise = useRef<Promise<any> | null>(null);
 
   if (typeof window !== "undefined" && window.stork && !stork.current) {
     stork.current = window.stork;
@@ -90,7 +90,8 @@ export const StorkUI = ({
       ) {
         stork.current.downloadIndex(
           name,
-          "https://files.stork-search.net/releases/v2.0.0-beta.1/federalist.st"
+          "https://files.stork-search.net/releases/v2.0.0-beta.1/federalist.st",
+          { forceRefreshIndex: true }
         );
         downloadedIndexes.current.push(name);
       }

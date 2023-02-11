@@ -4,6 +4,13 @@ import { LatestRelease } from "@/components/home/LatestRelease";
 import { DocsLink } from "@/components/home/DocsLink";
 import { BaseLayout } from "@/components/layout/BaseLayout";
 import { SetPreferenceOnClick, When } from "@/components/docs/DocsPreferences";
+import { releases } from "@/releases/FetchReleases";
+
+export const getStaticProps = async (context) => {
+  return {
+    props: { releases: await releases },
+  };
+};
 
 <Nameplate />
 
@@ -148,7 +155,7 @@ By default, Stork's output is completely unstyled, letting you customize the out
     <title>Search</title>
     <link
       rel="stylesheet"
-      href="https://files.stork-search.net/releases/latest/basic.css"
+      href="https://files.stork-search.net/releases/latest/stork.css"
     />
   </head>
   <body>
@@ -169,7 +176,7 @@ Finally, we'll load the Stork Javascript library and register our search index:
     <title>Search</title>
     <link
       rel="stylesheet"
-      href="https://files.stork-search.net/releases/latest/basic.css"
+      href="https://files.stork-search.net/releases/latest/stork.css"
     />
   </head>
   <body>
@@ -188,5 +195,3 @@ Finally, we'll load the Stork Javascript library and register our search index:
   </body>
 </html>
 ```
-
-<DocsLink />

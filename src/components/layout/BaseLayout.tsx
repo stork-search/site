@@ -2,15 +2,9 @@ import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { Container } from "./grid";
 
-export const BaseLayout = ({
-  children,
-  hideNameplate = false,
-}: {
-  children: any;
-  hideNameplate?: boolean;
-}) => (
+export const BaseLayout = ({ children }: { children: any }) => (
   <Container>
-    <Header nameplateHidden={hideNameplate} />
+    <Header />
     {children}
     <Footer />
   </Container>

@@ -32,7 +32,7 @@ const StyledLink = styled(Link)`
   &:link.active,
   &:hover.active {
     font-weight: bold;
-    background: rgb(190, 210, 182);
+    background: var(--brand-color);
   }
 
   @media (max-width: 73em) {
