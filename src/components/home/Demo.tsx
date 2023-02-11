@@ -1,3 +1,4 @@
+import { StorkUI } from "@/stork/StorkProvider";
 import Link from "next/link";
 import styled from "styled-components";
 import { Row } from "../layout/grid";
@@ -18,17 +19,6 @@ const Meta = styled.div`
   margin: 0.25em 0;
 `;
 
-const StorkUI = () => (
-  <div className="stork-wrapper">
-    <input
-      data-stork="federalist"
-      className="stork-input"
-      placeholder="federalist"
-    ></input>
-    <div data-stork="federalist-output" className="stork-output"></div>
-  </div>
-);
-
 export const Demo = () => (
   <Row background="offset">
     <Flex>
@@ -39,7 +29,7 @@ export const Demo = () => (
         </Link>
         :
       </Meta>
-      <StorkUI></StorkUI>
+      <StorkUI name="federalist" placeholder="liberty"></StorkUI>
     </Flex>
   </Row>
 );

@@ -1,50 +1,72 @@
+import { StorkUI } from "@/stork/StorkProvider";
+import { useContext } from "react";
+import styled from "styled-components";
+import { Button } from "../Button";
 import { DocsNavigation } from "../docs/DocsNavigation";
 import { DocsPreferences } from "../docs/DocsPreferences";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 import {
   CenterColumn,
-  Container,
   Grid,
   LeftColumn,
+  MobileOnly,
+  MobileSideColumn,
   RightColumn,
   Row,
 } from "./grid";
 
-const StorkUI = () => (
-  <div className="stork-wrapper">
-    <input
-      data-stork="federalist"
-      className="stork-input"
-      placeholder="federalist"
-    ></input>
-    <div data-stork="federalist-output" className="stork-output"></div>
-  </div>
-);
+const Flex = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-const DocsSearch = () => (
-  <Row background="offset">
-    <StorkUI />
-  </Row>
-);
+const Grow = styled.div`
+  flex-grow: 1;
+`;
 
-export const DocsLayout = ({ children }: { children: any }) => (
-  <Grid>
-    <CenterColumn>
-      <Header />
-    </CenterColumn>
-    {/* <CenterColumn>
-      <DocsSearch />
-    </CenterColumn> */}
-    <LeftColumn>
-      <DocsNavigation />
-    </LeftColumn>
-    <CenterColumn>{children}</CenterColumn>
-    <RightColumn>
-      <DocsPreferences />
-    </RightColumn>
-    <CenterColumn>
-      <Footer />
-    </CenterColumn>
-  </Grid>
-);
+const DocsSearch = () => {
+  const { left, right, toggleLeft, toggleRight } = useContext(MobileSideColumn);
+  return (
+    <MobileOnly>
+      <Row background="offset">
+        <Flex>
+          <MobileOnly>
+            <Button onClick={toggleLeft}>Navigation</Button>
+          </MobileOnly>
+          {/* <Grow>
+          <StorkUI name="docs" placeholder="Search the docs..." />
+        </Grow> */}
+          <MobileOnly>
+            <Button onClick={toggleRight}>Preferences</Button>
+          </MobileOnly>
+        </Flex>
+      </Row>
+    </MobileOnly>
+  );
+};
+
+export const DocsLayout = ({ children }: { children: any }) => {
+  return (
+    <Grid>
+      <CenterColumn>
+        <Header />
+      </CenterColumn>
+      <CenterColumn>
+        <DocsSearch />
+      </CenterColumn>
+      <LeftColumn>
+        <DocsNavigation />
+      </LeftColumn>
+      <CenterColumn>{children}</CenterColumn>
+      <RightColumn>
+        <DocsPreferences />
+      </RightColumn>
+      <CenterColumn>
+        <Footer />
+      </CenterColumn>
+    </Grid>
+  );
+};

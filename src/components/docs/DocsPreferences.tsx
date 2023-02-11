@@ -14,12 +14,6 @@ const inconsolata = Inconsolata({ subsets: ["latin"] });
 
 const Preferences = styled.div`
   font-family: ${inconsolata.style.fontFamily};
-  opacity: 0.4;
-  transition: opacity 0.2s ease-in-out;
-
-  &:hover {
-    opacity: 1;
-  }
 `;
 
 const PreferenceSectionTitle = styled.h3``;

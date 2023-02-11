@@ -1,17 +1,12 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Script from "next/script";
 
 export const HeadContents = ({ pageProps }: { pageProps: any }) => {
   const router = useRouter();
   return (
     <>
-      <Script src="https://files.stork-search.net/releases/1.6.0/stork.js" />
       <Head>
-        <title>
-          {pageProps.pageTitle ? `${pageProps.pageTitle} • ` : ""}Stork Search -
-          Impossibly Fast Web Search
-        </title>
+        <title>Stork Search - Impossibly Fast Web Search</title>
 
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -56,13 +51,6 @@ export const HeadContents = ({ pageProps }: { pageProps: any }) => {
           name="twitter:image:alt"
           content="The Stork Logo, a happy bird holding a magnifying glass"
         />
-
-        <link
-          rel="stylesheet"
-          href={`https://files.stork-search.net/releases/1.6.0/basic.css`}
-        />
-
-        <script>stork.initialize()</script>
       </Head>
     </>
   );

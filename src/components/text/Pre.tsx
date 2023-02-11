@@ -33,7 +33,7 @@ export const InnerPre = styled.pre`
   border-radius: 0.5rem;
   padding: 1rem;
   color: white;
-  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
 `;
 

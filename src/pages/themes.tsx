@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import * as RXUISlider from "@radix-ui/react-slider";
+import { StorkUI } from "@/stork/StorkProvider";
+import { useState } from "react";
 
 const Grid = styled.div`
   display: grid;
@@ -28,17 +30,6 @@ const Flex = styled.div`
   justify-content: space-between;
 `;
 
-const StorkUI = () => (
-  <div className="stork-wrapper">
-    <input
-      data-stork="federalist"
-      className="stork-input"
-      placeholder="federalist"
-    ></input>
-    <div data-stork="federalist-output" className="stork-output"></div>
-  </div>
-);
-
 const Input = ({
   cssVariable,
   defaultValue,
@@ -64,13 +55,28 @@ const Input = ({
   );
 };
 
-export default function ThemesPage() {
+const ThemesPage = () => {
+  const [showUI, setShowUI] = useState(true);
+
   return (
     <>
       <h1>Stork Theme Builder</h1>
       <Grid>
+        {JSON.stringify(showUI)}
         <Left>
-          <StorkUI />
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setShowUI(false);
+              console.log(showUI);
+            }}
+          >
+            Reload
+          </button>
+
+          {showUI && (
+            <StorkUI name="federalist" placeholder="liberty" value="liberty" />
+          )}
         </Left>
         <Right>
           <Input cssVariable="--stork-input-width" defaultValue="100%" />
@@ -125,4 +131,6 @@ export default function ThemesPage() {
       </Grid>
     </>
   );
-}
+};
+
+export default ThemesPage;

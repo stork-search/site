@@ -49,28 +49,27 @@ export const Header = ({
 
 const Navigation = () => {
   return (
-    <NavigationMenu.Root className="NavigationMenuRoot">
+    <NavigationMenu.Root className="NavigationMenuRoot" delayDuration={0}>
       <NavigationMenu.List className="NavigationMenuList">
-        <NavigationMenu.Item>
+        <NavigationMenu.Item asChild>
           <NavigationMenu.Link href="/docs/install">Docs</NavigationMenu.Link>
         </NavigationMenu.Item>
-        <NavigationMenu.Item>
+        <NavigationMenu.Item asChild>
           <NavigationMenu.Link href="/themes">Themes</NavigationMenu.Link>
         </NavigationMenu.Item>
-        <NavigationMenu.Item className="NavigationMenuTrigger">
+        <NavigationMenu.Item asChild className="NavigationMenuTrigger">
           <NavigationMenu.Link
             href="https://github.com/jameslittle230/stork"
             className="NavigationMenuTrigger"
           >
             Github
-            <ExternalLinkIcon aria-hidden />
           </NavigationMenu.Link>
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Trigger className="NavigationMenuTrigger">
-            Ecosystem <CaretDownIcon className="CaretDown" aria-hidden />
+            Ecosystem
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="NavigationMenuContent">
+          <NavigationMenu.Content asChild className="NavigationMenuContent">
             <ul className="List one">
               <a href="/changelog">Releases</a>
               {/* <a href="#">@stork/indexer (NPM)</a>
@@ -81,9 +80,9 @@ const Navigation = () => {
 
         <NavigationMenu.Item>
           <NavigationMenu.Trigger className="NavigationMenuTrigger">
-            Community <CaretDownIcon className="CaretDown" aria-hidden />
+            Community
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="NavigationMenuContent">
+          <NavigationMenu.Content className="NavigationMenuContent" asChild>
             <ul className="List two">
               <a href="https://ko-fi.com/jameslittle230">Donate</a>
               <a href="https://github.com/jameslittle230/stork">Contribute</a>
@@ -92,7 +91,6 @@ const Navigation = () => {
             </ul>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
-
         {/* <NavigationMenu.Indicator className="NavigationMenuIndicator">
           <div className="Arrow" />
         </NavigationMenu.Indicator> */}

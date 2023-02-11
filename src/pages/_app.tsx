@@ -14,8 +14,8 @@ import { DocsLayout } from "@/components/layout/DocsLayout";
 import { PreferencesProvider } from "@/components/docs/PreferencesProvider";
 import { HeadContents } from "@/components/HeadContents";
 import { useEffect } from "react";
+import { StorkProvider } from "@/stork/StorkProvider";
 
-const StorkProvider = ({ children }: { children: any }) => <>{children}</>;
 const ReleasesProvider = ({ children }: { children: any }) => <>{children}</>;
 
 const Shell = ({ children }: { children: any }) => {
@@ -56,7 +56,16 @@ export default function App({ Component, pageProps }: AppProps) {
   };
 
   return (
-    <StorkProvider>
+    <StorkProvider
+      indexes={{
+        federalist: {
+          url: "https://files.stork-search.net/releases/v2.0.0-beta.1/federalist.st",
+        },
+        "3b1b": {
+          url: "https://files.stork-search.net/releases/v2.0.0-beta.1/3b1b.st",
+        },
+      }}
+    >
       <HeadContents pageProps={pageProps} />
       <ReleasesProvider>
         <PreferencesProvider>
