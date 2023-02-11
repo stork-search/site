@@ -44,7 +44,6 @@ const CTA = styled.p`
 
 export const LatestRelease = () => {
   const releases = useReleases();
-  console.log(releases);
   const { publishedAt, tagName, url } = releases[0];
 
   return (

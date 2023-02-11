@@ -71,7 +71,7 @@ const Navigation = () => {
           </NavigationMenu.Trigger>
           <NavigationMenu.Content asChild className="NavigationMenuContent">
             <ul className="List one">
-              <a href="/changelog">Releases</a>
+              <Link href="/changelog">Releases</Link>
               {/* <a href="#">@stork/indexer (NPM)</a>
               <a href="#">@stork/react (NPM)</a> */}
             </ul>
@@ -84,10 +84,12 @@ const Navigation = () => {
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent" asChild>
             <ul className="List two">
-              <a href="https://ko-fi.com/jameslittle230">Donate</a>
-              <a href="https://github.com/jameslittle230/stork">Contribute</a>
-              <a href="/chat">Discord</a>
-              <a href="/sticker">Buy a sticker</a>
+              <Link href="https://ko-fi.com/jameslittle230">Donate</Link>
+              <Link href="https://github.com/jameslittle230/stork">
+                Contribute
+              </Link>
+              <Link href="/chat">Discord</Link>
+              <Link href="/sticker">Buy a sticker</Link>
             </ul>
           </NavigationMenu.Content>
         </NavigationMenu.Item>

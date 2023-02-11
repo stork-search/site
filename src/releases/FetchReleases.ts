@@ -29,4 +29,4 @@ export const releases = makeRequest(releasesQuery)
   .then((data) => data.data.repository.releases.nodes)
   .then((data) => data.filter((d: any) => !d.isDraft))
   .then((data) => data.filter((d: any) => !d.isPrerelease))
-  .catch((e) => console.log(e));
+  .catch((e) => console.error(e));
