@@ -1,4 +1,0 @@
-{
-  "presets": ["next/babel"],
-  "plugins": ["./src/babel-plugin-nextjs-mdx-patch", ["styled-components", { "ssr": true }]]
-}

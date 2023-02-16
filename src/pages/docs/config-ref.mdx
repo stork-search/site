@@ -1,35 +1,10 @@
-import Link from 'next/link'
-import { PageTitle } from '../../components/text'
-import CodeBlock from '../../components/codeblock'
-import { Column } from '../../components/utils'
-import ApiReferenceTable from '../../components/docs/api-reference'
-import {
-  inputOptionData,
-  fileOptionData,
-  srtOptionData,
-  outputOptionData,
-} from '../../lib/config-options'
-
-export const getStaticProps = async (context) => {
-  return {
-    props: {
-      pageTitle: 'Index Configuration Reference',
-      template: 'docs',
-      data: {
-        inputOptionData,
-        fileOptionData,
-        srtOptionData,
-        outputOptionData,
-      },
-    },
-  }
-}
+import { SetPreferenceOnClick, When } from "@/components/docs/DocsPreferences";
 
 # Stork Configuration File Reference
 
 Just getting started? [Learn how to build a search index](/docs/build)
 
-A Stork configuration file is a [TOML file](https://toml.io/en/) that you pass into the Stork build command. This file defines the way your index is created and processed, and also controls some aspects of how your search results are displayed.
+A Stork configuration file is a [TOML file](https://toml.io/en/) or JSON file that you pass into the Stork build command. This file defines the way your index is created and processed, and also controls some aspects of how your search results are displayed.
 
 ```
 $ stork build --input my-config-file.toml --output my-index.st
@@ -37,93 +12,82 @@ $ stork build --input my-config-file.toml --output my-index.st
 
 The configuration file parser relies heavily on intuitive default values: if a field is inapplicable to your search index (or if you're happy with the listed default value), you can leave the field out of your configuration file.
 
-Stork configuration files are guaranteed to be parseable in all future versions of Stork, though the Stork build phase will warn you if you're using deprecated fields in your configuration file. Fields may be deprecated in point releases of Stork, at which point they will also be undocumented. Setting deprecated fields will have no effect on your index.
+## Input options
 
-## Input Options
+Input options define the list of documents that should be read and indexed, as well as the way those files are processed.
 
-Input options define how your files will be read and processed. Input options are key/value pairs under the `[input]` [TOML Table](https://toml.io/en/v1.0.0#table):
+```toml
+[input]
+base_directory = "/my-files"
+url_prefix = "https://example.com/"
+title_boost = "Large"
+stemming = "Spanish"
+frontmatter_config = "Ignore"
+# See below:
+# html_config = ...
+# srt_config = ...
 
-<CodeBlock
-  title="stork-config.toml"
-  source={`[input]
-key1 = "value"
-key2 = 123`}
-/>
-
-<ApiReferenceTable options={props.data.inputOptionData} />
-
-## The File object
-
-Each file object represents a document that will be indexed by Stork, and an entry that will be displayed when your users search in a search box.
-
-Files can either be specified using an "Array of Objects" syntax, which is more compact...
-
-<CodeBlock
-  title="array-of-objects.toml"
-  source={`[input]
-${''}
-base_directory = "./files"
-files = [
-  {title = "Introduction", url = "https://google.com", path = "federalist-1.txt"}
-  {title = "Concerning Dangers from Foreign Force and Influence", url = "https://yahoo.com", path = "federalist-2.txt"}
-]`}
-/>
-
-... or using the [TOML "Array of Tables"](https://toml.io/en/v1.0.0#array-of-tables) syntax:
-
-<CodeBlock
-  title="array-of-tables.toml"
-  source={`[input]
-base_directory = "./files"
- 
-[[input.files]] 
-path = "federalist-1.txt"
-url = "https://google.com"
-title = "Introduction"
- 
 [[input.files]]
-path = "federalist-2.txt"
-url = "https://yahoo.com"
-title = "Concerning Dangers from Foreign Force and Influence"`}
-/>
+# ...
+```
 
-The two are equivalent.
+### HTML Configuration
 
-<ApiReferenceTable options={props.data.fileOptionData} />
+The HTML configuration object defines how text should be extracted from HTML documents.
 
-## The SRT Configuration object
+```toml
+[input.html_config]
+save_nearest_id = true
+title_selector = "h1.page-title"
+included_selectors = ['article']
+excluded_selectors = ['pre', 'aside']
+```
 
-Read more about configuring SRT behavior on the [SRT documentation page](/docs/srt).
+### SRT Configuration
 
-You can add SRT configuration options by adding the key-value pairs under a `[input.srt_config]` table:
+The SRT configuration object defines how URLs are generated from timestamp information embedded in SRT subtitle files.
 
-<CodeBlock
-  title="srt-config.toml"
-  source={`[input]
-url_prefix = "https://vimeo.com/"
-  
+```toml
 [input.srt_config]
 timestamp_template_string = "#t={}"
 timestamp_format = "MinutesAndSeconds"
-  
+```
+
+### Files
+
+Each document that is indexed need to be defined in the configuration.
+
+Documents can be read from the filesystem, from the web, or from within the configuration file itself.
+
+Within the file object, you can override some of the global configuration objects that you defined in the `input` section.
+
+```toml
+# This syntax adds a new element to the `input.files` array.
+# https://toml.io/en/v1.0.0#array-of-tables
 [[input.files]]
-...`}
-/>
+title = "1: General Introduction" # Required
+url = "https://federalist.stork-search.net/1.html" # Required
 
-<ApiReferenceTable options={props.data.srtOptionData} />
+# One of the following 3 is required:
+path = "general-introduction.txt"
+src_url = "https://federalist.stork-search.net/1.html" # Can be omitted if it's the same as `url`
+contents = "After an unequivocal experience of the inefficiency of the subsisting federal government, you are called upon to deliberate on a new Constitution for the United States of America..."
 
-## Output Configuration
+filetype = "Markdown"
 
-The optional output section of a Stork configuration file defines how the config file is written to disk and how the search results should be displayed when using the Javascript API.
+# The below options all override the previously-specified input options.
+stemming = "French"
+html_config = {title_selector = "h1.custom-page-title", included_selectors = ['article', 'aside'], excluded_selectors = ['pre']}
+srt_config = {timestamp_format = "NumberOfSeeconds"}
+frontmatter_config = "Omit"
+```
 
-<CodeBlock
-  title="output.toml"
-  source={`[input]
-...
- 
+## Output options
+
+Output options define the behavior of the indexer.
+
+```toml
 [output]
-excerpts_per_result = 2
-displayed_results_count = 5`}
-/>
-
-<ApiReferenceTable options={props.data.outputOptionData} />
+minimum_query_length = 2
+break_on_first_error = true
+```

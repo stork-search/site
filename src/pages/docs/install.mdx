@@ -1,64 +1,60 @@
-import { releases } from '../../lib/github-api-client'
-import InstallTabs from '../../components/docs/install-tabs.js'
+import { SetPreferenceOnClick, When } from "@/components/docs/DocsPreferences";
 
-export const getStaticProps = async (context) => {
-  return {
-    props: {
-      pageTitle: 'Installation',
-      template: 'docs',
-      latestRelease: (await releases)[0],
-    },
-  }
-}
+# Install Stork
 
-# Installing Stork
+<When name="installation-method" value="node">
 
-There are two parts to Stork: the command line tool, and the Javascript module. Here, you'll learn how to install both.
+The easiest way to install Stork is through the `@stork/indexer` NPM module.
 
-## The command line tool
+Run the following to download the pre-built binary within a module:
 
-<InstallTabs latestRelease={props.latestRelease} />
+```sh
+$ yarn add -D @stork/indexer
+```
 
-If these options don't work for you, please [file a Github issue](https://github.com/jameslittle230/stork/issues/new) describing the installation process you hope to see!
+Then, use the module in your project:
 
-## The Javascript library
+```tsx
+import stork from "@stork/indexer";
 
-You can either load the Javascript library from the Stork CDN (backed by AWS Cloudfront) or by self-hosting it.
+stork.buildIndex({...});
+```
 
-### From the Stork CDN:
+</When>
 
-Include the following script tag on your site, before your closing `</body>` tag:
+## Pre-built binaries
 
-<CodeBlock
-  language="html"
-  source={`<script src="https://files.stork-search.net/releases/${props.latestRelease.tagName}/stork.js"></script>`}
-/>
+You can download a pre-built binary to run Stork from the command line. You can either download the binary from the appropriate Github Release or from the Stork CDN.
 
-When a new Stork version comes out, update the version that is pinned in the URL.
+Pre-built Stork binaries are available for the following platforms:
 
-### Self-hosting:
+- macOS (x64, macOS 11)
+- macOS (x64, macOS 12)
+- macOS (Apple Silicon)
+- Linux (Ubuntu 20.04)
+- Linux (Ubuntu 22.04)
+- Amazon Linux
 
-Download `stork.js` and `stork.wasm` from the [latest Github release](https://github.com/jameslittle230/stork/releases) and publish those files on your web server. Be sure to serve `stork.wasm` with the [correct MIME type](/docs/self-hosting), and be sure to call `stork.initialize()` with the URL where you're hosting the `stork.wasm`.
+macOS users can also use Homebrew to install Stork:
 
-Visit the [self-hosting guide](/docs/self-hosting) for more information.
+```sh
+$ brew install stork-search/stork-tap/stork
+```
 
-## Updates and Semantic Versioning
+## Build from source
 
-Stork updates contain bug fixes, indexing enhancements, UI enhancements, and additional configuration options.
+If you have a current Rust toolchain installed, you can use Cargo to build Stork from source.
 
-All files on the `files.stork-search.net` CDN are versioned. If you're loading the JS, CSS, or any command line binaries from the CDN, make sure to update the version number in the URL to stay up-to-date.
+```sh
+$ cargo install stork-search
+```
 
-The project will maintain semantic versioning adherence in the following areas:
+<Callout>
+  If these options don't work for you, please [file a Github issue]() describing
+  the installation process you hope to see.
+</Callout>
 
-- Any working configuration file will still work with any later version of the Stork indexing binary, up to the next major version
-- Any command line invocation will still give the same output for any later binaries, up to the next major version
-- Any working calls to the Stork JS API (.register(), .initialize(), .search() and others) will still work with any later versions of stork.js, up to the next major version
-- Any index file can be loaded with any later versions of stork.js/stork.wasm, up to the next major version
+## Next Steps
 
-However, the project cannot guarantee semantic versioning adherence in the following areas (although if Stork is causing major issues with these, please reach out):
-
-- The API of the Rust stork-search library published to crates.io
-- HTML and CSS side effects of Stork themes (although the dynamically generated HTML structure will remain the same, to not break custom themes)
-- Development processes
-
-To track updates, follow the [Stork Releases RSS feed](https://github.com/jameslittle230/stork/releases.atom).
+- Install the Javascript library
+- Build a search index

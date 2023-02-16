@@ -1,0 +1,32 @@
+import axios from "axios";
+
+const githubApiEndpoint = "https://api.github.com/graphql";
+const token = process.env.GITHUB_TOKEN;
+const headers = { Authorization: `bearer ${token}` };
+
+const releasesQuery = `
+{
+  repository(name: "stork", owner: "jameslittle230") {
+    releases(first: 20, orderBy: { field: CREATED_AT, direction: DESC }) {
+      nodes {
+        descriptionHTML
+        isDraft
+        isPrerelease
+        publishedAt
+        tagName
+        url
+      }
+    }
+  }
+}
+`;
+
+const makeRequest = (query: string) =>
+  axios.post(githubApiEndpoint, { query }, { headers });
+
+export const releases = makeRequest(releasesQuery)
+  .then((resp) => resp.data)
+  .then((data) => data.data.repository.releases.nodes)
+  .then((data) => data.filter((d: any) => !d.isDraft))
+  .then((data) => data.filter((d: any) => !d.isPrerelease))
+  .catch((e) => console.error(e));

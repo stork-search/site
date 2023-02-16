@@ -1,5 +1,5 @@
 [build]
-command = "npm run build"
+command = "next build && next export"
 publish = "out"
 
 [[plugins]]
@@ -14,17 +14,3 @@ force = true
 from = "/chat"
 to = "https://discord.gg/5qMvggCNY3"
 force = true
-
-[build.processing.css]
-bundle = true
-minify = true
-
-[build.processing.js]
-bundle = true
-minify = true
-
-[build.processing.html]
-pretty_urls = true
-
-[build.processing.images]
-compress = true
