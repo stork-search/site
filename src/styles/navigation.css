@@ -1,36 +1,69 @@
+/* @import "@radix-ui/colors/blackA.css";
+@import "@radix-ui/colors/indigo.css";
+@import "@radix-ui/colors/mauve.css";
+@import "@radix-ui/colors/purple.css";
+@import "@radix-ui/colors/violet.css"; */
+
+/* reset */
+.NavigationMenuRoot button,
+.NavigationMenuRoot p {
+  margin: 0;
+  border: 0;
+  background: none;
+}
+
 .NavigationMenuRoot {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   z-index: 1;
+  flex-shrink: 0;
+}
+
+.NavigationMenuRoot > * {
+  position: static;
 }
 
 .NavigationMenuList {
   display: flex;
-  gap: 1em;
   justify-content: center;
-  align-items: center;
   list-style: none;
   margin: 0;
-  padding: 0;
 }
 
-.NavigationMenuTrigger {
+.NavigationMenuTrigger,
+.NavigationMenuLink {
+  padding: 8px 12px;
+  margin: 0 -2px;
   outline: none;
   user-select: none;
-  background: none;
-  font: inherit;
-  border: none;
-  padding: 0;
   font-weight: bold;
-  color: hsla(199, 91%, 31%, 1);
+  line-height: 1;
+  border-radius: 4px;
+  font-size: 15px;
+  color: var(--link-color);
+}
+.NavigationMenuTrigger:focus,
+.NavigationMenuLink:focus {
+  box-shadow: 0 0 0 2px hsl(206 22% 7% / 20%);
+}
+.NavigationMenuTrigger:hover,
+.NavigationMenuLink:hover {
+  background-color: hsl(0 0% 100% / 0.2);
 }
 
 .NavigationMenuTrigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1px;
+  gap: 2px;
+}
+
+.NavigationMenuLink {
+  display: block;
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 1;
 }
 
 .NavigationMenuContent {
@@ -41,7 +74,6 @@
   animation-duration: 250ms;
   animation-timing-function: ease;
 }
-
 .NavigationMenuContent[data-motion="from-start"] {
   animation-name: enterFromLeft;
 }
@@ -61,6 +93,7 @@
 }
 
 .NavigationMenuIndicator {
+  position: absolute;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -103,28 +136,65 @@
 }
 
 .List {
-  padding: 10px;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  width: 250px;
+  padding: 14px;
+  margin: 0;
+  gap: 5px;
+  list-style-type: none;
 }
 
-.List a {
-  width: 100%;
-  padding: 0.5em;
+.List.tight {
+  gap: 0;
+}
+@media only screen and (min-width: 600px) {
+  .List.one {
+    width: 350px;
+  }
+  .List.two {
+    width: 250px;
+  }
+}
+
+.ListItemLink,
+.ListItemLink:visited {
+  display: block;
+  outline: none;
+  text-decoration: none;
+  user-select: none;
+  padding: 8px 12px;
   border-radius: 6px;
+  font-size: 15px;
   line-height: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--link-color) !important;
+}
+.ListItemLink:focus {
+  box-shadow: 0 0 0 2px hsl(0 0% 0% / 0.1);
+}
+.ListItemLink:hover {
+  background-color: hsl(0 0% 0% / 0.05);
 }
 
-.List a:hover {
-  background: #eee;
+.ListItemHeading {
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.ListItemText {
+  line-height: 1.4;
+  font-weight: initial;
+  font-size: 0.9em;
+  color: var(--link-color);
 }
 
 .ViewportPosition {
   position: absolute;
   display: flex;
-  justify-content: right;
+  justify-content: center;
+  transform: translateX(calc(var(--content-width) / 6));
   width: 100%;
   top: 100%;
   left: 0;
@@ -133,6 +203,7 @@
 
 .CaretDown {
   position: relative;
+  color: var(--link-color);
   top: 1px;
   transition: transform 250ms ease;
 }
@@ -141,7 +212,7 @@
 }
 
 .Arrow {
-  position: relative;
+  position: absolute;
   top: 70%;
   background-color: white;
   width: 10px;

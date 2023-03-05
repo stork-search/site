@@ -7,6 +7,8 @@ declare global {
 
 import { createContext, useEffect, useRef, useContext } from "react";
 
+const STORK_VERSION = "2.0.0-beta.2";
+
 export type IndexRegistration = {
   name: string;
   url: string;
@@ -48,7 +50,7 @@ export const StorkProvider = ({
     if (stork.current) {
       wasmInitializePromise.current = stork.current.initialize(
         wasmUrl ||
-          "https://files.stork-search.net/releases/v2.0.0-beta.1/stork.wasm"
+          `https://files.stork-search.net/releases/${STORK_VERSION}/stork.wasm`
       );
     }
   });
@@ -64,7 +66,9 @@ export const StorkProvider = ({
     >
       {children}
       {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-      <script src="https://files.stork-search.net/releases/v2.0.0-beta.1/stork.js"></script>
+      <script
+        src={`https://files.stork-search.net/releases/${STORK_VERSION}/stork.js`}
+      ></script>
     </StorkContext.Provider>
   );
 };
@@ -90,7 +94,7 @@ export const StorkUI = ({
       ) {
         stork.current.downloadIndex(
           name,
-          "https://files.stork-search.net/releases/v2.0.0-beta.1/federalist.st",
+          `https://files.stork-search.net/releases/${STORK_VERSION}/federalist.st`,
           { forceRefreshIndex: true }
         );
         downloadedIndexes.current.push(name);

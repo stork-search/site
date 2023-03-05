@@ -4,18 +4,18 @@ import { SetPreferenceOnClick, When } from "@/components/docs/DocsPreferences";
 
 <When name="installation-method" value="node">
 
-The easiest way to install Stork is through the `@stork/indexer` NPM module.
+The easiest way to install Stork is through the `@stork-search/index` NPM module.
 
 Run the following to download the pre-built binary within a module:
 
 ```sh
-$ yarn add -D @stork/indexer
+$ yarn add -D @stork-search/index
 ```
 
 Then, use the module in your project:
 
 ```tsx
-import stork from "@stork/indexer";
+import { stork } from "@stork-search/index";
 
 stork.buildIndex({...});
 ```

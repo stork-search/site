@@ -152,8 +152,8 @@ export const Row = styled.div<{ background?: keyof typeof colors }>`
     background ? colors[background] : "transparent"};
   margin-left: calc(-50vw + var(--content-width) / 2);
   margin-right: calc(-50vw + var(--content-width) / 2);
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
+  padding-top: var(--row-padding);
+  padding-bottom: var(--row-padding);
   padding-left: calc(50vw - var(--content-width) / 2);
   padding-right: calc(50vw - var(--content-width) / 2);
 

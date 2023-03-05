@@ -2,10 +2,6 @@ import { SetPreferenceOnClick, When } from "@/components/docs/DocsPreferences";
 
 # Indexing HTML & Markdown Files
 
-<Callout>
-  This content hasn't yet been audited for correctness in Stork 2.0 yet.
-</Callout>
-
 Stork will parse HTML files using a browser-grade HTML parser, extracting content from tags, scripts, and styles.
 
 However, your HTML likely has more content than you actually want indexed. The very page you're looking at has a header and a footer, and if Stork indexed the text in the header and footer as part of each document, you would be able to search for "questions or comments" and get _every page_ in your results, since it's in the footer of every page.
