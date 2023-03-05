@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    --stork-background-color: white;
     --brand-color: hsl(103 24% 77%);
     --row-padding: 1.25em;
     --link-color: hsl(199 91% 31%);

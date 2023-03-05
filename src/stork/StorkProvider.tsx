@@ -5,9 +5,15 @@ declare global {
   }
 }
 
-import { createContext, useEffect, useRef, useContext } from "react";
+import {
+  createContext,
+  useEffect,
+  useRef,
+  useContext,
+  JSXElementConstructor,
+} from "react";
 
-const STORK_VERSION = "2.0.0-beta.2";
+const STORK_VERSION = "v2.0.0-beta.2";
 
 export type IndexRegistration = {
   name: string;
@@ -29,10 +35,12 @@ const StorkContext = createContext<any>({
 });
 
 export const StorkProvider = ({
+  headProvider: HeadProvider,
   wasmUrl,
   indexes,
   children,
 }: {
+  headProvider?: JSXElementConstructor<any>;
   wasmUrl?: string;
   indexes: Record<string, { url: string; downloaded?: boolean }>;
   children: any;
@@ -64,6 +72,14 @@ export const StorkProvider = ({
         wasmInitializePromise,
       }}
     >
+      {HeadProvider && (
+        <HeadProvider>
+          <link
+            rel="stylesheet"
+            href={`https://files.stork-search.net/releases/${STORK_VERSION}/stork.css`}
+          />
+        </HeadProvider>
+      )}
       {children}
       {/* eslint-disable-next-line @next/next/no-sync-scripts */}
       <script

@@ -11,12 +11,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>
-          <link
-            rel="stylesheet"
-            href="https://files.stork-search.net/releases/v2.0.0-releasetest.4/stork.css"
-          />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

@@ -14,6 +14,7 @@ import { ReleasesProvider } from "@/releases/Releases";
 import "@/styles/prism.css";
 import "@/styles/navigation.css";
 import "@/styles/slider.css";
+import Head from "next/head";
 
 declare global {
   interface Window {
@@ -53,7 +54,7 @@ export default function App({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <StorkProvider indexes={storkIndexes}>
+    <StorkProvider indexes={storkIndexes} headProvider={Head}>
       <HeadContents pageProps={pageProps} />
       <ReleasesProvider releases={pageProps.releases}>
         <PreferencesProvider>
