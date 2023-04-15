@@ -11,6 +11,7 @@ const releasesQuery = `
       nodes {
         descriptionHTML
         isDraft
+        isPrerelease
         publishedAt
         tagName
         url
@@ -27,5 +28,6 @@ const releases = makeRequest(releasesQuery)
   .then((resp) => resp.data)
   .then((data) => data.data.repository.releases.nodes)
   .then((data) => data.filter(d => !d.isDraft))
+  .then((data) => data.filter(d => !d.isPrerelease))
 
 export { releases }
