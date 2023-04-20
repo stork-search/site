@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button } from "../Button";
 
 const CsatWrapper = styled.div`
-  background: var(--brand-color);
+  background-color: var(--color-brand);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
   font-size: 0.9rem;
-  margin: 2rem 0 4rem;
+  margin: 6rem 0 0;
   padding: 1rem;
   button {
     font-size: 0.8em;
@@ -29,10 +31,20 @@ const CsatWrapper = styled.div`
   }
 `;
 
-const Flex = styled.div`
+const XStack = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5em;
+`;
+
+const YStack = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  p {
+    margin: 0;
+  }
 `;
 
 enum HelpfulState {
@@ -133,6 +145,21 @@ export const Csat = () => {
 
   const router = useRouter();
 
+  useEffect(() => {
+    const resetCsat = () => {
+      setWasHelpful(HelpfulState.Unsubmitted);
+      setFeedbackText("");
+      setLastSubmittedFeedbackText("");
+      setUserMessage("");
+    };
+
+    router.events.on("routeChangeComplete", resetCsat);
+
+    return () => {
+      router.events.off("routeChangeComplete", resetCsat);
+    };
+  }, [router]);
+
   const currentPage = router.pathname;
 
   const handleSubmitHelpfulness = (h: HelpfulState) =>
@@ -166,32 +193,42 @@ export const Csat = () => {
 
   return (
     <CsatWrapper>
-      <Flex>
-        Was this page helpful?
-        <Button onClick={() => handleSubmitHelpfulness(HelpfulState.Yes)}>
-          Yes!
-        </Button>
-        <Button onClick={() => handleSubmitHelpfulness(HelpfulState.No)}>
-          No
-        </Button>
-      </Flex>
-      {wasHelpful === HelpfulState.Yes ? (
-        <p>Glad this page was helpful! Could you tell me what you liked?</p>
-      ) : null}
-      {wasHelpful === HelpfulState.No ? (
-        <p>Sorry to hear. Could you tell me what could be better?</p>
-      ) : null}
+      <YStack>
+        <XStack>
+          Was this page helpful?
+          <Button onClick={() => handleSubmitHelpfulness(HelpfulState.Yes)}>
+            Yes!
+          </Button>
+          <Button onClick={() => handleSubmitHelpfulness(HelpfulState.No)}>
+            No
+          </Button>
+        </XStack>
+        {wasHelpful === HelpfulState.Yes ? (
+          <p>Glad to hear! Could you tell me what you liked?</p>
+        ) : null}
+        {wasHelpful === HelpfulState.No ? (
+          <p>Sorry to hear. Could you tell me what could be better?</p>
+        ) : null}
 
-      {wasHelpful !== HelpfulState.Unsubmitted ? (
-        <>
-          <textarea
-            value={feedbackText}
-            onChange={(e) => setFeedbackText(e.target.value)}
-          ></textarea>
-          <Button onClick={handleSubmitFeedback}>Submit →</Button>{" "}
-        </>
-      ) : null}
-      {userMessage ? <p>{userMessage}</p> : null}
+        {wasHelpful !== HelpfulState.Unsubmitted ? (
+          <>
+            <textarea
+              value={feedbackText}
+              style={{ width: "100%" }}
+              onChange={(e) => setFeedbackText(e.target.value)}
+              placeholder={
+                wasHelpful === HelpfulState.Yes
+                  ? "The way you described this..."
+                  : "I didn't understand why I had to..."
+              }
+            ></textarea>
+            <Button style={{ width: "100%" }} onClick={handleSubmitFeedback}>
+              Submit →
+            </Button>{" "}
+          </>
+        ) : null}
+        {userMessage ? <p>{userMessage}</p> : null}
+      </YStack>
     </CsatWrapper>
   );
 };

@@ -11,18 +11,25 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    --brand-color: hsl(103 24% 77%);
+
+      
     --row-padding: 1.25em;
-    --link-color: hsl(199 91% 31%);
+      
+    --color-brand: hsl(103 24% 77%);
+    --color-brand-subdued: hsl(103 13% 88%);
+    --color-brand-dark: hsl(103 38% 25%);
+    --color-link: hsl(199 91% 31%);
+    --color-border: hsl(0 0% 0% / 0.2);
+
+    --border-radius: 8px;
   }
 
   * {
     box-sizing: border-box;
-    // position: relative;
   }
 
   a:link {
-    color: var(--link-color);
+    color: var(--color-link);
     font-weight: bold;
   }
 
@@ -30,7 +37,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${inconsolata.style.fontFamily};
 
   *:not(pre) > & {
-    background: var(--brand-color);
+    background: var(--color-brand);
     color: hsla(0, 0%, 0%, 1);
     padding: 0.2em 0.5em;
     font-weight: bold;

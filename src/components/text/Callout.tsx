@@ -11,9 +11,9 @@ const Title = styled.p`
 
 const CalloutWrapper = styled.div`
   display: flex;
-  background-color: #e0e5dd;
-  border: 1px solid hsla(0, 0%, 0%, 0.2);
-  border-radius: 0.5em;
+  background-color: var(--color-brand-subdued);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
   padding: 1em;
   font-size: 0.9em;
   line-height: 1.2;

@@ -12,8 +12,6 @@ import { Layout } from "@/components/layout/Layout";
 import { ReleasesProvider } from "@/releases/Releases";
 
 import "@/styles/prism.css";
-import "@/styles/navigation.css";
-import "@/styles/slider.css";
 import Head from "next/head";
 
 declare global {

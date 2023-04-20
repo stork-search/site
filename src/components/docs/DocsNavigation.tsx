@@ -5,20 +5,21 @@ import styled from "styled-components";
 const TOC = styled.ul`
   list-style-type: none;
   padding: 0;
-  padding-bottom: 5rem;
   font-size: 0.9rem;
   flex-shrink: 0;
+  position: sticky;
+  top: 1em;
 `;
 
 const StyledLink = styled(Link)`
   display: block;
   width: 100%;
-  border-bottom: 1px solid hsla(0, 0%, 80%);
-  padding: 0.6rem 2rem;
+  padding: 0.4rem 2rem;
   font-size: 1em;
   text-decoration: none;
   line-height: 1.3;
   color: currentColor;
+  border-radius: var(--border-radius);
 
   &:link {
     color: currentColor; // override :(
@@ -32,7 +33,7 @@ const StyledLink = styled(Link)`
   &:link.active,
   &:hover.active {
     font-weight: bold;
-    background: var(--brand-color);
+    background: var(--color-brand);
   }
 
   @media (max-width: 73em) {
@@ -45,7 +46,7 @@ const TOCTitle = styled("h2")`
   padding: 0 2rem;
   text-transform: uppercase;
   color: hsla(0, 0%, 0%, 0.6);
-  margin: 2.5rem 0 0.75rem;
+  margin: 2.5rem 0 0.4rem;
 `;
 
 const DocsLink = ({ href, children }: { href: string; children: any }) => {

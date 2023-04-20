@@ -1,4 +1,10 @@
-import { createContext, ReducerAction, useContext, useReducer } from "react";
+import {
+  createContext,
+  ReducerAction,
+  useContext,
+  useReducer,
+  useState,
+} from "react";
 
 export type Preferences = {
   "installation-method": "cmdline" | "nodejs";
@@ -12,13 +18,15 @@ const initialPreferences: Preferences = {
   "document-source": "inline",
 };
 
+type PreferenceDispatchAction = {
+  type: "set";
+  name: keyof Preferences;
+  value: string;
+};
+
 const preferencesReducer = (
   preferences: any,
-  action: {
-    type: "set";
-    name: keyof Preferences;
-    value: string;
-  }
+  action: PreferenceDispatchAction
 ) => {
   preferences[action.name] = action.value;
   const output = { ...preferences };
@@ -26,12 +34,17 @@ const preferencesReducer = (
   return output;
 };
 
-// @ts-ignore
-export const PreferencesContext = createContext<Preferences>(null);
-
-export const PreferencesDispatchContext =
-  // @ts-ignore
-  createContext<ReducerAction<any, any>>(preferencesReducer);
+export const PreferencesContext = createContext<{
+  preferences: Preferences;
+  setPreference: (action: PreferenceDispatchAction) => void;
+  currentlyHoveredPreference: keyof Preferences | null;
+  setCurrentlyHoveredPreference: Function;
+}>({
+  preferences: initialPreferences,
+  setPreference: () => {},
+  currentlyHoveredPreference: null,
+  setCurrentlyHoveredPreference: () => {},
+});
 
 export const PreferencesProvider = ({ children }: { children: any }) => {
   const [preferences, dispatch] = useReducer(
@@ -39,19 +52,24 @@ export const PreferencesProvider = ({ children }: { children: any }) => {
     initialPreferences
   );
 
+  const [currentlyHoveredPreference, setCurrentlyHoveredPreference] = useState<
+    keyof Preferences | null
+  >(null);
+
   return (
-    <PreferencesContext.Provider value={preferences}>
-      <PreferencesDispatchContext.Provider value={dispatch}>
-        {children}
-      </PreferencesDispatchContext.Provider>
+    <PreferencesContext.Provider
+      value={{
+        preferences,
+        setPreference: dispatch,
+        currentlyHoveredPreference,
+        setCurrentlyHoveredPreference,
+      }}
+    >
+      {children}
     </PreferencesContext.Provider>
   );
 };
 
 export function usePreferences() {
   return useContext(PreferencesContext);
-}
-
-export function usePreferencesDispatch() {
-  return useContext(PreferencesDispatchContext);
 }

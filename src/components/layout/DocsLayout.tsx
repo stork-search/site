@@ -16,6 +16,7 @@ import {
   RightColumn,
   Row,
 } from "./grid";
+import { usePreferences } from "../docs/PreferencesProvider";
 
 const Flex = styled.div`
   display: flex;
@@ -31,25 +32,24 @@ const Grow = styled.div`
 const DocsSearch = () => {
   const { left, right, toggleLeft, toggleRight } = useContext(MobileSideColumn);
   return (
-    <MobileOnly>
-      <Row background="offset">
-        <Flex>
-          <MobileOnly>
-            <Button onClick={toggleLeft}>Navigation</Button>
-          </MobileOnly>
-          {/* <Grow>
+    <Row background="offset">
+      <Flex>
+        <MobileOnly>
+          <Button onClick={toggleLeft}>Navigation</Button>
+        </MobileOnly>
+        <Grow>
           <StorkUI name="docs" placeholder="Search the docs..." />
-        </Grow> */}
-          <MobileOnly>
-            <Button onClick={toggleRight}>Preferences</Button>
-          </MobileOnly>
-        </Flex>
-      </Row>
-    </MobileOnly>
+        </Grow>
+        <MobileOnly>
+          <Button onClick={toggleRight}>Preferences</Button>
+        </MobileOnly>
+      </Flex>
+    </Row>
   );
 };
 
 export const DocsLayout = ({ children }: { children: any }) => {
+  const { currentlyHoveredPreference } = usePreferences();
   return (
     <Grid>
       <CenterColumn>
@@ -61,12 +61,14 @@ export const DocsLayout = ({ children }: { children: any }) => {
       <LeftColumn>
         <DocsNavigation />
       </LeftColumn>
-      <CenterColumn>{children}</CenterColumn>
+      <CenterColumn>
+        {children}
+        <Csat />
+      </CenterColumn>
       <RightColumn>
         <DocsPreferences />
       </RightColumn>
       <CenterColumn>
-        <Csat />
         <Footer />
       </CenterColumn>
     </Grid>

@@ -1,18 +1,16 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  background: #104c3c;
-  border-radius: 6px;
-  border: none;
-  color: white;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  background: white;
   font-weight: bold;
-  padding: 5px 10px;
+  padding: 0.4em 0.75em;
   cursor: pointer;
   display: inline-block;
-  &:hover {
-    background: #156650;
-  }
+  transition: transform 0.1s ease-in-out;
+
   &:active {
-    transform: translateY(2px);
+    transform: translateY(1px);
   }
 `;
