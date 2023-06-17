@@ -12,13 +12,6 @@ function Footer() {
           excited that you're checking it out.
         </p>
         <p>
-          If you have any questions or comments, feel free to{' '}
-          <a href="https://github.com/jameslittle230/stork/discussions">
-            start a discussion on Github
-          </a>{' '}
-          or <a href="/chat">chat about the project on Discord.</a>
-        </p>
-        <p>
           This site is open source. Please{' '}
           <a href="https://github.com/stork-search/site">
             file a bug or open a PR

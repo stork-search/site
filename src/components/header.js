@@ -74,11 +74,6 @@ const Header = ({ nameplateHidden }) => {
           <div>
             <HeaderLink href="/docs/install">Documentation</HeaderLink>
             <HeaderLink href="/changelog">Changelog</HeaderLink>
-            <HeaderLink href="/roadmap">Roadmap</HeaderLink>
-            <HeaderLink href="https://ko-fi.com/jameslittle230">
-              Donate
-            </HeaderLink>
-            <HeaderLink href="/chat">Discord</HeaderLink>
           </div>
         </div>
       </Flex>

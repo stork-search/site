@@ -210,25 +210,6 @@ function MyApp({ Component, pageProps }) {
         }}
       >
         <Component {...pageProps} />
-        <div
-          style={{
-            position: 'fixed',
-            zIndex: 100,
-            background: '#e6e162',
-            textAlign: 'center',
-
-            bottom: 0,
-            padding: '1em',
-            margin: '0 -2.5%',
-            width: '105%',
-            borderTop: '1px solid #b3b300',
-          }}
-        >
-          Stork Search v2 is in beta!{' '}
-          <a href="https://v2--stork-search.netlify.app/">
-            Read the documentation →
-          </a>
-        </div>
       </MDXProvider>
     </ThemeAwareWrapper>
   )
